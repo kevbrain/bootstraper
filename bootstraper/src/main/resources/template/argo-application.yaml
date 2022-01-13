@@ -14,7 +14,4 @@ spec:
     path: ${appName}/jkube/
     repoURL: https://github.com/kevbrain/ocp-gitops-apps-deploy.git
     targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}
