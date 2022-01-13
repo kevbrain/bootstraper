@@ -15,6 +15,6 @@ data:
   path.template: "{{path.template}}"
   path.workspace: "{{path.workspace}}"
   placeholdermanager.url: "{{placeholdermanager.url}}"
-  server.port: "{{server.port}}"
+  server.port: '8080'
   spring.application.name: "{{spring.application.name}}"
 ---
