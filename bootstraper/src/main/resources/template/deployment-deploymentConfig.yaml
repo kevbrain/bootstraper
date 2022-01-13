@@ -1,0 +1,143 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  namespace: ${ocpNamespace}
+  annotations:
+    build-commit: '@git.commit.id.abbrev@'
+    build-date: "@git.build.time@"
+  name: ${appName}
+  labels:
+    app: ${appName}
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - microservice-pod
+        from:
+          kind: ImageStreamTag
+          namespace: ${ocpNamespace}
+          name: '${appName}:latest'
+  selector:
+      app: ${appName}
+  template:
+    metadata:
+      name: ${appName}
+      labels:
+        app: ${appName}
+      annotations:
+        build-commit: '@git.commit.id.abbrev@'
+        build-date: "@git.build.time@"
+    spec:
+      volumes:
+   <#list emptyDirVolumes as emptyvol>
+        - name: emptydir${emptyvol.name}
+          emptyDir: {}
+   </#list>
+   <#list nas as nas>
+        - name: nas${nas.name}
+          nfs:
+            server: ${nas.nas.server}
+            path: ${nas.nas.serverPath}
+   </#list>
+   <#list persitentVolumes as pv>
+        - name: pv${pv.name}
+          persistentVolumeClaim:
+            claimName: pvc${pv.claim.name}
+   </#list>
+   <#list configMapsAsvol as cm>
+        - name: cm${cm.name}-vol
+          configMap:
+            name: ${appName}${cm.name}
+            items:
+            <#list cm.selectedKeyValue as itemcm>
+              - key: ${itemcm.keyName}
+                path: ${itemcm.keyName}
+            </#list>
+            defaultMode: 420
+   </#list>
+      containers:
+        - name: microservice-pod 
+          resources:
+            requests:
+              memory: 250Mi
+              cpu : 200m
+            limits:
+              memory: 750Mi
+              cpu : 500m
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: actuator/health
+              port: 8080
+              scheme: HTTP
+            periodSeconds: 10	
+            successThreshold: 1	
+            timeoutSeconds: 1
+          env:
+<#list configMaps as cm>
+   <#list cm.selectedKeyValue as itemcm>
+            - name: ${itemcm.keyName}
+              valueFrom:
+                configMapKeyRef:
+                  name: ${appName}${cm.name}
+                  key: ${itemcm.keyName}
+  </#list>
+</#list>
+<#list secrets as secret>
+   <#list secret.selectedKeyValue as itemsecret>
+            - name: ${itemsecret.keyName}
+              valueFrom:
+                secretKeyRef:
+                  name: ${appName}${secret.name}
+                  key: ${itemsecret.keyName}
+   </#list>
+</#list>
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          imagePullPolicy: Always
+          volumeMounts:
+   <#list emptyDirVolumes as emptyvolmount>
+            - name: emptydir${emptyvolmount.name}
+              mountPath: ${emptyvolmount.path}
+   </#list>
+   <#list nas as nas>
+            - name: nas${nas.name}
+              mountPath: ${nas.path}
+   </#list>
+   <#list persitentVolumes as pv>
+            - name: pv${pv.name}
+              mountPath: ${pv.path}
+   </#list>
+   <#list cmVolumes as cmvol>
+            - name: cm${cmvol.configMapName}-vol
+              mountPath: ${cmvol.path}${cmvol.subPath}
+   </#list>
+<#if (serviceAccount)?has_content>
+          securityContext:
+            runAsUser: ${userUid}
+          workingDir: /tmp
+</#if>
+          image: >-
+            ${ocpRegistry}/${ocpNamespace}/${appName}:latest
+<#if (serviceAccount)?has_content>
+      serviceAccount: ${serviceAccount.name}
+      securityContext:
+        fsGroup: ${userGid}
+        supplementalGroups: [${userGid}]
+</#if>
+      restartPolicy: Always

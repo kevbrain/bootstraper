@@ -1,4 +1,4 @@
-package com.its4u.buildfactory;
+package ${group};
 
 
 import org.springframework.boot.SpringApplication;

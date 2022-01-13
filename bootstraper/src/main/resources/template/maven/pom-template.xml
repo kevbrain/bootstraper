@@ -8,9 +8,9 @@
 		<relativePath/> 
   </parent>
   
-  <groupId>com.its4u.buildfactory</groupId>
-  <artifactId>bootstraper</artifactId>
-  <name>bootstraper</name>
+  <groupId>${group}</groupId>
+  <artifactId>${artifact}</artifactId>
+  <name>${artifact}</name>
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
@@ -24,90 +24,77 @@
 	<maven.compiler.source>1.8</maven.compiler.source>
 	<maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+<#if (joinfaces)>  
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>org.joinfaces</groupId>
         <artifactId>joinfaces-dependencies</artifactId>
-        <version>${joinfaces.version}</version>
+        <version>${r"${joinfaces.version}"}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
-  
-    <dependencies>
+ </#if> 
+ <dependencies>
+ <#if (actuator)> 
     	<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 	</dependency>
+ </#if>
+ <#if (web)>
 	<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
-		<dependency>
-   		 	<groupId>com.mashape.unirest</groupId>
-   		 	<artifactId>unirest-java</artifactId>
-    		<version>1.4.9</version>
-		</dependency>
-		<dependency>
-  			<groupId>org.json</groupId>
-  			<artifactId>json</artifactId>
-  			<version>20140107</version>
-		</dependency>
-        <dependency>
+</#if>
+<#if (joinfaces)> 	
+    <dependency>
       		<groupId>org.joinfaces</groupId>
       		<artifactId>primefaces-spring-boot-starter</artifactId>
-    	</dependency>
-        <dependency>
+    </dependency>
+</#if>
+    <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
             <version>4.6.1</version>
-        </dependency>
-        <dependency>
+    </dependency>
+    <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.8.0</version>
-        </dependency>
-        <dependency>
+    </dependency>
+ <#if (freemarker)>   
+    <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-        </dependency>
-        <dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-		  <groupId>io.fabric8</groupId>
-		  <artifactId>kubernetes-client</artifactId>
-		  <version>5.7.0</version>
-		</dependency>
+    </dependency>
+ </#if>
+ <#if (lombok)>  
+    <dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+		<scope>provided</scope>
+		<#if (!joinfaces)>
+		    <version>1.18.16</version>
+		</#if> 
+	</dependency>
+ </#if>
 	<dependency>
 		 <groupId>org.apache.commons</groupId>
 		 <artifactId>commons-lang3</artifactId>
-	
+		 <version>3.11</version>
 	</dependency>
+ <#if (sonar)>  	
 	<dependency>
 		<groupId>org.sonarsource.scanner.maven</groupId>
 		<artifactId>sonar-maven-plugin</artifactId>
 		<version>3.2</version>
 	</dependency>
-	<dependency>
-	    <groupId>org.eclipse.jgit</groupId>
-	    <artifactId>org.eclipse.jgit</artifactId>
-	    <version>5.12.0.202106070339-r</version>
-	</dependency>
-	<dependency>
-		    <groupId>org.kohsuke</groupId>
-		    <artifactId>github-api</artifactId>
-		    <version>1.132</version>
-	</dependency>
-	<dependency>
-	      <groupId>com.fasterxml.jackson.core</groupId>
-	      <artifactId>jackson-databind</artifactId>
-	 </dependency>
-    </dependencies>
+</#if>
+</dependencies>
 	    
     <build>
         <plugins>
@@ -139,13 +126,13 @@
                 <configuration>
                     <allowInsecureRegistries>true</allowInsecureRegistries>
                     <from>
-                        <image>image-registry.openshift-image-registry.svc.cluster.local:5000/openshift/java:11</image>
+                        <image>${ocpRegistry}/openshift/java:11</image>
                     </from>
                     <to>
-                        <image>image-registry.openshift-image-registry.svc.cluster.local:5000/bootstraper-dev/bootstraper</image>
+                        <image>${ocpRegistry}/${ocpNamespace}-dev/${artifact}</image>
                         <tags>
                             <tag>latest</tag>                            
-                            <tag>${project.version}</tag>                           
+                            <tag>${r"${project.version}"}</tag>                           
                         </tags>
                     </to>
                 </configuration>

@@ -1,0 +1,20 @@
+<#list routes as route>
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  namespace: ${ocpNamespace}
+  name: ${appName}-route
+  labels:
+    app: ${appName}
+spec:
+  to:
+    kind: Service
+    name: ${appName}-service
+    weight: 256
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  wildcardPolicy: None
+---
+</#list>

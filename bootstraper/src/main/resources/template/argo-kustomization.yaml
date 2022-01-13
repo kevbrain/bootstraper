@@ -1,0 +1,17 @@
+resources:
+- namespace-${env}.yml
+- pvc-claim-pipeline-${env}.yml
+- rolebinding-${env}.yml
+- DeploymentConfig-${env}.yml
+- ConfigMaps-${env}.yml
+- Secrets-${env}.yml
+- Service-${env}.yml
+- mavensetting-cm-${env}.yml
+<#list routes as route>
+- Routes-${env}.yaml
+</#list>
+- pipeline.yml
+- pipeline-triggerTemplate.yml
+- pipeline-triggerBinding.yml
+- pipeline-eventListener.yml
+- pipeline-eventListenerRoute.yml
