@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  namespace: bootstraper-dev
+  name: bootstraper-cm-0
+  labels:
+    app: bootstraper
+data: 
+  cluster-suffix: "{{cluster-suffix}}"
+  ocp.environment: "{{ocp.environment}}"
+  ocp.replicas: "{{ocp.replicas}}"
+  ocp-cluster.registry: "{{ocp-cluster.registry}}"
+  ocp-namespace: "{{ocp-namespace}}"
+  path.resource: "{{path.resource}}"
+  path.template: "{{path.template}}"
+  path.workspace: "{{path.workspace}}"
+  placeholdermanager.url: "{{placeholdermanager.url}}"
+  server.port: "{{server.port}}"
+  spring.application.name: "{{spring.application.name}}"
+---

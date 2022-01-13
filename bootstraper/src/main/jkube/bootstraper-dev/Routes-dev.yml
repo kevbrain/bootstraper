@@ -1,0 +1,18 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  namespace: bootstraper-dev
+  name: bootstraper-route
+  labels:
+    app: bootstraper
+spec:
+  to:
+    kind: Service
+    name: bootstraper-service
+    weight: 256
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  wildcardPolicy: None
+---

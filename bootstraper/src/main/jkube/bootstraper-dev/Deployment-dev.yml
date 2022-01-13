@@ -1,0 +1,115 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: bootstraper-dev
+  annotations:
+    its4u.placeholders/auto: "true"
+    reloader.stakater.com/auto: "true"
+    build-commit: '@git.commit.id.abbrev@'
+    build-date: "@git.build.time@"
+  name: bootstraper
+  labels:
+    app: bootstraper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bootstraper
+  template:
+    metadata:
+      name: bootstraper
+      labels:
+        app: bootstraper
+      annotations:
+        build-commit: '@git.commit.id.abbrev@'
+        build-date: "@git.build.time@"
+    spec:
+      volumes:
+        - name: emptydirlogs
+          emptyDir: {}
+      containers:
+        - name: microservice-pod 
+          resources:
+            requests:
+              memory: 250Mi
+              cpu : 200m
+            limits:
+              memory: 750Mi
+              cpu : 500m
+          readinessProbe:
+            httpGet:
+              path: actuator/health
+              port: 8080
+              scheme: HTTP
+          env:
+            - name: cluster-suffix
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: cluster-suffix
+            - name: ocp.environment
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: ocp.environment
+            - name: ocp.replicas
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: ocp.replicas
+            - name: ocp-cluster.registry
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: ocp-cluster.registry
+            - name: ocp-namespace
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: ocp-namespace
+            - name: path.resource
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: path.resource
+            - name: path.template
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: path.template
+            - name: path.workspace
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: path.workspace
+            - name: placeholdermanager.url
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: placeholdermanager.url
+            - name: server.port
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: server.port
+            - name: spring.application.name
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: spring.application.name
+            - name: actuator.password
+              valueFrom:
+                secretKeyRef:
+                  name: bootstraper-secret-0
+                  key: actuator.password
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: emptydirlogs
+              mountPath: /Logs
+          image: >-
+            image-registry.openshift-image-registry.svc.cluster.local:5000/bootstraper-dev/bootstraper:latest
+      restartPolicy: Always

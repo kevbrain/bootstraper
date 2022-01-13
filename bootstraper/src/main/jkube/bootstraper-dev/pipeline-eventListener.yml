@@ -1,0 +1,9 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: bootstraper
+  namespace: bootstraper-dev
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - triggerRef: bootstraper-trigger
