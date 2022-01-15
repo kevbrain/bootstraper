@@ -73,8 +73,10 @@ apiVersion: apps/v1
 metadata:
   namespace: ${ocpNamespace}
   annotations:
-    build-commit: '@git.commit.id.abbrev@'
-    build-date: "@git.build.time@"
+    its4u.placeholders/auto: "true"
+    reloader.stakater.com/auto: "true"
+    build-commit: "{{git.commit}}"
+    build-date: "{{git.date}}"
   name: ${appName}
   labels:
     app: ${appName}
@@ -89,8 +91,8 @@ spec:
       labels:
         app: ${appName}
       annotations:
-        build-commit: '@git.commit.id.abbrev@'
-        build-date: "@git.build.time@"
+        build-commit: "{{git.commit}}"
+        build-date: "{{git.date}}"
     spec:
       volumes:
    <#list emptyDirVolumes as emptyvol>
@@ -182,7 +184,7 @@ spec:
             runAsUser: ${userUid}
 </#if>
           image: >-
-            {{ocp-cluster.registry}}/{{ocp-namespace}}/${appName}:@project.version@
+            {{ocp-cluster.registry}}/{{ocp-namespace}}/test-ksc:{{app-version}}
 <#if (serviceAccount)?has_content>
       serviceAccount: ${serviceAccount.name}
       securityContext:
