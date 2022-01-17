@@ -3,3 +3,4 @@ ocp-cluster.registry
 ocp-namespace
 ocp.environment
 cluster-suffix
+app-version

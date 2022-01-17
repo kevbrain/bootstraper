@@ -26,7 +26,9 @@ public class PlaceHolderManagerService {
 			if (environments.get(keyenv)) {
 				System.out.println("Create Environment : "+keyenv);
 				Environments env = new Environments(project,projectName+"-"+keyenv);
-				env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets));
+				if (keyenv.equalsIgnoreCase("dev")) {
+					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv));
+				} 
 				envsProject.add(env);
 			}
 		}
@@ -34,16 +36,25 @@ public class PlaceHolderManagerService {
 		return project;
 	}
 	
-	public List<PlaceHolders> createplaceHoldersForEnv(Environments env,List<ConfigMap> cms,List<Secrets> secrets) {
+	public List<PlaceHolders> createplaceHoldersForEnv(Environments env,List<ConfigMap> cms,List<Secrets> secrets,String keyenv) {
 		List<PlaceHolders> placeHolders = new ArrayList<>();
 		for (ConfigMap cm:cms) {
 			for (String cmKey :cm.getKeyValue().keySet()) {
-				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),cmKey),env,cm.getKeyValue().get(cmKey),""));
+				String valueKey=cm.getKeyValue().get(cmKey);
+				if (cmKey.equalsIgnoreCase("ocp-namespace")) {valueKey=env.getEnvironment();}
+				if (cmKey.equalsIgnoreCase("app-version")) {valueKey="0.0.1-SNAPSHOT";}
+				if (cmKey.equalsIgnoreCase("ocp-cluster.registry")) {valueKey="image-registry.openshift-image-registry.svc.cluster.local:5000";}
+				if (cmKey.equalsIgnoreCase("cluster-suffix")) {valueKey="apps.ocp-lab.its4u.eu";}
+				if (cmKey.equalsIgnoreCase("ocp-namespace")) {valueKey=env.getEnvironment();}
+				if (cmKey.equalsIgnoreCase("ocp.environment")) {valueKey=keyenv;}
+				if (cmKey.equalsIgnoreCase("ocp.replicas")) {valueKey="1";}
+				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),cmKey),env,valueKey,""));
 			}
 		}
 		for (Secrets secret:secrets) {
 			for (String secretKey :secret.getKeyValue().keySet()) {
-				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),secretKey),env,secret.getKeyValue().get(secretKey),"secret"));
+				String valueKey=secret.getKeyValue().get(secretKey);
+				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),secretKey),env,valueKey,"secret"));
 			}
 		}
 		return placeHolders;
