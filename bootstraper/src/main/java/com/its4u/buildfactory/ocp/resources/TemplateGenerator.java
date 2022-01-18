@@ -152,7 +152,7 @@ public class TemplateGenerator {
 
     	this.generatedResources = new ArrayList<>();
     	
-    	String argoNameApp = "00-argoApp-"+model.getAppName()+".yaml";
+    	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
 
     	if (model.getServiceAccount()!=null) {
     		TemplateResource serviceAccount = new TemplateResource("00-ServiceAccount-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);

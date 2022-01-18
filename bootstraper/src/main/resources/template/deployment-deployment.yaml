@@ -107,7 +107,7 @@ spec:
           workingDir: /tmp
 </#if>
           image: >-
-            {{ocp-cluster.registry}}/{{ocp-namespace}}/test-ksc:{{app-version}}
+            {{ocp-cluster.registry}}/{{ocp-namespace}}/${appName}:{{app-version}}
 <#if (serviceAccount)?has_content>
       serviceAccount: ${serviceAccount.name}
       securityContext:
