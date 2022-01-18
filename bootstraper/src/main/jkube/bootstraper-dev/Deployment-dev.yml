@@ -107,6 +107,11 @@ spec:
                 configMapKeyRef:
                   name: bootstraper-cm-0
                   key: git.user
+            - name: argo.server
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: argo.server
             - name: actuator.password
               valueFrom:
                 secretKeyRef:

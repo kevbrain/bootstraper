@@ -193,6 +193,24 @@
 							
 							<p:commandButton value="Test Connection" actionListener="#{ocpInitializerBean.testConnection()}" />
 			    	</p:tab>
+			    	<p:tab title="ARGO">
+			    			<h:panelGrid columns="2">	 
+			    						<h:outputText value="Server :"/>
+							   			<p:inputText value="#{argoInitializerBean.argoServer}"   style="width:600px;" >
+							   				<p:ajax event="change"  update="@form" />
+							   			</p:inputText>	
+							   			
+							   			<h:outputText value="user :"/>
+							   			<p:inputText value="#{argoInitializerBean.argoUser}"   style="width:600px;" >
+							   				<p:ajax event="change"  update="@form" />
+							   			</p:inputText>	
+							   			
+							   			<h:outputText value="Password :"/>
+							   			<p:password value="#{argoInitializerBean.argoPassword}" toggleMask="true" redisplay="true" style="width:400px;">   	
+				   							<p:ajax event="change" update="@form" />
+				   						</p:password>							
+			    			</h:panelGrid>
+			    	</p:tab>
 			    </p:tabView>
 	   				    	
 		    </p:fieldset>

@@ -19,4 +19,5 @@ data:
   spring.application.name: "{{spring.application.name}}"
   argo.user: "{{argo.user}}"
   git.user: "{{git.user}}"
+  argo.server: "{{argo.server}}"
 ---
