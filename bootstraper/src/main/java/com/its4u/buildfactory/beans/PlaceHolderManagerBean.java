@@ -48,18 +48,18 @@ public class PlaceHolderManagerBean {
 	@Autowired
 	private PlaceHolderManagerService placeHolderService;
 	
-	public void createPlaceHolderProject() {
-		/*
-		pollView.log("create PlaceHolder Project : "+viewInitializerBean.getAppName());
+	public void createPlaceHolderProject(String appName,List<ConfigMap> cms,List<Secrets> secrets) {
+		
+		pollView.log("create PlaceHolder Project : "+appName);
 		System.out.println("create PlaceHolder Project");
-		System.out.println("appName = "+viewInitializerBean.getAppName());
-		String gitUrl = gitInitializerBean.getGitUrlPrefix()+viewInitializerBean.getAppName()+".git";
+		System.out.println("appName = "+appName);
+		String gitUrl = gitInitializerBean.getGitUrlPrefix()+appName+".git";
 		System.out.println("GitUrl = "+gitInitializerBean.getGitUrl());
 		Project myProject = placeHolderService.createProject(
-				viewInitializerBean.getAppName(),
+				appName,
 				gitUrl,
-				viewInitializerBean.getConfigMaps(),
-				viewInitializerBean.getSecrets(),
+				cms,
+				secrets,
 				ocpInitializerBean.getNamespaces());
 		System.out.println(myProject.getProject_Id()+ " created with success !");
 		ObjectMapper mapper = new ObjectMapper();
@@ -74,7 +74,7 @@ public class PlaceHolderManagerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 	}
 	
 	public void postProjectToPlaceHolderManager(String jsonProject) throws IOException {

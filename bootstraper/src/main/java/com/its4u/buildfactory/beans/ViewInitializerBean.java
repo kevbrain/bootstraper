@@ -75,6 +75,9 @@ public class ViewInitializerBean {
 	@Autowired
     private OcpInitializerBean ocpInitializerBean;
 	
+	@Autowired
+	private PlaceHolderManagerBean placeHolderManagerBean;
+	
 	private static Logger logger = LoggerFactory.getLogger(ViewInitializerBean.class);
 	
 	private boolean showUploadFile;
@@ -816,6 +819,8 @@ public class ViewInitializerBean {
 		return appName+"-"+env;
 	}
     
-    
+    public void createPlaceHolderProject() {
+    	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
+    }
    
 }
