@@ -174,7 +174,8 @@ public class ViewInitializerBean {
 	@Value("${path.template}")
 	private String pathTemplate;
 	
-
+	@Value("${spring.application.name}")
+	private String titleApp;
 	
 	private boolean disablePublish;
 	
