@@ -10,10 +10,10 @@ import lombok.Data;
 @Component
 public class ArgoInitializerBean {
 	
-	@Value("${argo.server")
+	@Value("${argo.server}")
 	private String argoServer;
 
-	@Value("${argo.user")
+	@Value("${argo.user}")
 	private String argoUser;
 	
 	@Value("${argo.password}")
