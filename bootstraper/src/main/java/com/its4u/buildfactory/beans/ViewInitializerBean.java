@@ -786,18 +786,15 @@ public class ViewInitializerBean {
 	    		if (ocpInitializerBean.getNamespaces().get(keyEnv))
 	    			mapTreeNodeEnv.put(keyEnv, new DefaultTreeNode(new ProjectArborescenceItem(model.getAppName()+"-"+keyEnv,"Folder",null),jkube));
 	    	}
-	    	/*
-	    	mapTreeNodeEnv.put("dev", new DefaultTreeNode(new ProjectArborescenceItem("dev","Folder",null),jkube));
-	    	mapTreeNodeEnv.put("tst", new DefaultTreeNode(new ProjectArborescenceItem("tst","Folder",null),jkube));
-	    	mapTreeNodeEnv.put("int", new DefaultTreeNode(new ProjectArborescenceItem("int","Folder",null),jkube));
-	    	*/
+	    	
 	    	TreeNode argo=  mavenInitializerBean.getArgo();
 	    	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
 	    	
 	    	
 	    	for (String keyenv:ocpInitializerBean.getNamespaces().keySet()) {
 	 
-	    		if (ocpInitializerBean.getNamespaces().get(keyenv)) {
+	    		// generate resources only for DEV environment
+	    		if (ocpInitializerBean.getNamespaces().get(keyenv) && keyenv.equalsIgnoreCase("dev")) {
 	    			generateDeployment(keyenv);
 			    	for (TemplateResource res: generatedTemplatesResources) { 
 			    		// Argo only on DEV

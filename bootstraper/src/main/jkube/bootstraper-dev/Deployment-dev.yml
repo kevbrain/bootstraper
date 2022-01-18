@@ -97,11 +97,21 @@ spec:
                 configMapKeyRef:
                   name: bootstraper-cm-0
                   key: spring.application.name
+            - name: argo.user
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: argo.user
             - name: actuator.password
               valueFrom:
                 secretKeyRef:
                   name: bootstraper-secret-0
                   key: actuator.password
+            - name: argo.password
+              valueFrom:
+                secretKeyRef:
+                  name: bootstraper-secret-0
+                  key: argo.password
           ports:
             - containerPort: 8080
               protocol: TCP

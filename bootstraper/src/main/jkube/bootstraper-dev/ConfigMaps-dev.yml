@@ -17,4 +17,5 @@ data:
   placeholdermanager.url: "{{placeholdermanager.url}}"
   server.port: '8080'
   spring.application.name: "{{spring.application.name}}"
+  argo.user: "{{argo.user}}"
 ---

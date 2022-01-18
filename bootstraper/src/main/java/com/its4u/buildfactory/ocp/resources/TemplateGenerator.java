@@ -152,12 +152,12 @@ public class TemplateGenerator {
 
     	this.generatedResources = new ArrayList<>();
     	
-    	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
+    	String argoNameApp = "00-argoApp-"+model.getAppName()+".yaml";
 
     	if (model.getServiceAccount()!=null) {
-    		TemplateResource serviceAccount = new TemplateResource("ServiceAccount-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
+    		TemplateResource serviceAccount = new TemplateResource("00-ServiceAccount-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
     		generatedResources.add(serviceAccount);
-    		TemplateResource scc = new TemplateResource("SecurityContextConstraint-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
+    		TemplateResource scc = new TemplateResource("00-SecurityContextConstraint-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
     		generatedResources.add(scc);
     	}
     	
@@ -166,22 +166,22 @@ public class TemplateGenerator {
     	TemplateResource deployment = new TemplateResource("Deployment-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_deployment),50,50,10);
     	TemplateResource service = new TemplateResource("Service-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_service),55,55,20);
     	
-    	TemplateResource pipeline = new TemplateResource("pipeline.yml",generateResourceWithTemplate(model,template_pipeline),0,0,0);
-    	TemplateResource pipelineTrigger = new TemplateResource("pipeline-trigger.yml",generateResourceWithTemplate(model,template_pipelineTrigger),0,0,0);
-    	TemplateResource pipelineTriggerTemplate = new TemplateResource("pipeline-triggerTemplate.yml",generateResourceWithTemplate(model,template_pipelineTriggerTemplate),0,0,0);
-    	TemplateResource pipelineTriggerBinding = new TemplateResource("pipeline-triggerBinding.yml",generateResourceWithTemplate(model,template_pipelineTriggerBinding),0,0,0);
-    	TemplateResource pipelineEventListener = new TemplateResource("pipeline-eventListener.yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
-    	TemplateResource pipelineEventListenerRoute = new TemplateResource("pipeline-eventListenerRoute.yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
+    	TemplateResource pipeline = new TemplateResource("00-pipeline.yml",generateResourceWithTemplate(model,template_pipeline),0,0,0);
+    	TemplateResource pipelineTrigger = new TemplateResource("00-pipeline-trigger.yml",generateResourceWithTemplate(model,template_pipelineTrigger),0,0,0);
+    	TemplateResource pipelineTriggerTemplate = new TemplateResource("00-pipeline-triggerTemplate.yml",generateResourceWithTemplate(model,template_pipelineTriggerTemplate),0,0,0);
+    	TemplateResource pipelineTriggerBinding = new TemplateResource("00-pipeline-triggerBinding.yml",generateResourceWithTemplate(model,template_pipelineTriggerBinding),0,0,0);
+    	TemplateResource pipelineEventListener = new TemplateResource("00-pipeline-eventListener.yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
+    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-pipeline-eventListenerRoute.yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
     	    	
-    	TemplateResource namespace = new TemplateResource("namespace-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
-    	TemplateResource rolebinding= new TemplateResource("rolebinding-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_rolebinding),0,0,0);
-    	TemplateResource mavensetting= new TemplateResource("mavensetting-cm-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
-    	TemplateResource pvcPipeline= new TemplateResource("pvc-claim-pipeline"+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
+    	TemplateResource namespace = new TemplateResource("00-namespace-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
+    	TemplateResource rolebinding= new TemplateResource("00-rolebinding-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_rolebinding),0,0,0);
+    	TemplateResource mavensetting= new TemplateResource("00-mavensetting-cm-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
+    	TemplateResource pvcPipeline= new TemplateResource("00-pvc-claim-pipeline"+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
     	appArgo = new TemplateResource(argoNameApp,generateResourceWithTemplate(model,template_argo_application),0,0,0);
     	
-    	TemplateResource argoKustomization = new TemplateResource("kustomization.yaml",generateResourceWithTemplate(model,template_argo_kustomization),0,0,0);
+    	//TemplateResource argoKustomization = new TemplateResource("kustomization.yaml",generateResourceWithTemplate(model,template_argo_kustomization),0,0,0);
     	
-    	generatedResources.add(argoKustomization);
+    	//generatedResources.add(argoKustomization);
     	generatedResources.add(appArgo);
     	    	
     	generatedResources.add(namespace);
@@ -210,7 +210,7 @@ public class TemplateGenerator {
     	}
     	
     	if (!model.getPersitentVolumes().isEmpty()) {
-    		TemplateResource pvc = new TemplateResource("PVClaims-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
+    		TemplateResource pvc = new TemplateResource("00-PVClaims-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
     		generatedResources.add(pvc);
     	}
  
