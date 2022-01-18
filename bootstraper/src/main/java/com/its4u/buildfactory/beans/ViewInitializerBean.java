@@ -22,6 +22,7 @@ import java.util.zip.ZipOutputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.view.ViewScoped;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -62,7 +63,7 @@ import freemarker.template.TemplateException;
 import lombok.Data;
 
 
-
+@ViewScoped
 @Data
 @Component
 
