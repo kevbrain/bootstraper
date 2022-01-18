@@ -2,8 +2,6 @@ package com.its4u.buildfactory.beans;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -20,11 +18,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.view.ViewScoped;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.FileUploadEvent;
@@ -41,7 +36,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
 import com.its4u.buildfactory.model.FilesToAnalyse;
@@ -65,6 +59,7 @@ import lombok.Data;
 
 @Data
 @Component
+@ViewScoped
 
 public class ViewInitializerBean {
 	

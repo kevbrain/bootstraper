@@ -31,7 +31,7 @@
 				</h:panelGrid>			
 			</f:facet>
    	<h:form id="form" prependId="false">
-   		<p:growl id="growl" showDetail="true" />
+   		
    			<center>	   		
 	   		<h:panelGrid columns="3" >
 	   			<p:commandButton   icon="fa fa-fw fa-chevron-left" actionListener="#{viewInitializerBean.previousStep}"  update="@form"  style="margin:10px;background:#003b50;color:white" immediate="true" />
@@ -49,7 +49,9 @@
 	   		</center>
    			<div style="position:relative;margin:auto;text-align:center;">		    				    		
 				    	<p:commandButton value="Reset Configuration"  actionListener="#{viewInitializerBean.reset}" update="@form" style="margin:10px;background:#003b50;color:white" />				    					    	
-				    	<p:commandButton value="Create and Publish Project"  actionListener="#{gitInitializerBean.createRepo(viewInitializerBean.appName)}" update="@form" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
+				    	<p:commandButton value="Create and Publish Project"  actionListener="#{gitInitializerBean.createRepo(viewInitializerBean.appName)}" 
+				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
+				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
 				    	<p:commandButton value="Create PlaceHolder Project"  actionListener="#{placeHolderManagerBean.createPlaceHolderProject}" 
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
 				    		update="growl" style="margin:10px;background:#003b50;color:white"  />
