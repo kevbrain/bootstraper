@@ -52,7 +52,7 @@
 				    	<p:commandButton value="Create and Publish Project"  actionListener="#{gitInitializerBean.createRepo(viewInitializerBean.appName)}" update="@form" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
 				    	<p:commandButton value="Create PlaceHolder Project"  actionListener="#{placeHolderManagerBean.createPlaceHolderProject}" 
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
-				    		update="@form,growl" style="margin:10px;background:#003b50;color:white"  />
+				    		update="growl" style="margin:10px;background:#003b50;color:white"  />
 				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
 			    </div>
    			
