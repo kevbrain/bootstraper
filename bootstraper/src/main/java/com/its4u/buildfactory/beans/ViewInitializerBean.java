@@ -41,6 +41,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
 import com.its4u.buildfactory.model.FilesToAnalyse;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
@@ -66,6 +67,9 @@ import lombok.Data;
 @Component
 
 public class ViewInitializerBean {
+	
+	@Autowired
+	private PollView pollView;
 	
 	@Autowired
     private GitInitializerBean gitInitializerBean;

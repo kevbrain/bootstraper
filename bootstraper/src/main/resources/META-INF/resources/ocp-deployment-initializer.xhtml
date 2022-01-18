@@ -50,6 +50,7 @@
 				    	<p:commandButton value="Reset Configuration"  actionListener="#{viewInitializerBean.reset}" update="@form" style="margin:10px;background:#003b50;color:white" />				    					    	
 				    	<p:commandButton value="Create and Publish Project"  actionListener="#{gitInitializerBean.createRepo(viewInitializerBean.appName)}" update="@form" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
 				    	<p:commandButton value="Create PlaceHolder Project"  actionListener="#{placeHolderManagerBean.createPlaceHolderProject}" update="@form" style="margin:10px;background:#003b50;color:white"  />
+				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
 			    </div>
    			
    			<br/> 
@@ -716,6 +717,19 @@
      	<p:scrollPanel style="width:1200px;height:600px">
 	    <p:inputTextarea   value="#{dialogBean.content}" cols="100" rows="5"  />
 	    </p:scrollPanel>
+	</p:dialog>
+	
+	<p:dialog header="Logs" widgetVar="dlg1" minHeight="500" width="1400" showEffect="fade">
+		<h:form>
+			<h:outputText escape="false"  id="txt_count" value="#{pollView.listLogs}"/>									
+			<p:poll interval="1" listener="#{pollView.increment}" update="txt_count"/>
+		</h:form>	
+	</p:dialog>
+ 
+ 	<p:dialog  widgetVar="dlg0"  showEffect="fade">
+		<h:form>
+			<p:graphicImage name="loader_seq.gif"  style="background: transparent;"/>
+		</h:form>	
 	</p:dialog>
 
 </h:body>
