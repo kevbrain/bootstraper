@@ -11,6 +11,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.api.RemoteAddCommand;
@@ -128,6 +131,7 @@ public class GitInitializerBean {
 	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
 	    // you can add more settings here if needed
 	    pushCommand.call();
+	    
 	}
 	
 	
@@ -172,6 +176,7 @@ public class GitInitializerBean {
 	    // you can add more settings here if needed
 	    pushCommand.call();
 	    pollView.log("Git Cluster app updated, commited and pushed");
+	    
 	}
 	
 	public void createRepo(String project) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
@@ -249,9 +254,11 @@ public class GitInitializerBean {
 			pushCommand.call();
 		}
 	    pollView.log("Git Project created");	
-	    
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
 	    createArgoApp();
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 	    createGitAppsDeploy(project);
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 	}
 	
 	public void copyResourcesFromClassPath(String pathResource,String project,String pathDest)  {
@@ -291,6 +298,8 @@ public class GitInitializerBean {
 	public void createNewRemoteRepository(String project) throws IOException, InterruptedException {
 		System.out.println("*** create new repo ***");
 		
+		
+		pollView.log("Git create new repo for "+project);
 		GitHub github = new GitHubBuilder().withOAuthToken(gitPassword).build();
 		//github.connect();
 
@@ -298,8 +307,8 @@ public class GitInitializerBean {
 		  project,"Created By Ocp InitialiZr",
 		  "https://github.com/kevbrain/",true/*public*/);
 		
-		System.out.println("*** Repo created ***");
-		
+		//System.out.println("*** Repo created ***");
+		pollView.log("Repo created ");
 		
 		String urlWebHook="http://el-"+project+"-"+project+"-dev.apps.ocp-lab.its4u.eu/";
 		System.out.println("wait 4s ...");
@@ -313,6 +322,7 @@ public class GitInitializerBean {
 	    collectionEvents.add(GHEvent.ALL);
 		GHHook hook =repo.createHook("web",config,collectionEvents,true);
 		
+		pollView.log("WebHook created with urlWebHook");
 		System.out.println("*** WebHook created with "+urlWebHook);
 	}
 	

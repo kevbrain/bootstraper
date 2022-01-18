@@ -10,6 +10,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,6 +31,9 @@ import lombok.Data;
 public class PlaceHolderManagerBean {
 
 	@Autowired
+	private PollView pollView;
+	
+	@Autowired
     private OcpInitializerBean ocpInitializerBean;
 	
 	@Autowired
@@ -43,6 +49,7 @@ public class PlaceHolderManagerBean {
 	private PlaceHolderManagerService placeHolderService;
 	
 	public void createPlaceHolderProject() {
+		pollView.log("create PlaceHolder Project : "+viewInitializerBean.getAppName());
 		System.out.println("create PlaceHolder Project");
 		System.out.println("appName = "+viewInitializerBean.getAppName());
 		String gitUrl = gitInitializerBean.getGitUrlPrefix()+viewInitializerBean.getAppName()+".git";
@@ -58,6 +65,7 @@ public class PlaceHolderManagerBean {
 		try {
 			String jsonProject = mapper.writeValueAsString(myProject);
 			postProjectToPlaceHolderManager(jsonProject);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Placeholder created"));
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
