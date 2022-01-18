@@ -36,8 +36,8 @@ public class PlaceHolderManagerBean {
 	@Autowired
     private OcpInitializerBean ocpInitializerBean;
 	
-	@Autowired
-    private ViewInitializerBean viewInitializerBean;
+	//@Autowired
+    //private ViewInitializerBean viewInitializerBean;
 	
 	@Autowired
     private GitInitializerBean gitInitializerBean;
@@ -49,6 +49,7 @@ public class PlaceHolderManagerBean {
 	private PlaceHolderManagerService placeHolderService;
 	
 	public void createPlaceHolderProject() {
+		/*
 		pollView.log("create PlaceHolder Project : "+viewInitializerBean.getAppName());
 		System.out.println("create PlaceHolder Project");
 		System.out.println("appName = "+viewInitializerBean.getAppName());
@@ -73,6 +74,7 @@ public class PlaceHolderManagerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	public void postProjectToPlaceHolderManager(String jsonProject) throws IOException {
