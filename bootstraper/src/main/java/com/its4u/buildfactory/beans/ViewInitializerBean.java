@@ -63,7 +63,6 @@ import freemarker.template.TemplateException;
 import lombok.Data;
 
 
-@ViewScoped
 @Data
 @Component
 
