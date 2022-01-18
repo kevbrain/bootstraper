@@ -47,6 +47,9 @@ public class GitInitializerBean {
 	@Autowired
     private MavenInitializerBean mavenInitializerBean;
 	
+	@Autowired
+	private PollView pollView;
+	
 	private String gitUrlPrefix="https://github.com/kevbrain/";
 	
 	private String gitUrl = "";
@@ -129,6 +132,8 @@ public class GitInitializerBean {
 	
 	
 	public void createArgoApp() throws IllegalStateException, GitAPIException, IOException, URISyntaxException {
+		
+		pollView.log("Create Argo App");	
 		UUID uuid = UUID.randomUUID();
 		String path = pathWorkspace+"//ocp-gitops-"+uuid;
 		Git git = null;
@@ -147,11 +152,11 @@ public class GitInitializerBean {
 			git = Git.init().setDirectory(workingDirectory).call();
 		}	
 		
-		
+		pollView.log("Git Cluster app cloned");
 		readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
 		git.add().addFilepattern(".").call();
 
-		
+		pollView.log("App created : "+path);
 		// Now, we do the commit with a message
 		
 		RevCommit rev =	git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
@@ -166,11 +171,13 @@ public class GitInitializerBean {
 	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
 	    // you can add more settings here if needed
 	    pushCommand.call();
-		
+	    pollView.log("Git Cluster app updated, commited and pushed");
 	}
 	
 	public void createRepo(String project) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
 		
+		
+		pollView.log("Workspace creation");
 		UUID uuid = UUID.randomUUID();
 		
 		this.gitSubDirectory=project;
@@ -184,7 +191,8 @@ public class GitInitializerBean {
 		this.gitUrl= gitUrlPrefix+project+".git";
 		
 		
-		// clone Git Project
+		pollView.log("Git initialization");
+		// clone Git Project"
 		Git git = null;
 		File workingDirectory = null;
 		workingDirectory = new File(path);
@@ -200,12 +208,12 @@ public class GitInitializerBean {
 			git = Git.init().setDirectory(workingDirectory).call();
 		}	
 		
-			
+		pollView.log("Git Project Setup");
 		// Create project in Git Project
 		File newFile = new File(workingDirectory, project);
 		newFile.mkdir();
 		
-			
+		pollView.log("Init Maven project");	
 		// Read Maven Project and Create structure
 		TreeNode nodeProject = mavenInitializerBean.getRoot();
 		
@@ -240,7 +248,8 @@ public class GitInitializerBean {
 		} finally {
 			pushCommand.call();
 		}
-		
+	    pollView.log("Git Project created");	
+	    
 	    createArgoApp();
 	    createGitAppsDeploy(project);
 	}
