@@ -102,6 +102,11 @@ spec:
                 configMapKeyRef:
                   name: bootstraper-cm-0
                   key: argo.user
+            - name: git.user
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: git.user
             - name: actuator.password
               valueFrom:
                 secretKeyRef:
@@ -112,6 +117,11 @@ spec:
                 secretKeyRef:
                   name: bootstraper-secret-0
                   key: argo.password
+            - name: git.password
+              valueFrom:
+                secretKeyRef:
+                  name: bootstraper-secret-0
+                  key: git.password
           ports:
             - containerPort: 8080
               protocol: TCP

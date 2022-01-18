@@ -59,15 +59,17 @@ public class GitInitializerBean {
 	
 	private String gitSubDirectory;
 	
-	private String gitUser="kevbrain";
-	
-	private String gitPassword= "";
-	
 	@Value("${path.workspace}")
 	private String pathWorkspace;
 	
 	@Value("${path.resource}")
 	private String pathResource;
+	
+	@Value("${git.user}")
+	private String gitUser;
+	
+	@Value("${git.password}")
+	private String gitPassword;
 	
 	private TreeNode nodeArgoApp;
 	
