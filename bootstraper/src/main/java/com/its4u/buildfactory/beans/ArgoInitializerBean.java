@@ -1,6 +1,7 @@
 package com.its4u.buildfactory.beans;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.primefaces.model.TreeNode;
@@ -43,7 +44,10 @@ public class ArgoInitializerBean {
 		//System.out.println(resourceyml);
 		Yaml yamlfile = new Yaml();
 		for (Object obj:yamlfile.loadAll(resourceyml)) {
-			System.out.println(obj.getClass()+" -> "+obj.toString());
+			LinkedHashMap lhm = (LinkedHashMap) obj;
+			String apiVersion = (String) lhm.get("apiVersion");
+			
+			System.out.println(apiVersion);
 		}
 		
 	
