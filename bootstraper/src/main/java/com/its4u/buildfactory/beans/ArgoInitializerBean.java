@@ -45,7 +45,8 @@ public class ArgoInitializerBean {
 			JsonParser parser = factory.createJsonParser(resourceyml); 
 			
 			while (parser.nextToken() != null) {
-				  System.out.println(parser.currentToken().asString());
+				System.out.println("->"+parser.currentToken().getClass());
+				  System.out.println("["+parser.currentToken().asString()+"]");
 				  //System.out.println(parser.nextToken().asString());
 			}
 		} catch (JsonParseException e) {
