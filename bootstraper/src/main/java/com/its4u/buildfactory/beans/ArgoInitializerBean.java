@@ -6,6 +6,7 @@ import java.util.List;
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.yaml.snakeyaml.Yaml;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
@@ -39,23 +40,12 @@ public class ArgoInitializerBean {
 	}
 	
 	private void parseCreatedRessource(String resourceyml) {
-		System.out.println(resourceyml);
-		YAMLFactory factory = new YAMLFactory();
-		try {
-			JsonParser parser = factory.createJsonParser(resourceyml); 
-			
-			while (parser.nextToken() != null) {
-				System.out.println("->"+parser.currentToken().getClass());
-				  System.out.println("["+parser.currentToken().asString()+"]");
-				  //System.out.println(parser.nextToken().asString());
-			}
-		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		//System.out.println(resourceyml);
+		Yaml yamlfile = new Yaml();
+		for (Object obj:yamlfile.loadAll(resourceyml)) {
+			System.out.println(obj.getClass()+" -> "+obj.toString());
+		}
 		
+	
 	}
 }
