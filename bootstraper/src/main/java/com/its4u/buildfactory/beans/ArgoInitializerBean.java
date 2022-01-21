@@ -45,9 +45,25 @@ public class ArgoInitializerBean {
 		Yaml yamlfile = new Yaml();
 		for (Object obj:yamlfile.loadAll(resourceyml)) {
 			LinkedHashMap lhm = (LinkedHashMap) obj;
-			String apiVersion = (String) lhm.get("apiVersion");
+			String group="";
+			String version="";
+			String apiVersionAndGroup = (String) lhm.get("apiVersion");
 			
-			System.out.println(apiVersion);
+			if (apiVersionAndGroup.split("/").length>1) {
+				group=apiVersionAndGroup.split("/")[0];
+				version=apiVersionAndGroup.split("/")[1];
+			} else {
+				version= apiVersionAndGroup;
+			}
+			String kind = (String) lhm.get("kind");
+			String name=(String)((LinkedHashMap)lhm.get("metadata")).get("name");
+			String namespace=(String)((LinkedHashMap)lhm.get("metadata")).get("namespace");
+			
+			System.out.println(group);
+			System.out.println(version);
+			System.out.println(kind);
+			System.out.println(name);
+			System.out.println(namespace);
 		}
 		
 	
