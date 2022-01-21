@@ -1,12 +1,15 @@
 package com.its4u.buildfactory.beans;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.primefaces.model.TreeNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.yaml.snakeyaml.Yaml;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;
 
 import lombok.Data;
@@ -37,10 +40,21 @@ public class ArgoInitializerBean {
 	
 	private void parseCreatedRessource(String resourceyml) {
 		System.out.println(resourceyml);
-		Yaml yaml = new Yaml();
-		for (Object object : yaml.loadAll(resourceyml)) {
-			System.out.println(object.toString());
-		}
+		YAMLFactory factory = new YAMLFactory();
+		try {
+			JsonParser parser = factory.createJsonParser(resourceyml); 
+			
+			while (parser.nextToken() != null) {
+				  System.out.println(parser.currentToken().asString());
+				  //System.out.println(parser.nextToken().asString());
+			}
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		
 	}
 }
