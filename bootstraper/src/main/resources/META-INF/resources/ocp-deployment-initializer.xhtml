@@ -49,7 +49,7 @@
 	   		</center>
    			<div style="position:relative;margin:auto;text-align:center;">		    				    		
 				    	<p:commandButton value="Reset Configuration"  actionListener="#{viewInitializerBean.reset}" update="@form" style="margin:10px;background:#003b50;color:white" />				    					    	
-				    	<p:commandButton value="Create and Publish Project"  actionListener="#{gitInitializerBean.createRepo(viewInitializerBean.appName)}" 
+				    	<p:commandButton value="Create and Publish Project"  actionListener="#{viewInitializerBean.createProject(viewInitializerBean.appName)}" 
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
 				    	<p:commandButton value="Create PlaceHolder Project"  actionListener="#{viewInitializerBean.createPlaceHolderProject}" 

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,6 +22,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 
 import org.apache.commons.io.IOUtils;
+import org.eclipse.jgit.api.errors.AbortedByHookException;
+import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.NoHeadException;
+import org.eclipse.jgit.api.errors.NoMessageException;
+import org.eclipse.jgit.api.errors.ServiceUnavailableException;
+import org.eclipse.jgit.api.errors.UnmergedPathsException;
+import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
@@ -821,6 +830,47 @@ public class ViewInitializerBean {
     
     public void createPlaceHolderProject() {
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
+    }
+    
+    public void createProject() {
+    	try {
+			gitInitializerBean.createRepo(appName);
+		} catch (AbortedByHookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ConcurrentRefUpdateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoHeadException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoMessageException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServiceUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnmergedPathsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WrongRepositoryStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GitAPIException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	createPlaceHolderProject();
+    	
     }
    
 }
