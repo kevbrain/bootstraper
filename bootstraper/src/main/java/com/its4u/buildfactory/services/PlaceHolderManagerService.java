@@ -54,6 +54,7 @@ public class PlaceHolderManagerService {
 		for (Secrets secret:secrets) {
 			for (String secretKey :secret.getKeyValue().keySet()) {
 				String valueKey=secret.getKeyValue().get(secretKey);
+				if (secretKey.equalsIgnoreCase("actuator.password")) {valueKey="password";}
 				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),secretKey),env,valueKey,"secret"));
 			}
 		}
