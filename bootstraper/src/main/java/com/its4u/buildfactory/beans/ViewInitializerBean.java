@@ -832,9 +832,9 @@ public class ViewInitializerBean {
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     }
     
-    public void createProject() {
+    public void createProject(String projectName) {
     	try {
-			gitInitializerBean.createRepo(appName);
+			gitInitializerBean.createRepo(projectName);
 		} catch (AbortedByHookException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
