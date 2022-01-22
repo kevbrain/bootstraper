@@ -1,16 +1,6 @@
 package com.its4u.buildfactory.maven.resources;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.its4u.buildfactory.model.TemplateModel;
-import com.its4u.buildfactory.ocp.resources.ConfigMap;
-import com.its4u.buildfactory.ocp.resources.PersistentVolumeClaim;
-import com.its4u.buildfactory.ocp.resources.Route;
-import com.its4u.buildfactory.ocp.resources.Secrets;
-import com.its4u.buildfactory.ocp.resources.ServiceAccount;
-import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
-import com.its4u.buildfactory.ocp.resources.Volumes;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,31 +20,6 @@ import java.util.zip.ZipOutputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 
-import org.apache.commons.io.IOUtils;
-import org.eclipse.jgit.api.errors.AbortedByHookException;
-import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.NoHeadException;
-import org.eclipse.jgit.api.errors.NoMessageException;
-import org.eclipse.jgit.api.errors.ServiceUnavailableException;
-import org.eclipse.jgit.api.errors.UnmergedPathsException;
-import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
-import org.primefaces.event.DragDropEvent;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.TreeNode;
-import org.primefaces.model.file.UploadedFile;
-import org.primefaces.model.file.UploadedFiles;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
 import com.its4u.buildfactory.model.FilesToAnalyse;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
@@ -61,6 +35,23 @@ import com.its4u.buildfactory.ocp.resources.ServiceAccount;
 import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;
 import com.its4u.buildfactory.ocp.resources.Volumes;
+
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.DragDropEvent;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.TreeNode;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.model.file.UploadedFiles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import freemarker.template.TemplateException;
 import lombok.Data;
@@ -226,7 +217,7 @@ public class ViewInitializerBean {
     	this.volumes.add(logs);
     	this.newConfigMapVol=null;
     	this.filesForAnalyse= new ArrayList<>();
-    	this.availableKeysAndValues = new HashMap();
+    	this.availableKeysAndValues = new HashMap<String,String>();
     	this.splitDeployment=true;
     	this.userUid=null;
     	this.userGid=null;
@@ -293,7 +284,6 @@ public class ViewInitializerBean {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	    	
@@ -816,7 +806,7 @@ public class ViewInitializerBean {
 			    		} else {
 			    			TreeNode parent= mapTreeNodeEnv.get(keyenv);
 			    			parent.setExpanded(true);
-			    			TreeNode newnode = new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
+			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
 			    		}
 			    	}
 	    		}

@@ -7,7 +7,6 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.its4u.buildfactory.maven.resources.MavenModel;
 import com.its4u.buildfactory.model.TemplateModel;
 
 import freemarker.template.Configuration;
@@ -174,19 +173,13 @@ public class TemplateGenerator {
     	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-pipeline-eventListenerRoute.yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
     	    	
     	TemplateResource namespace = new TemplateResource("00-namespace-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
-    	TemplateResource rolebinding= new TemplateResource("00-rolebinding-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_rolebinding),0,0,0);
     	TemplateResource mavensetting= new TemplateResource("00-mavensetting-cm-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
     	TemplateResource pvcPipeline= new TemplateResource("00-pvc-claim-pipeline"+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
     	appArgo = new TemplateResource(argoNameApp,generateResourceWithTemplate(model,template_argo_application),0,0,0);
-    	
-    	//TemplateResource argoKustomization = new TemplateResource("kustomization.yaml",generateResourceWithTemplate(model,template_argo_kustomization),0,0,0);
-    	
-    	//generatedResources.add(argoKustomization);
+
     	generatedResources.add(appArgo);
     	    	
-    	generatedResources.add(namespace);
-    	//generatedResources.add(rolebinding);
-    	       
+    	generatedResources.add(namespace);    	   	       
     	generatedResources.add(configMaps);
     	generatedResources.add(secrets);
     	generatedResources.add(deployment);

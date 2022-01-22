@@ -1,10 +1,6 @@
 package com.its4u.buildfactory.ocp.infra;
 
 import java.math.BigDecimal;
-import java.util.Map;
-
-import org.springframework.web.client.RestTemplate;
-
 import io.fabric8.kubernetes.api.model.PodList;
 import lombok.Getter;
 import lombok.Setter;

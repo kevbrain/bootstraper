@@ -2,9 +2,6 @@ package com.its4u.buildfactory.ocp.resources;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -5,18 +5,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.its4u.buildfactory.model.placeholders.Project;
@@ -35,10 +31,7 @@ public class PlaceHolderManagerBean {
 	
 	@Autowired
     private OcpInitializerBean ocpInitializerBean;
-	
-	//@Autowired
-    //private ViewInitializerBean viewInitializerBean;
-	
+		
 	@Autowired
     private GitInitializerBean gitInitializerBean;
 	
@@ -68,10 +61,8 @@ public class PlaceHolderManagerBean {
 			postProjectToPlaceHolderManager(jsonProject);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Placeholder created"));
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

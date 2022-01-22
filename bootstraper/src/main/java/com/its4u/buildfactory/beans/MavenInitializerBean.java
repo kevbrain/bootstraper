@@ -1,38 +1,20 @@
 package com.its4u.buildfactory.beans;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+import com.its4u.buildfactory.maven.resources.MavenModel;
+import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
+import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
+import com.its4u.buildfactory.ocp.resources.TemplateResource;
 
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.StreamedContent;
 import org.primefaces.model.TreeNode;
-import org.primefaces.model.file.UploadedFiles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.its4u.buildfactory.maven.resources.MavenModel;
-import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
-import com.its4u.buildfactory.model.FilesToAnalyse;
-import com.its4u.buildfactory.model.TemplateModel;
-import com.its4u.buildfactory.ocp.resources.ConfigMap;
-import com.its4u.buildfactory.ocp.resources.Container;
-import com.its4u.buildfactory.ocp.resources.DeploymentModel;
-import com.its4u.buildfactory.ocp.resources.Route;
-import com.its4u.buildfactory.ocp.resources.Secrets;
-import com.its4u.buildfactory.ocp.resources.ServiceAccount;
-import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
-import com.its4u.buildfactory.ocp.resources.TemplateResource;
-import com.its4u.buildfactory.ocp.resources.Volumes;
 
 import freemarker.template.TemplateException;
 import lombok.Data;
@@ -117,7 +99,6 @@ public class MavenInitializerBean {
 		try {
 			generateResources();
 		} catch (IOException | TemplateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -138,10 +119,10 @@ public class MavenInitializerBean {
     	this.joinfaces_redirectionPage = new TemplateResource(model.getArtifact()+"WelcomePageRedirect.java", generator.generateResourceWithTemplate(model,generator.getTemplate_welcomePageRedirection()), 0, 0, 0);
     	
     	root = new DefaultTreeNode(new ProjectArborescenceItem(artifact, "-",null ), null);
-    	TreeNode pom1 = new DefaultTreeNode("Text",new ProjectArborescenceItem("pom.xml","Text",pom_generated),root);
-    	TreeNode readme = new DefaultTreeNode("Text",new ProjectArborescenceItem("README.md","Text",maven_readMe),root);
-    	TreeNode classpath = new DefaultTreeNode("Text",new ProjectArborescenceItem(".classpath","Text",maven_classpath_generated),root);
-    	TreeNode lombok = new DefaultTreeNode("Text",new ProjectArborescenceItem("lombok.config","Text",lombok_generated),root);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem("pom.xml","Text",pom_generated),root);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem("README.md","Text",maven_readMe),root);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem(".classpath","Text",maven_classpath_generated),root);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem("lombok.config","Text",lombok_generated),root);
     	TreeNode src = new DefaultTreeNode(new ProjectArborescenceItem("src","Folder",null),root);
     	src.setExpanded(true);
     	TreeNode test = new DefaultTreeNode(new ProjectArborescenceItem("test","Folder",null),src);
@@ -154,12 +135,12 @@ public class MavenInitializerBean {
     	argo.setExpanded(true);
     	TreeNode java = new DefaultTreeNode(new ProjectArborescenceItem("java","Folder",null),main);
     	TreeNode resources = new DefaultTreeNode(new ProjectArborescenceItem("resources","Folder",null),main);
-    	TreeNode appProperties = new DefaultTreeNode("Text",new ProjectArborescenceItem("application.properties","Text",application_properties_generated),resources);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem("application.properties","Text",application_properties_generated),resources);
     	
     	if (joinfaces) {
     		TreeNode metainf = new DefaultTreeNode(new ProjectArborescenceItem("META-INF","Folder",null),resources);
     		TreeNode resourcesMetainf = new DefaultTreeNode(new ProjectArborescenceItem("resources","Folder",null),metainf);
-    		TreeNode mainpage = new DefaultTreeNode("Text",new ProjectArborescenceItem(model.getArtifact()+".xhtml","Text",joinfaces_mainpage),resourcesMetainf);
+    		new DefaultTreeNode("Text",new ProjectArborescenceItem(model.getArtifact()+".xhtml","Text",joinfaces_mainpage),resourcesMetainf);
     	}
     	
     	String[] applicationGroup = this.group.split("[.]");
@@ -174,11 +155,15 @@ public class MavenInitializerBean {
     		newGroupPathTest = new DefaultTreeNode("Text",new ProjectArborescenceItem(applicationGroup[i],"Folder",null),parentTest);
     		parentTest=newGroupPathTest;
     	}
-    	TreeNode application = new DefaultTreeNode("Text",new ProjectArborescenceItem("Application.java","Text",source_application_generated),newGroupPath);
+    	new DefaultTreeNode("Text",new ProjectArborescenceItem("Application.java","Text",source_application_generated),newGroupPath);
     	if (joinfaces) {
-    		TreeNode welcomePage = new DefaultTreeNode("Text",new ProjectArborescenceItem("WelcomePageRedirect.java","Text",joinfaces_redirectionPage),newGroupPath);
+    		 new DefaultTreeNode("Text",new ProjectArborescenceItem("WelcomePageRedirect.java","Text",joinfaces_redirectionPage),newGroupPath);
     	}
 	}
+
+    public void createNewDefautTreeNode(String type,String fileName,TemplateResource templateResource,TreeNode parent) {
+        new DefaultTreeNode(type,new ProjectArborescenceItem(fileName,type,templateResource),parent);
+    }
 	
 	public void onNodeSelect(NodeSelectEvent event) {
 		System.out.println("nodeSelected "+event.getTreeNode().getClass());
@@ -189,10 +174,7 @@ public class MavenInitializerBean {
 			ProjectArborescenceItem item = (ProjectArborescenceItem) node.getData();
 			dialogBean.setHeader(item.getName());
 			if (item.getTemplateResource()!=null && item.getTemplateResource().getResourceAsString()!=null)
-				dialogBean.setContent(item.getTemplateResource().getResourceAsString());
-			//System.out.println(item.getName());
-		    //RequestContext.getCurrentInstance().update("dlg1");
-		    //RequestContext.getCurrentInstance().execute("PF('dlg1').show()");
+				dialogBean.setContent(item.getTemplateResource().getResourceAsString());		
 		}
 	}
 }

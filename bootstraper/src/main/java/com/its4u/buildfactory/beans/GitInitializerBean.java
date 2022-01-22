@@ -25,11 +25,9 @@ import org.eclipse.jgit.api.errors.NoMessageException;
 import org.eclipse.jgit.api.errors.ServiceUnavailableException;
 import org.eclipse.jgit.api.errors.UnmergedPathsException;
 import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
-import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.kohsuke.github.GHEvent;
-import org.kohsuke.github.GHHook;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
@@ -119,7 +117,7 @@ public class GitInitializerBean {
 		
 		// Now, we do the commit with a message
 		
-		RevCommit rev =	git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
+		git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
 	
 		RemoteAddCommand remoteAddCommand = git.remoteAdd();
 	    remoteAddCommand.setName("origin");
@@ -163,7 +161,7 @@ public class GitInitializerBean {
 		pollView.log("App created : "+path);
 		// Now, we do the commit with a message
 		
-		RevCommit rev =	git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
+		git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
 	
 		RemoteAddCommand remoteAddCommand = git.remoteAdd();
 	    remoteAddCommand.setName("origin");
@@ -320,9 +318,9 @@ public class GitInitializerBean {
 		final HashMap<String, String> config = new HashMap<>();
 	      config.put("url",urlWebHook);
 	      config.put("content_type", "json");
-	    Collection collectionEvents = new ArrayList();
+	    Collection<GHEvent> collectionEvents = new ArrayList<GHEvent>();
 	    collectionEvents.add(GHEvent.ALL);
-		GHHook hook =repo.createHook("web",config,collectionEvents,true);
+		repo.createHook("web",config,collectionEvents,true);
 		
 		pollView.log("WebHook created with urlWebHook");
 		System.out.println("*** WebHook created with "+urlWebHook);

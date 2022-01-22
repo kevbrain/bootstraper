@@ -3,16 +3,14 @@ package com.its4u.buildfactory.beans;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import com.its4u.buildfactory.ocp.infra.ClusterOcp;
 import com.its4u.buildfactory.ocp.infra.NamespaceOcp;
 import com.its4u.buildfactory.ocp.infra.NodeOcp;
+
+import org.springframework.stereotype.Component;
 
 import io.fabric8.kubernetes.api.model.Namespace;
 import io.fabric8.kubernetes.api.model.NamespaceList;

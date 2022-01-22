@@ -1,20 +1,17 @@
 package com.its4u.buildfactory.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
-
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-
 import org.springframework.stereotype.Component;
 
 @Component
 
 public class PollView implements Serializable {
 	
-	private Stack<String> logPile = new Stack<String>();
+    private static final long serialVersionUID = 1L;
+
+    private Stack<String> logPile = new Stack<String>();
 	
 	private String listLogs;
 	

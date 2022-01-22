@@ -1,7 +1,5 @@
 package com.its4u.buildfactory.model;
 
-import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
-
 import lombok.Getter;
 import lombok.Setter;
 
