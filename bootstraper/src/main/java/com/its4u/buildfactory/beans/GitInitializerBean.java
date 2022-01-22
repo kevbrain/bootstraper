@@ -259,6 +259,8 @@ public class GitInitializerBean {
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 	    createGitAppsDeploy(project);
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
+	    
+	    
 	}
 	
 	public void copyResourcesFromClassPath(String pathResource,String project,String pathDest)  {
