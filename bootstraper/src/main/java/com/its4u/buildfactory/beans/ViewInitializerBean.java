@@ -18,6 +18,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
@@ -849,6 +851,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	pollView.log("Project bootstraped with success ...."); 
     }
     
