@@ -720,11 +720,10 @@
 	         </center>
 	         <p:dialog header="Logs" widgetVar="dlg1" minHeight="500" width="1400" showEffect="fade">
 				
-					<h:outputText escape="false"  id="txt_count" value="#{pollView.listLogs}"/>									
-					<p:poll interval="2" update="txt_count"/>
+					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>														
 					
 			</p:dialog>
-	         
+	         <p:poll interval="1"  listener="#{pollView.increment} update="logapplication"/>
     	</h:form>
 	</p:panel>
     

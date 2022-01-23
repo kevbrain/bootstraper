@@ -842,7 +842,14 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	pollView.log("Start apply Default conf ...."); 
+    	try {
+			placeHolderManagerBean.applyConf(appName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	pollView.log("Project bootstraped with success ...."); 
     }
     
    

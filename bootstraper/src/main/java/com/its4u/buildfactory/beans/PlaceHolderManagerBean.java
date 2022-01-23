@@ -44,8 +44,6 @@ public class PlaceHolderManagerBean {
 	public void createPlaceHolderProject(String appName,List<ConfigMap> cms,List<Secrets> secrets) {
 		
 		pollView.log("create PlaceHolder Project : "+appName);
-		System.out.println("create PlaceHolder Project");
-		System.out.println("appName = "+appName);
 		String gitUrl = gitInitializerBean.getGitUrlPrefix()+appName+".git";
 		System.out.println("GitUrl = "+gitInitializerBean.getGitUrl());
 		Project myProject = placeHolderService.createProject(
@@ -72,28 +70,38 @@ public class PlaceHolderManagerBean {
 		
 		URL url = new URL(placeholdermanagerUrl+"/createProject");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		
-		System.out.println("Connection to "+url);
-		conn.setDoOutput(true);
-		
+
+		conn.setDoOutput(true);		
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", "application/json");
-
-		
-		System.out.println(jsonProject);
 		OutputStream os = conn.getOutputStream();
 		os.write(jsonProject.getBytes());
 		os.flush();
-
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(conn.getInputStream())));
 
 		String output;
-		System.out.println("Output from Server .... \n");
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
 		}
+		conn.disconnect();
+	}
+	
+	public void applyConf(String projectName) throws IOException {
+		
+		System.out.println("Apply Conf");
+		URL url = new URL(placeholdermanagerUrl+"/apply-conf/"+projectName);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+		conn.setDoOutput(true);		
+		conn.setRequestMethod("GET");		
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				(conn.getInputStream())));
+
+		String output;
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+		}
 		conn.disconnect();
 	}
 	

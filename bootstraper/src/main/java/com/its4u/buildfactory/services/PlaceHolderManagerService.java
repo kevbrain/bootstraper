@@ -58,34 +58,4 @@ public class PlaceHolderManagerService {
 		}
 		return placeHolders;
 	}
-	
-	public Project createBetaProject() {
-		String projectName = "suisse";
-		Project project = new Project(projectName, null, "Kevyn");
-		List<Environments> envs =  new ArrayList<>();
-		
-		Environments dev = new Environments(project,projectName+"-dev");
-		Environments tst = new Environments(project,projectName+"-tst");
-		Environments inte = new Environments(project,projectName+"-int");
-				
-		dev.setPlaceholders(createplaceHolders(dev));
-		tst.setPlaceholders(createplaceHolders(tst));
-		inte.setPlaceholders(createplaceHolders(inte));
-		
-		envs.add(dev);
-		envs.add(tst);
-		envs.add(inte);
-				
-		project.setEnvironments(envs);
-		return project;
 	}
-	
-	public List<PlaceHolders> createplaceHolders(Environments env) {
-		List<PlaceHolders> placeHolders = new ArrayList<>();
-		placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),"welcome.message"),env,"Hello",""));
-		placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),"ocp.replicas"),env,"2",""));
-		placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),"application.title"),env,"My application",""));
-		placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),"database.password"),env,"systempassword","secret"));
-		return placeHolders;
-	}
-}

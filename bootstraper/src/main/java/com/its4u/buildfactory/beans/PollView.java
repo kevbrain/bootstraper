@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class PollView implements Serializable {
 	
     private static final long serialVersionUID = 1L;
