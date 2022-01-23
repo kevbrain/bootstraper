@@ -718,6 +718,13 @@
 	         		         		         
 	         </p:panel>
 	         </center>
+	         <p:dialog header="Logs" widgetVar="dlg1" minHeight="500" width="1400" showEffect="fade">
+				
+					<h:outputText escape="false"  id="txt_count" value="#{pollView.listLogs}"/>									
+					<p:poll interval="2" update="txt_count"/>
+					
+			</p:dialog>
+	         
     	</h:form>
 	</p:panel>
     
@@ -727,12 +734,7 @@
 	    </p:scrollPanel>
 	</p:dialog>
 	
-	<p:dialog header="Logs" widgetVar="dlg1" minHeight="500" width="1400" showEffect="fade">
-		<h:form>
-			<h:outputText escape="false"  id="txt_count" value="#{pollView.listLogs}"/>									
-			<p:poll interval="1" listener="#{pollView.increment}" update="txt_count"/>
-		</h:form>	
-	</p:dialog>
+	
  
  	<p:dialog  widgetVar="dlg0"  showEffect="fade">
 		<h:form>

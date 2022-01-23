@@ -819,7 +819,30 @@ public class ViewInitializerBean {
 	}
     
     public void createPlaceHolderProject() {
+    	pollView.log("Start create repos ....");
+    	try {
+			gitInitializerBean.createRepo(appName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	pollView.log("Wait 1s ....");
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	pollView.log("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
+    	pollView.log("Wait 1s ....");
+    	try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
     
    
