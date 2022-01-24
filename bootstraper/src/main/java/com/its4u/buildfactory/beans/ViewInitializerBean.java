@@ -843,7 +843,12 @@ public class ViewInitializerBean {
     	pollView.log("PlaceHolder project created ....");
     	pollView.log("Please wait ....");
     	System.out.println("Wait 3s ....");
-    	wait(3);
+    	try {
+    		TimeUnit.SECONDS.sleep(3);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	System.out.println("Start to update conf cluster ...."); 
     	pollView.log("Start to update conf cluster ....");
     	try {
@@ -854,7 +859,12 @@ public class ViewInitializerBean {
 		}
     	pollView.log("Please wait ....");
     	System.out.println("Wait 10s ....");
-    	wait(10);
+    	try {
+    		TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	    	
     	System.out.println("Start apply Default conf of application...."); 
     	
@@ -870,7 +880,12 @@ public class ViewInitializerBean {
     	
     	System.out.println("Wait 40s ....");
     	pollView.log("Please wait ....");
-    	wait(40);
+    	try {
+    		TimeUnit.SECONDS.sleep(40);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	System.out.println("Start Pipeline ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
@@ -889,15 +904,7 @@ public class ViewInitializerBean {
     	}
     }
     
-    public void wait(int sec) {
-    	try {
-    		TimeUnit.SECONDS.sleep(sec);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
+      
    
    
 }
