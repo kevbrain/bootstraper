@@ -232,7 +232,7 @@ public class ViewInitializerBean {
     	this.userGid=null;
     	this.hostRouteName=null;
     	this.runAsUser=false;
-    	this.routeExposed=false;
+    	this.routeExposed=true;
 
     	initCommonOcp();
     	refreshConfigMapMounting();
@@ -841,12 +841,7 @@ public class ViewInitializerBean {
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
     	System.out.println("Wait 3s ....");
-    	try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    	wait(3);
     	System.out.println("Start to update conf cluster ....");  
     	try {
 			placeHolderManagerBean.sync("cluster-configs");
@@ -856,12 +851,7 @@ public class ViewInitializerBean {
 		}
     	
     	System.out.println("Wait 10s ....");
-    	try {
-			TimeUnit.SECONDS.sleep(10);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    	wait(10);
     	    	
     	System.out.println("Start apply Default conf of application...."); 
     	
@@ -876,12 +866,7 @@ public class ViewInitializerBean {
     	
     	
     	System.out.println("Wait 20s ....");
-    	try {
-			TimeUnit.SECONDS.sleep(20);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    	wait(20);
     	System.out.println("Start Pipeline ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
@@ -898,9 +883,9 @@ public class ViewInitializerBean {
     	}
     }
     
-    public void wait(int msec) {
+    public void wait(int sec) {
     	try {
-			Thread.sleep(msec);
+    		TimeUnit.SECONDS.sleep(sec);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
