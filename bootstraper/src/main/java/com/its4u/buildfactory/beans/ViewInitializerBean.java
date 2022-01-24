@@ -835,8 +835,8 @@ public class ViewInitializerBean {
     	wait(1000);
     	pollView.log("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
-    	pollView.log("Wait 1s ....");
-    	wait(1000);
+    	pollView.log("Wait 5s ....");
+    	wait(5000);
     	pollView.log("Start apply Default conf ...."); 
     	try {
 			placeHolderManagerBean.applyConf(appName);
