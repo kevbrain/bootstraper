@@ -84,6 +84,9 @@ public class ViewInitializerBean {
 	@Autowired
 	private TektonManagerBean tektonManagerBean;
 	
+	@Autowired
+	private CodeReadyWorspaceManagerBean codeReadyWorspaceManagerBean;
+	
 	private static Logger logger = LoggerFactory.getLogger(ViewInitializerBean.class);
 	
 	private boolean showUploadFile;
@@ -887,6 +890,12 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}    	
     	System.out.println("Project build pipeline launched");
+    	System.out.println("Start create Workspace in codeReady");
+    	try {
+    		codeReadyWorspaceManagerBean.createWorkspace(appName);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
     
     public void wait(int msec) {
