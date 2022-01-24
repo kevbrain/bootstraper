@@ -19,6 +19,7 @@ import com.its4u.buildfactory.model.placeholders.Project;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
 import com.its4u.buildfactory.ocp.resources.Secrets;
 import com.its4u.buildfactory.services.PlaceHolderManagerService;
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -73,9 +74,10 @@ public class PlaceHolderManagerBean {
 		Unirest.setTimeouts(0, 0);
 		String url = placeholdermanagerUrl+"/createProject";
 		try {
-			Unirest.post(url)
+			HttpResponse<String> response = Unirest.post(url)
 				  .body(jsonProject)
 				  .asString();		
+			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -108,7 +110,8 @@ public class PlaceHolderManagerBean {
 		Unirest.setTimeouts(0, 0);
 		String url = placeholdermanagerUrl+"/apply-conf/"+projectName;
 		try {
-			Unirest.get(url).asString();		
+			HttpResponse<String> response = Unirest.get(url).asString();	
+			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
