@@ -828,7 +828,15 @@ public class ViewInitializerBean {
 	}
     
     public void createPlaceHolderProject() {
-    	int j=0;
+    	try {
+			refreshAllconf();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (TemplateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
     	System.out.println("Start create repos ....");
     	try {
 			gitInitializerBean.createRepo(appName);
