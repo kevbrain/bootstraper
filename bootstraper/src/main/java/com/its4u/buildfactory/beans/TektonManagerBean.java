@@ -40,7 +40,7 @@ public class TektonManagerBean {
 		
 		System.out.println(body_generated.getResourceAsString());		
 		Unirest.setTimeouts(0, 0);
-		String url = "https://el-"+projectName+"-"+projectName+"-dev.apps.ocp-lab.its4u.eu/";
+		String url = "http://el-"+projectName+"-"+projectName+"-dev.apps.ocp-lab.its4u.eu/";
 		try {
 			HttpResponse<String> response = Unirest.post(url)
 				  .body(body_generated.getResourceAsString())
