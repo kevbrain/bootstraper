@@ -50,7 +50,7 @@
    			<div style="position:relative;margin:auto;text-align:center;">		    				    		
 				    	<p:commandButton value="Reset Configuration"  actionListener="#{viewInitializerBean.reset}" update="@form" style="margin:10px;background:#003b50;color:white" />				    					    					    	
 				    	<p:commandButton value="Apply and create Project"  actionListener="#{viewInitializerBean.createPlaceHolderProject}" 
-				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
+				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide();PF('dlg1').show();"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}"/>
 				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
 				    	
@@ -743,11 +743,7 @@
     	</h:form>
 	</p:panel>
     
-    <p:dialog id="dlg1" header="#{dialogBean.header}" widgetVar="dlg1" minHeight="40" width="1200" showEffect="fade">
-     	<p:scrollPanel style="width:1200px;height:600px">
-	    <p:inputTextarea   value="#{dialogBean.content}" cols="100" rows="5"  />
-	    </p:scrollPanel>
-	</p:dialog>
+
 	
 	
  
