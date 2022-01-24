@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -836,6 +837,14 @@ public class ViewInitializerBean {
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
+    	System.out.println("Wait 5s ....");
+    	try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	System.out.println("End Wait ....");
     	System.out.println("Start to update conf cluster ....");  
     	try {
 			placeHolderManagerBean.applyConf("cluster-configs");
@@ -843,9 +852,15 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<1000000;i++) {j++;};
-    	System.out.println("End Wait ...."+j);
+    	try {
+			TimeUnit.SECONDS.sleep(10);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	System.out.println("End Wait ....");
     	
     	
     	System.out.println("Start apply Default conf of application...."); 
@@ -861,9 +876,13 @@ public class ViewInitializerBean {
     	
     	
     	System.out.println("Wait 10s ....");
-    	
-    	for (int i=0;i<90000;i++) {j++;};
-    	System.out.println("End Wait ...."+j);
+    	try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
 		} catch (Exception e) {

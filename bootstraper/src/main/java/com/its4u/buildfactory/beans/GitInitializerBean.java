@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -261,14 +262,24 @@ public class GitInitializerBean {
 			    int j=0;
 			    System.out.println("Git Project created");	
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
-			    System.out.println("Wait 10s ....");
-		    	for (int i=0;i<120000;i++) {j++;};
+			    System.out.println("Wait 5s ....");
+			    try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	System.out.println("End Wait ...."+j);
 			    createArgoApp();
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 			    System.out.println("Argo application created");
-			    System.out.println("Wait 10s ....");
-		    	for (int i=0;i<120000;i++) {j++;};
+			    System.out.println("Wait 5s ....");
+			    try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	System.out.println("End Wait ...."+j);
 			    createGitAppsDeploy(project);
 			    System.out.println("APPS deploy created");
