@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.its4u.buildfactory.model.TektonModel;
 import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -37,10 +38,13 @@ public class TektonManagerBean {
 		
 		Unirest.setTimeouts(0, 0);
 		String url = "http://el-"+projectName+"-"+projectName+"-dev.apps.ocp-lab.its4u.eu/";
+		System.out.println("Trigger url = "+url);
 		try {
-			Unirest.post(url)
-				  .body(body_generated.getResourceAsString())
-				  .asString();		
+			HttpResponse<String> response = Unirest.post(url)
+					  .header("content-type", "application/json")
+					  .body(body_generated.getResourceAsString())
+					  .asString();		
+			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
