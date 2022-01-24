@@ -56,7 +56,7 @@
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}"/>
 				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
-				    	<p:commandButton value="Create infra" actionListener="#{argoInitializerBean.createInfra(viewInitializerBean.generatedTemplatesResources)}" 
+				    	<p:commandButton value="Start pipeline" actionListener="#{tektonManagerBean.startPipelineExecution(viewInitializerBean.appName)}" 
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide()"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}" />
 			    </div>

@@ -81,6 +81,8 @@ public class TemplateGenerator {
     
     private final Template template_welcomePageRedirection;
     
+    private final Template template_tektonStartPipeline;
+    
     private TemplateResource appArgo;
     
     public List<TemplateResource> generatedResources = new ArrayList<>();
@@ -132,6 +134,11 @@ public class TemplateGenerator {
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//joinfaces"));
         template_mainPageHtml = cfg.getTemplate("main-page.xhtml");
         template_welcomePageRedirection = cfg.getTemplate("WelcomePageRedirect.template");
+        
+        // tekton
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//tekton"));
+        template_tektonStartPipeline = cfg.getTemplate("startPipeline.json");
+        
     }
 
     
