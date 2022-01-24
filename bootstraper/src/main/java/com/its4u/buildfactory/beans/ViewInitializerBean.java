@@ -824,22 +824,22 @@ public class ViewInitializerBean {
 	}
     
     public void createPlaceHolderProject() {
-    	pollView.log("Start create repos ....");
+    	System.out.println("Start create repos ....");
     	try {
 			gitInitializerBean.createRepo(appName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	pollView.log("Wait 5s ....");
+    	System.out.println("Wait 5s ....");
     	for (int i=0;i<500000;i++) {};
-    	pollView.log("End Wait ....");
-    	pollView.log("Start create placeHolder project ....");    	
+    	System.out.println("End Wait ....");
+    	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
-    	pollView.log("Wait 10s ....");
-    	for (int i=0;i<500000;i++) {};
-    	pollView.log("End Wait ....");
-    	pollView.log("Start apply Default conf ...."); 
+    	System.out.println("Wait 10s ....");
+    	for (int i=0;i<500000;i++) {System.out.println(i);};
+    	System.out.println("End Wait ....");
+    	System.out.println("Start apply Default conf ...."); 
     	
     	try {
 			placeHolderManagerBean.applyConf(appName);
@@ -848,17 +848,17 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
-    	pollView.log("Project bootstraped with success ...."); 
-    	pollView.log("Wait 10s ....");
-    	for (int i=0;i<500000;i++) {};
-    	pollView.log("End Wait ....");
+    	System.out.println("Project bootstraped with success ...."); 
+    	System.out.println("Wait 10s ....");
+    	for (int i=0;i<500000;i++) {System.out.println(i);};
+    	System.out.println("End Wait ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
-    	pollView.log("Project build pipeline launched");
+    	System.out.println("Project build pipeline launched");
     }
     
     public void wait(int msec) {
