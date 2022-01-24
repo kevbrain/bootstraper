@@ -824,6 +824,7 @@ public class ViewInitializerBean {
 	}
     
     public void createPlaceHolderProject() {
+    	int j=0;
     	System.out.println("Start create repos ....");
     	try {
 			gitInitializerBean.createRepo(appName);
@@ -843,8 +844,8 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<5000;i++) {};
-    	System.out.println("End Wait ....");
+    	for (int i=0;i<3000;i++) {j++;};
+    	System.out.println("End Wait ...."+j);
     	
     	
     	System.out.println("Start apply Default conf of application...."); 
@@ -857,9 +858,12 @@ public class ViewInitializerBean {
 		}
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	System.out.println("Project bootstraped with success ...."); 
+    	
+    	
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<5000;i++) {};
-    	System.out.println("End Wait ....");
+    	
+    	for (int i=0;i<3000;i++) {j++;};
+    	System.out.println("End Wait ...."+j);
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
 		} catch (Exception e) {

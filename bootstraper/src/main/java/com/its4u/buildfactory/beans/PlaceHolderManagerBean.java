@@ -19,6 +19,8 @@ import com.its4u.buildfactory.model.placeholders.Project;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
 import com.its4u.buildfactory.ocp.resources.Secrets;
 import com.its4u.buildfactory.services.PlaceHolderManagerService;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import lombok.Data;
 
@@ -68,6 +70,17 @@ public class PlaceHolderManagerBean {
 	
 	public void postProjectToPlaceHolderManager(String jsonProject) throws IOException {
 		
+		Unirest.setTimeouts(0, 0);
+		String url = placeholdermanagerUrl+"/createProject";
+		try {
+			Unirest.post(url)
+				  .body(jsonProject)
+				  .asString();		
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*
 		URL url = new URL(placeholdermanagerUrl+"/createProject");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -85,11 +98,24 @@ public class PlaceHolderManagerBean {
 			System.out.println(output);
 		}
 		conn.disconnect();
+		*/
 	}
 	
 	public void applyConf(String projectName) throws IOException {
 		
 		System.out.println("Apply Conf");
+		
+		Unirest.setTimeouts(0, 0);
+		String url = placeholdermanagerUrl+"/apply-conf/"+projectName;
+		try {
+			Unirest.get(url).asString();		
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*
+		
 		URL url = new URL(placeholdermanagerUrl+"/apply-conf/"+projectName);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -103,6 +129,7 @@ public class PlaceHolderManagerBean {
 			System.out.println(output);
 		}
 		conn.disconnect();
+		*/
 	}
 	
 }
