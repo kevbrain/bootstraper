@@ -832,22 +832,15 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	pollView.log("Wait 5s ....");
-    	try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	for (int i=0;i<500000;i++) {};
+    	pollView.log("End Wait ....");
     	pollView.log("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	pollView.log("Wait 10s ....");
-    	try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	for (int i=0;i<500000;i++) {};
+    	pollView.log("End Wait ....");
     	pollView.log("Start apply Default conf ...."); 
+    	
     	try {
 			placeHolderManagerBean.applyConf(appName);
 		} catch (IOException e) {
@@ -856,7 +849,9 @@ public class ViewInitializerBean {
 		}
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	pollView.log("Project bootstraped with success ...."); 
-    	wait(1000);
+    	pollView.log("Wait 10s ....");
+    	for (int i=0;i<500000;i++) {};
+    	pollView.log("End Wait ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
 		} catch (Exception e) {

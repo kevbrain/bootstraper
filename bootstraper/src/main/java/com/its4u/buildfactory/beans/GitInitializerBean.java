@@ -255,7 +255,7 @@ public class GitInitializerBean {
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 	    createGitAppsDeploy(project);
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
-	    System.out.println("All are created on Githib");
+	    System.out.println("All are created on Github");
 	    
 	}
 	
