@@ -844,7 +844,7 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<3000;i++) {j++;};
+    	for (int i=0;i<1000000;i++) {j++;};
     	System.out.println("End Wait ...."+j);
     	
     	
@@ -862,7 +862,7 @@ public class ViewInitializerBean {
     	
     	System.out.println("Wait 10s ....");
     	
-    	for (int i=0;i<3000;i++) {j++;};
+    	for (int i=0;i<90000;i++) {j++;};
     	System.out.println("End Wait ...."+j);
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
