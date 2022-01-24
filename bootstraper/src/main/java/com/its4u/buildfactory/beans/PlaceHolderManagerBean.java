@@ -83,30 +83,11 @@ public class PlaceHolderManagerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*
-		URL url = new URL(placeholdermanagerUrl+"/createProject");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-		conn.setDoOutput(true);		
-		conn.setRequestMethod("POST");
-		conn.setRequestProperty("Content-Type", "application/json");
-		OutputStream os = conn.getOutputStream();
-		os.write(jsonProject.getBytes());
-		os.flush();
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				(conn.getInputStream())));
-
-		String output;
-		while ((output = br.readLine()) != null) {
-			System.out.println(output);
-		}
-		conn.disconnect();
-		*/
 	}
 	
 	public void applyConf(String projectName) throws IOException {
 		
-		System.out.println("Apply Conf");
+		System.out.println("Apply Conf and sync "+projectName);
 		
 		Unirest.setTimeouts(0, 0);
 		String url = placeholdermanagerUrl+"/apply-conf/"+projectName;
@@ -116,24 +97,22 @@ public class PlaceHolderManagerBean {
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}	
+	}
+	
+	public void sync(String projectName) throws IOException {
 		
-		/*
+		System.out.println("Sync project "+projectName);
 		
-		URL url = new URL(placeholdermanagerUrl+"/apply-conf/"+projectName);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-		conn.setDoOutput(true);		
-		conn.setRequestMethod("GET");		
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				(conn.getInputStream())));
-
-		String output;
-		while ((output = br.readLine()) != null) {
-			System.out.println(output);
-		}
-		conn.disconnect();
-		*/
+		Unirest.setTimeouts(0, 0);
+		String url = placeholdermanagerUrl+"/sync/"+projectName;
+		try {
+			HttpResponse<String> response = Unirest.get(url).asString();	
+			System.out.println(response.getBody());
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 }

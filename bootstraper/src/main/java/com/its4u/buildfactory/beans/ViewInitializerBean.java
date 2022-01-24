@@ -847,7 +847,7 @@ public class ViewInitializerBean {
     	System.out.println("End Wait ....");
     	System.out.println("Start to update conf cluster ....");  
     	try {
-			placeHolderManagerBean.applyConf("cluster-configs");
+			placeHolderManagerBean.sync("cluster-configs");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
