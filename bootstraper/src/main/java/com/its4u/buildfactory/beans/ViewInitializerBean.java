@@ -831,15 +831,23 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	System.out.println("Wait 5s ....");
-    	for (int i=0;i<5000;i++) {};
-    	System.out.println("End Wait ....");
+    	System.out.println("Git reposiroties created ....");    	
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
+    	System.out.println("PlaceHolder project created....");   
+    	System.out.println("Start to update conf cluster ....");  
+    	try {
+			placeHolderManagerBean.applyConf("cluster-configs");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	System.out.println("Wait 10s ....");
     	for (int i=0;i<5000;i++) {};
     	System.out.println("End Wait ....");
-    	System.out.println("Start apply Default conf ...."); 
+    	
+    	
+    	System.out.println("Start apply Default conf of application...."); 
     	
     	try {
 			placeHolderManagerBean.applyConf(appName);
