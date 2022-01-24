@@ -886,10 +886,10 @@ public class ViewInitializerBean {
     	System.out.println("Project bootstraped with success ...."); 
     	
     	
-    	System.out.println("Wait 40s ....");
+    	System.out.println("Wait 60s ....");
     	pollView.log("Please wait ....");
     	try {
-    		TimeUnit.SECONDS.sleep(40);
+    		TimeUnit.SECONDS.sleep(60);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
