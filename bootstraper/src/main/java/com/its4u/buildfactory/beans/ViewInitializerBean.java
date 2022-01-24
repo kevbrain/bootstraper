@@ -840,16 +840,19 @@ public class ViewInitializerBean {
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
+    	pollView.log("PlaceHolder project created ....");
+    	pollView.log("Please wait ....");
     	System.out.println("Wait 3s ....");
     	wait(3);
-    	System.out.println("Start to update conf cluster ....");  
+    	System.out.println("Start to update conf cluster ...."); 
+    	pollView.log("Start to update conf cluster ....");
     	try {
 			placeHolderManagerBean.sync("cluster-configs");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	pollView.log("Please wait ....");
     	System.out.println("Wait 10s ....");
     	wait(10);
     	    	
@@ -865,8 +868,9 @@ public class ViewInitializerBean {
     	System.out.println("Project bootstraped with success ...."); 
     	
     	
-    	System.out.println("Wait 20s ....");
-    	wait(20);
+    	System.out.println("Wait 40s ....");
+    	pollView.log("Please wait ....");
+    	wait(40);
     	System.out.println("Start Pipeline ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
@@ -874,7 +878,9 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
+    	pollView.log("Build pipeline on ocp started ....");
     	System.out.println("Project build pipeline launched");
+    	pollView.log("Start to create Workspace in codeReady....");
     	System.out.println("Start create Workspace in codeReady");
     	try {
     		codeReadyWorspaceManagerBean.createWorkspace(appName);
