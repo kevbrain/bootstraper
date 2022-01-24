@@ -17,10 +17,19 @@ import javax.faces.context.FacesContext;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.api.RemoteAddCommand;
+import org.eclipse.jgit.api.errors.AbortedByHookException;
+import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.NoHeadException;
+import org.eclipse.jgit.api.errors.NoMessageException;
+import org.eclipse.jgit.api.errors.ServiceUnavailableException;
+import org.eclipse.jgit.api.errors.UnmergedPathsException;
+import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.kohsuke.github.GHEvent;
+import org.kohsuke.github.GHHook;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;
@@ -85,178 +94,179 @@ public class GitInitializerBean {
 	}
 	
 	public void createGitAppsDeploy(String project) throws IllegalStateException, GitAPIException, IOException, URISyntaxException {
-		System.out.println("create project on ocp-gitops-apps");
-		UUID uuid = UUID.randomUUID();
-		String path = pathWorkspace+"//ocp-gitops-apps-deploy-"+uuid;
-		Git git = null;
-		File workingDirectory = null;
-		workingDirectory = new File(path);
-		workingDirectory.delete();
-		workingDirectory.mkdirs();
+		try {
+				UUID uuid = UUID.randomUUID();
+				String path = pathWorkspace+"//ocp-gitops-apps-deploy-"+uuid;
+				Git git = null;
+				File workingDirectory = null;
+				workingDirectory = new File(path);
+				workingDirectory.delete();
+				workingDirectory.mkdirs();
+				
+				try {	
+					git = Git.cloneRepository()
+							  .setURI(gitOpsAppsDeployUrl)
+							  .setDirectory(workingDirectory)
+							  .call();
+				} catch (Exception e) {
 		
-		try {	
-			git = Git.cloneRepository()
-					  .setURI(gitOpsAppsDeployUrl)
-					  .setDirectory(workingDirectory)
-					  .call();
+					git = Git.init().setDirectory(workingDirectory).call();
+				}	
+				File folder =  new File(path+"//"+project);
+				folder.mkdir();
+				readNodeMavenProjectAndCreateArtifact(mavenInitializerBean.getJkube(),path+"//"+project);
+				git.add().addFilepattern(".").call();
+		
+				
+				// Now, we do the commit with a message
+				
+				RevCommit rev =	git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
+			
+				RemoteAddCommand remoteAddCommand = git.remoteAdd();
+			    remoteAddCommand.setName("origin");
+			    remoteAddCommand.setUri(new URIish(gitOpsAppsDeployUrl));
+			    remoteAddCommand.call();
+		
+			    // push to remote:
+			    PushCommand pushCommand = git.push();
+			    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
+			    // you can add more settings here if needed
+			    pushCommand.call();
 		} catch (Exception e) {
-
-			git = Git.init().setDirectory(workingDirectory).call();
-		}	
-		File folder =  new File(path+"//"+project);
-		folder.mkdir();
-		readNodeMavenProjectAndCreateArtifact(mavenInitializerBean.getJkube(),path+"//"+project);
-		git.add().addFilepattern(".").call();
-
-		
-		// Now, we do the commit with a message
-		
-		git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
-	
-		RemoteAddCommand remoteAddCommand = git.remoteAdd();
-	    remoteAddCommand.setName("origin");
-	    remoteAddCommand.setUri(new URIish(gitOpsAppsDeployUrl));
-	    remoteAddCommand.call();
-
-	    // push to remote:
-	    PushCommand pushCommand = git.push();
-	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
-	    // you can add more settings here if needed
-	    pushCommand.call();
-	    System.out.println("Project created on ocp-gitops-apps");
+			e.printStackTrace();
+		}
 	    
 	}
 	
 	
 	public void createArgoApp() throws IllegalStateException, GitAPIException, IOException, URISyntaxException {
+		try {
+				pollView.log("Create Argo App");	
+				UUID uuid = UUID.randomUUID();
+				String path = pathWorkspace+"//ocp-gitops-"+uuid;
+				Git git = null;
+				File workingDirectory = null;
+				workingDirectory = new File(path);
+				workingDirectory.delete();
+				workingDirectory.mkdirs();
+				
+				try {	
+					git = Git.cloneRepository()
+							  .setURI(gitOpsUrl)
+							  .setDirectory(workingDirectory)
+							  .call();
+				} catch (Exception e) {
+					
+					git = Git.init().setDirectory(workingDirectory).call();
+				}	
+				
+				pollView.log("Git Cluster app cloned");
+				readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
+				git.add().addFilepattern(".").call();
 		
-		pollView.log("Create Argo App");
-		System.out.println("Create Argo Application on ocp-gitops");
-		UUID uuid = UUID.randomUUID();
-		String path = pathWorkspace+"//ocp-gitops-"+uuid;
-		Git git = null;
-		File workingDirectory = null;
-		workingDirectory = new File(path);
-		workingDirectory.delete();
-		workingDirectory.mkdirs();
+				pollView.log("App created : "+path);
+				// Now, we do the commit with a message
+				
+				RevCommit rev =	git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
+			
+				RemoteAddCommand remoteAddCommand = git.remoteAdd();
+			    remoteAddCommand.setName("origin");
+			    remoteAddCommand.setUri(new URIish(gitOpsUrl));
+			    remoteAddCommand.call();
 		
-		try {	
-			git = Git.cloneRepository()
-					  .setURI(gitOpsUrl)
-					  .setDirectory(workingDirectory)
-					  .call();
+			    // push to remote:
+			    PushCommand pushCommand = git.push();
+			    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
+			    // you can add more settings here if needed
+			    pushCommand.call();
+			    pollView.log("Git Cluster app updated, commited and pushed");
 		} catch (Exception e) {
-
-			git = Git.init().setDirectory(workingDirectory).call();
-		}	
-		
-		pollView.log("Application created on ArgoCD");
-		readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
-		git.add().addFilepattern(".").call();
-
-		pollView.log("App created : "+path);
-		// Now, we do the commit with a message
-		
-		git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
-	
-		RemoteAddCommand remoteAddCommand = git.remoteAdd();
-	    remoteAddCommand.setName("origin");
-	    remoteAddCommand.setUri(new URIish(gitOpsUrl));
-	    remoteAddCommand.call();
-
-	    // push to remote:
-	    PushCommand pushCommand = git.push();
-	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
-	    // you can add more settings here if needed
-	    pushCommand.call();
-	    System.out.println("Argo Application on ocp-gitops created");
-	    pollView.log("Git Cluster app updated, commited and pushed");
-	    
+			e.printStackTrace();
+		}
 	}
 	
-	public void createRepo(String project) throws Exception {
-		
-		
-		pollView.log("Workspace creation");
-		UUID uuid = UUID.randomUUID();
-		
-		this.gitSubDirectory=project;
-
-		boolean deleted = deleteDirectory(new File(pathWorkspace+"/"+project+"-"+uuid));
-		System.out.println("workspace deleted : "+deleted);
-		
-		String path = pathWorkspace+"//"+project+"-"+uuid;
-			
-		
-		this.gitUrl= gitUrlPrefix+project+".git";
-		
-		
-		pollView.log("Git initialization");
-		// clone Git Project"
-		Git git = null;
-		File workingDirectory = null;
-		workingDirectory = new File(path);
-		workingDirectory.delete();
-		workingDirectory.mkdirs();				
+	public void createRepo(String project) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
 		try {	
-			git = Git.cloneRepository()
-					  .setURI(gitUrl)
-					  .setDirectory(workingDirectory)
-					  .call();
-		} catch (Exception e) {
-
-			git = Git.init().setDirectory(workingDirectory).call();
-		}	
-		
-		pollView.log("Git Project Setup");
-		// Create project in Git Project
-		File newFile = new File(workingDirectory, project);
-		newFile.mkdir();
-		
-		pollView.log("Init Maven project");	
-		// Read Maven Project and Create structure
-		TreeNode nodeProject = mavenInitializerBean.getRoot();
-		
-		readNodeMavenProjectAndCreateArtifact(nodeProject,path);
-		
-		// if joinfaces project we copy resources to meta-inf
-		if (mavenInitializerBean.isJoinfaces()) {
-			//copyResourcesFromClassPath(pathResource,project,path);
-		}
+				pollView.log("Workspace creation");
+				UUID uuid = UUID.randomUUID();
 				
-		// Now, we do the commit with a message
+				this.gitSubDirectory=project;
 		
-		git.add().addFilepattern(".").call();
-		git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
-	
-		RemoteAddCommand remoteAddCommand = git.remoteAdd();
-	    remoteAddCommand.setName("origin");
-	    remoteAddCommand.setUri(new URIish(gitUrl));
-	    remoteAddCommand.call();
-
-	    // push to remote:
-	    PushCommand pushCommand = git.push();
-	    pushCommand.add("master");
-	    pushCommand.setRemote("origin");
-	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
-	    try {		    
-		    // you can add more settings here if needed
-		    pushCommand.call();
-	    } catch (Exception e) {
-			System.out.println(e.getCause().getMessage());
-			createNewRemoteRepository(project);
-		} finally {
-			pushCommand.call();
+				boolean deleted = deleteDirectory(new File(pathWorkspace+"/"+project+"-"+uuid));
+				System.out.println("workspace deleted : "+deleted);
+				
+				String path = pathWorkspace+"//"+project+"-"+uuid;
+					
+				
+				this.gitUrl= gitUrlPrefix+project+".git";
+				
+				
+				pollView.log("Git initialization");
+				// clone Git Project"
+				Git git = null;
+				File workingDirectory = null;
+				workingDirectory = new File(path);
+				workingDirectory.delete();
+				workingDirectory.mkdirs();				
+				try {	
+					git = Git.cloneRepository()
+							  .setURI(gitUrl)
+							  .setDirectory(workingDirectory)
+							  .call();
+				} catch (Exception e) {
+		
+					git = Git.init().setDirectory(workingDirectory).call();
+				}	
+				
+				pollView.log("Git Project Setup");
+				// Create project in Git Project
+				File newFile = new File(workingDirectory, project);
+				newFile.mkdir();
+				
+				pollView.log("Init Maven project");	
+				// Read Maven Project and Create structure
+				TreeNode nodeProject = mavenInitializerBean.getRoot();
+				
+				readNodeMavenProjectAndCreateArtifact(nodeProject,path);
+				
+				// if joinfaces project we copy resources to meta-inf
+				if (mavenInitializerBean.isJoinfaces()) {
+					//copyResourcesFromClassPath(pathResource,project,path);
+				}
+						
+				// Now, we do the commit with a message
+				
+				git.add().addFilepattern(".").call();
+				git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
+			
+				RemoteAddCommand remoteAddCommand = git.remoteAdd();
+			    remoteAddCommand.setName("origin");
+			    remoteAddCommand.setUri(new URIish(gitUrl));
+			    remoteAddCommand.call();
+		
+			    // push to remote:
+			    PushCommand pushCommand = git.push();
+			    pushCommand.add("master");
+			    pushCommand.setRemote("origin");
+			    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
+			    try {		    
+				    // you can add more settings here if needed
+				    pushCommand.call();
+			    } catch (Exception e) {
+					System.out.println(e.getCause().getMessage());
+					createNewRemoteRepository(project);
+				} finally {
+					pushCommand.call();
+				}
+			    pollView.log("Git Project created");	
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
+			    createArgoApp();
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
+			    createGitAppsDeploy(project);
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	    pollView.log("Git Project created");	
-	    System.out.println("Git DEV created");
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git DEV created"));
-	    createArgoApp();
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
-	    createGitAppsDeploy(project);
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
-	    System.out.println("All are created on Github");
-	    
 	}
 	
 	public void copyResourcesFromClassPath(String pathResource,String project,String pathDest)  {
@@ -294,56 +304,61 @@ public class GitInitializerBean {
 
 	
 	public void createNewRemoteRepository(String project) throws IOException, InterruptedException {
-		System.out.println("*** create new repo ***");
 		
+		try {
+				System.out.println("*** create new repo ***");								
+				pollView.log("Git create new repo for "+project);
+				GitHub github = new GitHubBuilder().withOAuthToken(gitPassword).build();
+				//github.connect();
 		
-		pollView.log("Git create new repo for "+project);
-		GitHub github = new GitHubBuilder().withOAuthToken(gitPassword).build();
-		//github.connect();
-
-		GHRepository repo = github.createRepository(
-		  project,"Created By Ocp InitialiZr",
-		  "https://github.com/kevbrain/",true/*public*/);
-		
-		//System.out.println("*** Repo created ***");
-		pollView.log("Repo created ");
-		
-		String urlWebHook="http://el-"+project+"-"+project+"-dev.apps.ocp-lab.its4u.eu/";
-		System.out.println("wait 4s ...");
-		System.out.println("Try to create Webhook");
-		Thread.sleep(4000);
-		
-		final HashMap<String, String> config = new HashMap<>();
-	      config.put("url",urlWebHook);
-	      config.put("content_type", "json");
-	    Collection<GHEvent> collectionEvents = new ArrayList<GHEvent>();
-	    collectionEvents.add(GHEvent.ALL);
-		repo.createHook("web",config,collectionEvents,true);
-		
-		pollView.log("WebHook created with urlWebHook");
-		System.out.println("*** WebHook created with "+urlWebHook);
+				GHRepository repo = github.createRepository(
+				  project,"Created By Ocp InitialiZr",
+				  "https://github.com/kevbrain/",true/*public*/);
+				
+				//System.out.println("*** Repo created ***");
+				pollView.log("Repo created ");
+				
+				String urlWebHook="http://el-"+project+"-"+project+"-dev.apps.ocp-lab.its4u.eu/";
+				System.out.println("wait 4s ...");
+				System.out.println("Try to create Webhook");
+				Thread.sleep(4000);
+				
+				final HashMap<String, String> config = new HashMap<>();
+			      config.put("url",urlWebHook);
+			      config.put("content_type", "json");
+			    Collection collectionEvents = new ArrayList();
+			    collectionEvents.add(GHEvent.ALL);
+				GHHook hook =repo.createHook("web",config,collectionEvents,true);
+				
+				pollView.log("WebHook created with urlWebHook");
+				System.out.println("*** WebHook created with "+urlWebHook);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void readNodeMavenProjectAndCreateArtifact(TreeNode node,String path) throws IOException {
 		
-		
-		if (node!=null && node.getData() instanceof ProjectArborescenceItem) {
-			ProjectArborescenceItem item = (ProjectArborescenceItem) node.getData();
-			if (item.getType().equalsIgnoreCase("Folder")) {
-				File folder =  new File(path+"//"+item.getName());
-				folder.mkdir();
-			} else if (item.getType().equalsIgnoreCase("Text")) {
-				Path filePath = Paths.get(path, item.getName());
-				Files.writeString(filePath,item.getTemplateResource().getResourceAsString() );
-			}
-			
-			if (node.getChildren()!=null && !node.getChildren().isEmpty()) {
-				path =path + "/"+item.getName();
-				for (TreeNode childNode: node.getChildren()) {
-					readNodeMavenProjectAndCreateArtifact(childNode,path);
+		try {
+				if (node!=null && node.getData() instanceof ProjectArborescenceItem) {
+					ProjectArborescenceItem item = (ProjectArborescenceItem) node.getData();
+					if (item.getType().equalsIgnoreCase("Folder")) {
+						File folder =  new File(path+"//"+item.getName());
+						folder.mkdir();
+					} else if (item.getType().equalsIgnoreCase("Text")) {
+						Path filePath = Paths.get(path, item.getName());
+						Files.writeString(filePath,item.getTemplateResource().getResourceAsString() );
+					}
+					
+					if (node.getChildren()!=null && !node.getChildren().isEmpty()) {
+						path =path + "/"+item.getName();
+						for (TreeNode childNode: node.getChildren()) {
+							readNodeMavenProjectAndCreateArtifact(childNode,path);
+						}
+					}
 				}
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
 	}
 }
