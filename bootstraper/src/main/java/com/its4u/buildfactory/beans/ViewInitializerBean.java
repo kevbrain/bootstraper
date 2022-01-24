@@ -837,14 +837,13 @@ public class ViewInitializerBean {
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
-    	System.out.println("Wait 5s ....");
+    	System.out.println("Wait 3s ....");
     	try {
-			TimeUnit.SECONDS.sleep(5);
+			TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	System.out.println("End Wait ....");
     	System.out.println("Start to update conf cluster ....");  
     	try {
 			placeHolderManagerBean.sync("cluster-configs");
@@ -860,9 +859,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	System.out.println("End Wait ....");
-    	
-    	
+    	    	
     	System.out.println("Start apply Default conf of application...."); 
     	
     	try {
@@ -875,14 +872,14 @@ public class ViewInitializerBean {
     	System.out.println("Project bootstraped with success ...."); 
     	
     	
-    	System.out.println("Wait 10s ....");
+    	System.out.println("Wait 20s ....");
     	try {
-			TimeUnit.SECONDS.sleep(5);
+			TimeUnit.SECONDS.sleep(20);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    
+    	System.out.println("Start Pipeline ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
 		} catch (Exception e) {
