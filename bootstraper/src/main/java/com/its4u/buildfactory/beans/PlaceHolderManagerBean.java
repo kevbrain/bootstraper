@@ -75,6 +75,7 @@ public class PlaceHolderManagerBean {
 		String url = placeholdermanagerUrl+"/createProject";
 		try {
 			HttpResponse<String> response = Unirest.post(url)
+				  .header("content-type", "application/json")
 				  .body(jsonProject)
 				  .asString();		
 			System.out.println(response.getBody());
