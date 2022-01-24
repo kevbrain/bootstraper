@@ -85,6 +85,7 @@ public class GitInitializerBean {
 	}
 	
 	public void createGitAppsDeploy(String project) throws IllegalStateException, GitAPIException, IOException, URISyntaxException {
+		System.out.println("create project on ocp-gitops-apps");
 		UUID uuid = UUID.randomUUID();
 		String path = pathWorkspace+"//ocp-gitops-apps-deploy-"+uuid;
 		Git git = null;
@@ -122,13 +123,15 @@ public class GitInitializerBean {
 	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
 	    // you can add more settings here if needed
 	    pushCommand.call();
+	    System.out.println("Project created on ocp-gitops-apps");
 	    
 	}
 	
 	
 	public void createArgoApp() throws IllegalStateException, GitAPIException, IOException, URISyntaxException {
 		
-		pollView.log("Create Argo App");	
+		pollView.log("Create Argo App");
+		System.out.println("Create Argo Application on ocp-gitops");
 		UUID uuid = UUID.randomUUID();
 		String path = pathWorkspace+"//ocp-gitops-"+uuid;
 		Git git = null;
@@ -147,7 +150,7 @@ public class GitInitializerBean {
 			git = Git.init().setDirectory(workingDirectory).call();
 		}	
 		
-		pollView.log("Git Cluster app cloned");
+		pollView.log("Application created on ArgoCD");
 		readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
 		git.add().addFilepattern(".").call();
 
@@ -166,6 +169,7 @@ public class GitInitializerBean {
 	    pushCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(gitUser, gitPassword));
 	    // you can add more settings here if needed
 	    pushCommand.call();
+	    System.out.println("Argo Application on ocp-gitops created");
 	    pollView.log("Git Cluster app updated, commited and pushed");
 	    
 	}
@@ -245,12 +249,13 @@ public class GitInitializerBean {
 			pushCommand.call();
 		}
 	    pollView.log("Git Project created");	
-	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
+	    System.out.println("Git DEV created");
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git DEV created"));
 	    createArgoApp();
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 	    createGitAppsDeploy(project);
 	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
-	    
+	    System.out.println("All are created on Githib");
 	    
 	}
 	

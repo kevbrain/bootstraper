@@ -832,11 +832,21 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	pollView.log("Wait 5s ....");
-    	wait(5000);
+    	try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	pollView.log("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	pollView.log("Wait 10s ....");
-    	wait(10000);
+    	try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	pollView.log("Start apply Default conf ...."); 
     	try {
 			placeHolderManagerBean.applyConf(appName);
