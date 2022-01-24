@@ -83,6 +83,8 @@ public class TemplateGenerator {
     
     private final Template template_tektonStartPipeline;
     
+    private final Template template_codeReady_devfile;
+    
     private TemplateResource appArgo;
     
     public List<TemplateResource> generatedResources = new ArrayList<>();
@@ -138,6 +140,10 @@ public class TemplateGenerator {
         // tekton
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//tekton"));
         template_tektonStartPipeline = cfg.getTemplate("startPipeline.json");
+        
+        // codeReady
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//codeready"));
+        template_codeReady_devfile = cfg.getTemplate("devfile.json");
         
     }
 
