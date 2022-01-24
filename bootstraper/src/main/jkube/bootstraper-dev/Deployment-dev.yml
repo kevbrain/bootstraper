@@ -107,6 +107,26 @@ spec:
                 configMapKeyRef:
                   name: bootstraper-cm-0
                   key: git.user
+            - name: codeready.user
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: codeready.user
+            - name: codeready.client.id
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: codeready.client.id
+            - name: codeready.access.token.url
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: codeready.access.token.url
+            - name: codeready.workspace.url
+              valueFrom:
+                configMapKeyRef:
+                  name: bootstraper-cm-0
+                  key: codeready.workspace.url
             - name: argo.server
               valueFrom:
                 configMapKeyRef:
@@ -127,6 +147,16 @@ spec:
                 secretKeyRef:
                   name: bootstraper-secret-0
                   key: git.password
+            - name: codeready.user.password
+              valueFrom:
+                secretKeyRef:
+                  name: bootstraper-secret-0
+                  key: codeready.user.password
+            - name: codeready.client.secret
+              valueFrom:
+                secretKeyRef:
+                  name: bootstraper-secret-0
+                  key: codeready.client.secret
           ports:
             - containerPort: 8080
               protocol: TCP

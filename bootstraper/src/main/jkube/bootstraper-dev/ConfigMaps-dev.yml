@@ -20,4 +20,8 @@ data:
   argo.user: "{{argo.user}}"
   git.user: "{{git.user}}"
   argo.server: "{{argo.server}}"
+  codeready.user: "{{codeready.user}}"
+  codeready.client.id: "{{codeready.client.id}}"
+  codeready.access.token.url: "{{codeready.access.token.url}}"
+  codeready.workspace.url: "{{codeready.workspace.url}}"
 ---
