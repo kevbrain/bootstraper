@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 import com.its4u.buildfactory.model.TektonModel;
 import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;
+import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import lombok.Data;
 
@@ -36,9 +38,18 @@ public class TektonManagerBean {
 		this.tektonModel = new TektonModel(projectName);
 		this.body_generated = new TemplateResource("body.json", generator.generateResourceWithTemplate(tektonModel,generator.getTemplate_tektonStartPipeline()), 0, 0, 0);
 		
-		System.out.println(body_generated.getResourceAsString());
-		
+		System.out.println(body_generated.getResourceAsString());		
 		Unirest.setTimeouts(0, 0);
+		String url = "https://el-"+projectName+"-"+projectName+"-dev.apps.ocp-lab.its4u.eu/";
+		try {
+			HttpResponse<String> response = Unirest.post(url)
+				  .body(body_generated.getResourceAsString())
+			  .asString();		
+			System.out.println(response.getBody());
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Tekton build pipeline launched"));
 		
