@@ -832,12 +832,12 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	System.out.println("Wait 5s ....");
-    	for (int i=0;i<500000;i++) {};
+    	for (int i=0;i<5000;i++) {};
     	System.out.println("End Wait ....");
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<500000;i++) {System.out.println(i);};
+    	for (int i=0;i<5000;i++) {};
     	System.out.println("End Wait ....");
     	System.out.println("Start apply Default conf ...."); 
     	
@@ -850,7 +850,7 @@ public class ViewInitializerBean {
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	System.out.println("Project bootstraped with success ...."); 
     	System.out.println("Wait 10s ....");
-    	for (int i=0;i<500000;i++) {System.out.println(i);};
+    	for (int i=0;i<5000;i++) {};
     	System.out.println("End Wait ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName);
