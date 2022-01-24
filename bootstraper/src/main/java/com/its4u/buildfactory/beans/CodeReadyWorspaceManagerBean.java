@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 
 import com.its4u.buildfactory.model.CodeReadyModel;
-import com.its4u.buildfactory.model.TektonModel;
 import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;
 import com.mashape.unirest.http.HttpResponse;
@@ -74,8 +73,6 @@ public class CodeReadyWorspaceManagerBean {
 		this.generator = new TemplateGenerator(pathTemplate);
 		this.codeReadyModel = new CodeReadyModel(projectName);
 		this.body_generated = new TemplateResource("body.json", generator.generateResourceWithTemplate(codeReadyModel,generator.getTemplate_codeReady_devfile()), 0, 0, 0);
-		
-		System.out.println(this.body_generated.getResourceAsString());
 		
 		Unirest.setTimeouts(0, 0);
 		String url = workspaceBaseUrl+"/api/workspace/devfile";
