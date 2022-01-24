@@ -80,6 +80,9 @@ public class ViewInitializerBean {
 	@Autowired
 	private PlaceHolderManagerBean placeHolderManagerBean;
 	
+	@Autowired
+	private TektonManagerBean tektonManagerBean;
+	
 	private static Logger logger = LoggerFactory.getLogger(ViewInitializerBean.class);
 	
 	private boolean showUploadFile;
@@ -829,21 +832,11 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	pollView.log("Wait 1s ....");
-    	try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	wait(1000);
     	pollView.log("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	pollView.log("Wait 1s ....");
-    	try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	wait(1000);
     	pollView.log("Start apply Default conf ...."); 
     	try {
 			placeHolderManagerBean.applyConf(appName);
@@ -853,6 +846,23 @@ public class ViewInitializerBean {
 		}
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	pollView.log("Project bootstraped with success ...."); 
+    	wait(1000);
+    	try {
+			tektonManagerBean.startPipelineExecution(appName);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    	
+    	pollView.log("Project build pipeline launched");
+    }
+    
+    public void wait(int msec) {
+    	try {
+			Thread.sleep(msec);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
    
