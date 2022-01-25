@@ -3,11 +3,11 @@ package com.its4u.buildfactory.beans;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.its4u.buildfactory.ocp.resources.TemplateResource;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.yaml.snakeyaml.Yaml;
+
+import com.its4u.buildfactory.ocp.resources.TemplateResource;
 
 import lombok.Data;
 

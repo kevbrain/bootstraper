@@ -1,9 +1,11 @@
 package com.its4u.buildfactory.model;
 
 
-import lombok.Data;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class TektonModel extends TemplateModel {
 
 	public String appName;

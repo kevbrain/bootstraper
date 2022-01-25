@@ -2,7 +2,9 @@ package com.its4u.buildfactory.beans;
 
 import java.io.Serializable;
 import java.util.Stack;
+
 import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
 @Component

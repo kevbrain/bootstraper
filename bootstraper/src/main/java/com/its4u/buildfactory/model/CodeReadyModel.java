@@ -1,8 +1,9 @@
 package com.its4u.buildfactory.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 public class CodeReadyModel extends TemplateModel{
 	
 	public String appName;

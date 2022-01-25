@@ -23,22 +23,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
-import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
-import com.its4u.buildfactory.model.FilesToAnalyse;
-import com.its4u.buildfactory.ocp.resources.ConfigMap;
-import com.its4u.buildfactory.ocp.resources.ConfigResource;
-import com.its4u.buildfactory.ocp.resources.Container;
-import com.its4u.buildfactory.ocp.resources.DeploymentModel;
-import com.its4u.buildfactory.ocp.resources.Mounting;
-import com.its4u.buildfactory.ocp.resources.Nas;
-import com.its4u.buildfactory.ocp.resources.PersistentVolumeClaim;
-import com.its4u.buildfactory.ocp.resources.Route;
-import com.its4u.buildfactory.ocp.resources.Secrets;
-import com.its4u.buildfactory.ocp.resources.ServiceAccount;
-import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
-import com.its4u.buildfactory.ocp.resources.TemplateResource;
-import com.its4u.buildfactory.ocp.resources.Volumes;
-
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.FileUploadEvent;
@@ -55,6 +39,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
+import com.its4u.buildfactory.model.FilesToAnalyse;
+import com.its4u.buildfactory.ocp.resources.ConfigMap;
+import com.its4u.buildfactory.ocp.resources.ConfigResource;
+import com.its4u.buildfactory.ocp.resources.Container;
+import com.its4u.buildfactory.ocp.resources.DeploymentModel;
+import com.its4u.buildfactory.ocp.resources.Mounting;
+import com.its4u.buildfactory.ocp.resources.Nas;
+import com.its4u.buildfactory.ocp.resources.PersistentVolumeClaim;
+import com.its4u.buildfactory.ocp.resources.Route;
+import com.its4u.buildfactory.ocp.resources.Secrets;
+import com.its4u.buildfactory.ocp.resources.ServiceAccount;
+import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
+import com.its4u.buildfactory.ocp.resources.TemplateResource;
+import com.its4u.buildfactory.ocp.resources.Volumes;
 
 import freemarker.template.TemplateException;
 import lombok.Data;

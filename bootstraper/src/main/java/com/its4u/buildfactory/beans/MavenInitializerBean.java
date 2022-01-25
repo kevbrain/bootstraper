@@ -2,11 +2,6 @@ package com.its4u.buildfactory.beans;
 
 import java.io.IOException;
 
-import com.its4u.buildfactory.maven.resources.MavenModel;
-import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
-import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
-import com.its4u.buildfactory.ocp.resources.TemplateResource;
-
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
@@ -15,6 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.its4u.buildfactory.maven.resources.MavenModel;
+import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
+import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
+import com.its4u.buildfactory.ocp.resources.TemplateResource;
 
 import freemarker.template.TemplateException;
 import lombok.Data;

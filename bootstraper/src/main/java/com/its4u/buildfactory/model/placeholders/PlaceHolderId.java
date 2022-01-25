@@ -2,7 +2,6 @@ package com.its4u.buildfactory.model.placeholders;
 
 import java.io.Serializable;
 
-
 import lombok.Data;
 
 @Data

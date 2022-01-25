@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.stereotype.Component;
+
 import com.its4u.buildfactory.ocp.infra.ClusterOcp;
 import com.its4u.buildfactory.ocp.infra.NamespaceOcp;
 import com.its4u.buildfactory.ocp.infra.NodeOcp;
-
-import org.springframework.stereotype.Component;
 
 import io.fabric8.kubernetes.api.model.Namespace;
 import io.fabric8.kubernetes.api.model.NamespaceList;

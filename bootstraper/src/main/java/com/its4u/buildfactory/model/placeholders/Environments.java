@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
 @Data
 
 public class Environments implements Serializable {
@@ -22,7 +21,6 @@ public class Environments implements Serializable {
 	private String environment;
 	
 	@Setter
-	@Getter
 	private String projectId;
 	
 	@JsonIgnore

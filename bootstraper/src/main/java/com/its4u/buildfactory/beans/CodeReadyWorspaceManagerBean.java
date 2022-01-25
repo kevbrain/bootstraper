@@ -6,7 +6,6 @@ package com.its4u.buildfactory.beans;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-
 import com.its4u.buildfactory.model.CodeReadyModel;
 import com.its4u.buildfactory.ocp.resources.TemplateGenerator;
 import com.its4u.buildfactory.ocp.resources.TemplateResource;

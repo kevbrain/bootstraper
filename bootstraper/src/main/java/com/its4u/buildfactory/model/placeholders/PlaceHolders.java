@@ -5,9 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.ToString;
 
-@ToString
 @Data
 
 public class PlaceHolders implements Serializable {
@@ -19,7 +17,6 @@ public class PlaceHolders implements Serializable {
 	private PlaceHolderId placeHolderId;
 	
 	@JsonIgnore
-
 	private Environments _environment;
 	
 
