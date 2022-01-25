@@ -1,6 +1,8 @@
 package com.its4u.buildfactory.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javax.annotation.PostConstruct;
@@ -24,10 +26,14 @@ public class PollView implements Serializable {
     }
  
 	public void increment() {
-		while (!logPile.isEmpty()) {
-			String mystr = (String)logPile.pop();
-			listLogs=listLogs+mystr;	
-		}	  
+		
+		StringBuilder stb = new StringBuilder();
+		Iterator<String> iter = logPile.iterator();
+
+		while (iter.hasNext()){
+			stb.append(iter.next());
+		}
+		listLogs = stb.toString();  
     }
 	
 	public int getNumber() {

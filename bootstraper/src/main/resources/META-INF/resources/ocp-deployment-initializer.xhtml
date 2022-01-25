@@ -734,13 +734,15 @@
 	         		         		         
 	         </p:panel>
 	         </center>
-	         <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">				
-					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>																			
-			</p:dialog>
-	         <p:poll interval="1"  listener="#{pollView.increment}" update="logapplication,reportInformation"/>
+	       
 	         
-	          <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade">				
-					<h1><center>Congratulations !</center></h1>		
+	          
+    	</h:form>
+	</p:panel>
+	
+		<p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade">	
+			<h:form>			
+					<h1>Congratulations ! Your project is created, configured and deployed. </h1>		
 					<h:panelGrid columns="2" id="reportInformation">
 					
 						<h:outputLabel value="Git Url :"/>
@@ -754,11 +756,19 @@
 						
 						<h:outputLabel value="OpenShift project Url :"/>
 						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}" style="width:600px;"/>
-					</h:panelGrid>													
-			</p:dialog>
-    	</h:form>
-	</p:panel>
-    
+					</h:panelGrid>
+					<p:poll interval="5"  update="logapplication"/>
+			</h:form>													
+		</p:dialog>
+	
+	 <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">	
+	 		<h:form>			
+					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>
+					<p:poll interval="2"  listener="#{pollView.increment}" update="logapplication"/>
+			</h:form>																			
+	 </p:dialog>
+	  
+        
     <p:dialog id="dlg1" header="#{dialogBean.header}" widgetVar="dlg1" minHeight="40" width="1200" showEffect="fade">
      	<p:scrollPanel style="width:1200px;height:600px">
 	    <p:inputTextarea   value="#{dialogBean.content}" cols="100" rows="5"  />
@@ -770,6 +780,7 @@
  	<p:dialog  widgetVar="dlg0"  showEffect="fade">
 		<h:form>
 			<p:graphicImage name="loader_seq.gif"  style="background: transparent;"/>
+			<center>.. Loading ..</center>
 		</h:form>	
 	</p:dialog>
 
