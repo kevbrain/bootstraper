@@ -734,12 +734,28 @@
 	         		         		         
 	         </p:panel>
 	         </center>
-	         <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">
-				
-					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>														
-					
+	         <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">				
+					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>																			
 			</p:dialog>
 	         <p:poll interval="1"  listener="#{pollView.increment}" update="logapplication"/>
+	         
+	          <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade">				
+					<h1><center>Congratulations !</center></h1>		
+					<h:panelGrid columns="2">
+					
+						<h:outputLabel value="Git Url :"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}"/>
+						
+						<h:outputLabel value="Deployer Url :"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlPlaceHolder}"/>
+						
+						<h:outputLabel value="CodeReady Workspace Url :"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlCodeReady}"/>
+						
+						<h:outputLabel value="OpenShift project Url :"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}"/>
+					</h:panelGrid>													
+			</p:dialog>
     	</h:form>
 	</p:panel>
     

@@ -24,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 import org.apache.commons.io.IOUtils;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.RowEditEvent;
@@ -39,8 +40,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
+import com.its4u.buildfactory.model.BootStraperResult;
 import com.its4u.buildfactory.model.FilesToAnalyse;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
 import com.its4u.buildfactory.ocp.resources.ConfigResource;
@@ -190,6 +193,7 @@ public class ViewInitializerBean {
 	
 	private boolean disablePublish;
 	
+	private BootStraperResult bootStrapResult;
 	
 	
     @PostConstruct
@@ -910,6 +914,16 @@ public class ViewInitializerBean {
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
+    	
+    	// resume result
+    	this.bootStrapResult = new BootStraperResult(
+    			gitInitializerBean.getGitUrl(),
+    			placeHolderManagerBean.getPlaceholdermanagerUrl(),
+    			codeReadyWorspaceManagerBean.getWorkspaceBaseUrl()+"/#/ide/"+codeReadyWorspaceManagerBean.getUser()+"/"+appName,
+    			"https://console-openshift-console.apps.ocp-lab.its4u.eu/topology/ns/"+appName+"-dev?view=graph");
+    	
+    	PrimeFaces current = PrimeFaces.current();
+    	current.executeScript("PF('dlgReportExecution').show();"); 
     }
     
       
