@@ -923,6 +923,16 @@ public class ViewInitializerBean {
     			codeReadyWorspaceManagerBean.getWorkspaceBaseUrl()+"/#/ide/"+codeReadyWorspaceManagerBean.getUser()+"/"+appName,
     			"https://console-openshift-console.apps.ocp-lab.its4u.eu/topology/ns/"+appName+"-dev?view=graph");
     	
+    	System.out.println("GIT : "+bootStrapResult.getUrlGitDev());
+    	System.out.println("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
+    	System.out.println("CODEREADY: "+bootStrapResult.getUrlCodeReady());
+    	System.out.println("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
+    	
+    	pollView.log("GIT : "+bootStrapResult.getUrlGitDev());
+    	pollView.log("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
+    	pollView.log("CODEREADY: "+bootStrapResult.getUrlCodeReady());
+    	pollView.log("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
+    	
     	PrimeFaces current = PrimeFaces.current();
     	current.executeScript("PF('dlgReportExecution').show();"); 
     }

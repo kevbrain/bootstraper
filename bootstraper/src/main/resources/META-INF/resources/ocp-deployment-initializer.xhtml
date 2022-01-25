@@ -737,23 +737,23 @@
 	         <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">				
 					<h:outputText escape="false"  id="logapplication" value="#{pollView.listLogs}"/>																			
 			</p:dialog>
-	         <p:poll interval="1"  listener="#{pollView.increment}" update="logapplication"/>
+	         <p:poll interval="1"  listener="#{pollView.increment}" update="logapplication,reportInformation"/>
 	         
 	          <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade">				
 					<h1><center>Congratulations !</center></h1>		
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" id="reportInformation">
 					
 						<h:outputLabel value="Git Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}" style="width:600px;"/>
 						
 						<h:outputLabel value="Deployer Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlPlaceHolder}"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlPlaceHolder}" style="width:600px;"/>
 						
 						<h:outputLabel value="CodeReady Workspace Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlCodeReady}"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlCodeReady}" style="width:600px;"/>
 						
 						<h:outputLabel value="OpenShift project Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}"style="width:600px;"/>
 					</h:panelGrid>													
 			</p:dialog>
     	</h:form>
