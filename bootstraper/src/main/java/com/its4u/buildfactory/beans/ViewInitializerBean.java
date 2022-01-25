@@ -237,6 +237,7 @@ public class ViewInitializerBean {
     	this.hostRouteName=null;
     	this.runAsUser=false;
     	this.routeExposed=true;
+    	this.bootStrapResult = new BootStraperResult();
 
     	initCommonOcp();
     	refreshConfigMapMounting();
