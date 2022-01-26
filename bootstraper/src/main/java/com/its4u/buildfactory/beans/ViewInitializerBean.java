@@ -876,6 +876,7 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	pollView.log("Please wait 10 s ....");
+    	pollView.log("conf cluster updated....");
     	System.out.println("Wait 10s ....");
     	try {
     		TimeUnit.SECONDS.sleep(10);
@@ -883,9 +884,9 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	    	
-    	System.out.println("Start apply Default conf of application...."); 
-    	
+    	pollView.log("conf cluster updated....");
+    	System.out.println("Start apply Default application application ...."); 
+    	pollView.log("Start apply Default application application ....");
     	try {
 			placeHolderManagerBean.applyConf(appName);
 		} catch (IOException e) {
@@ -895,7 +896,7 @@ public class ViewInitializerBean {
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	System.out.println("Project bootstraped with success ...."); 
     	
-    	
+    	pollView.log("Start Deployment resources on OCP ....");
     	System.out.println("Wait 60s ....");
     	pollView.log("Please wait 60s....");
     	try {
@@ -911,7 +912,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
-    	pollView.log("Build pipeline started on OCP....");
+    	pollView.log("Started Build Pipeline on OCP....");
     	System.out.println("Project build pipeline launched");
     	pollView.log("Start to create Workspace in codeReady....");
     	System.out.println("Start create Workspace in codeReady");
@@ -933,6 +934,7 @@ public class ViewInitializerBean {
     	System.out.println("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
     	System.out.println("CODEREADY: "+bootStrapResult.getUrlCodeReady());
     	System.out.println("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
+    	pollView.log("Now it's up to you to work.... ");
     	
     	pollView.log("GIT : "+bootStrapResult.getUrlGitDev());
     	pollView.log("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
