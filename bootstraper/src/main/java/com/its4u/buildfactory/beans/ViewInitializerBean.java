@@ -907,10 +907,10 @@ public class ViewInitializerBean {
     	System.out.println("Project bootstraped with success ...."); 
     	
     	pollView.log("Start Deployment resources on OCP ....");
-    	System.out.println("Wait 60s ....");
-    	pollView.log("Please wait 60s....");
+    	System.out.println("Wait 90s ....");
+    	pollView.log("Please wait 90s....");
     	try {
-    		TimeUnit.SECONDS.sleep(60);
+    		TimeUnit.SECONDS.sleep(90);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
