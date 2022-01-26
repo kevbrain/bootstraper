@@ -257,7 +257,7 @@ public class ViewInitializerBean {
     public void newApp(String projet) throws IOException, TemplateException {
     	
     	appName = appName.toLowerCase();
-    	if (namespace.isBlank() || namespace.isEmpty()) {
+    	if (namespace==null || namespace.isBlank() || namespace.isEmpty()) {
     		ocpInitializerBean.setNamespace(appName);
     	} else {
     		ocpInitializerBean.setNamespace(namespace);
