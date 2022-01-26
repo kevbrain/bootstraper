@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.its4u.buildfactory.ocp.infra.ClusterOcp;
 import com.its4u.buildfactory.ocp.infra.NamespaceOcp;
 import com.its4u.buildfactory.ocp.infra.NodeOcp;
+import com.its4u.buildfactory.ocp.resources.NamespaceResource;
 
 import io.fabric8.kubernetes.api.model.Namespace;
 import io.fabric8.kubernetes.api.model.NamespaceList;
@@ -46,19 +47,21 @@ public class OcpInitializerBean {
 	
 	private NodeList nodeslist;
 	
-	private HashMap<String,Boolean> namespaces ;
+	private HashMap<String,NamespaceResource> namespaces ;
 	
 	private boolean dev_env=true;
 	private boolean tst_env=false;
 	private boolean int_env=false;
 	
 	
+	
+	
 	@PostConstruct
 	public void init() {
-    	this.namespaces = new HashMap<String, Boolean>();
-    	this.namespaces.put("dev", this.dev_env);
-    	this.namespaces.put("tst", this.tst_env);
-    	this.namespaces.put("int", this.int_env);
+    	this.namespaces = new HashMap<String, NamespaceResource>();
+    	this.namespaces.put("dev", new NamespaceResource("-dev",this.dev_env));
+    	this.namespaces.put("tst", new NamespaceResource("-tst",this.tst_env));
+    	this.namespaces.put("int", new NamespaceResource("-int",this.int_env));
  
 	}
 	

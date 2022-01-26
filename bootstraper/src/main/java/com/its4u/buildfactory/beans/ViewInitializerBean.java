@@ -247,7 +247,8 @@ public class ViewInitializerBean {
  
     public void handleEnv(String env ) throws IOException, TemplateException {    	
         if (ocpInitializerBean.getNamespaces().get(env)!=null)  {
-        	ocpInitializerBean.getNamespaces().put(env, !ocpInitializerBean.getNamespaces().get(env));
+        	ocpInitializerBean.getNamespaces().get(env).setActivate(!ocpInitializerBean.getNamespaces().get(env).isActivate());
+        	//ocpInitializerBean.getNamespaces().put(env, !ocpInitializerBean.getNamespaces().get(env).isActivate());
     	}     
         
         refreshAllconf();
@@ -263,6 +264,7 @@ public class ViewInitializerBean {
     		ocpInitializerBean.setNamespace(namespace);
     	} else {
     		ocpInitializerBean.setNamespace(projet);
+    		this.namespace=projet;
     	}
     	gitInitializerBean.setGitUrl(projet);
         gitInitializerBean.setGitSubDirectory(projet);
@@ -273,6 +275,7 @@ public class ViewInitializerBean {
     public void newNamespace(String namespace) throws IOException, TemplateException {
     
     	System.out.println("namespace : ["+namespace+"]");
+    	this.namespace=namespace;
     	ocpInitializerBean.setNamespace(namespace);    	 	
        	refreshAllconf();
     }
@@ -820,7 +823,7 @@ public class ViewInitializerBean {
 	    	HashMap<String,TreeNode> mapTreeNodeEnv = new HashMap<String, TreeNode>();
 	    	
 	    	for (String keyEnv:ocpInitializerBean.getNamespaces().keySet()) {
-	    		if (ocpInitializerBean.getNamespaces().get(keyEnv))
+	    		//if (ocpInitializerBean.getNamespaces().get(keyEnv))
 	    			mapTreeNodeEnv.put(keyEnv, new DefaultTreeNode(new ProjectArborescenceItem(model.getAppName()+"-"+keyEnv,"Folder",null),jkube));
 	    	}
 	    	
@@ -831,7 +834,7 @@ public class ViewInitializerBean {
 	    	for (String keyenv:ocpInitializerBean.getNamespaces().keySet()) {
 	 
 	    		// generate resources only for DEV environment
-	    		if (ocpInitializerBean.getNamespaces().get(keyenv)) {
+	    		//if (ocpInitializerBean.getNamespaces().get(keyenv)) {
 	    			generateDeployment(keyenv);
 			    	for (TemplateResource res: generatedTemplatesResources) { 
 			    		// Argo only on DEV
@@ -844,7 +847,7 @@ public class ViewInitializerBean {
 			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
 			    		}
 			    	}
-	    		}
+	    		//}
 	    	}
     	}
     }

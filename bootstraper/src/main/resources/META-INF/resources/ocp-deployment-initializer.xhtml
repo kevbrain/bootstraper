@@ -91,15 +91,24 @@
 							   			
 							   			<h:outputText value="Environments"/>
 							   			<h:panelGrid>
-							   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['dev']}" itemLabel="DEV" disabled="true">
-							   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('dev')}" immediate="true" update="@form"/>
-							   				</p:selectBooleanCheckbox>
-							   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['tst']}" itemLabel="TST">
-							   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('tst')}" immediate="true" update="@form"/>
-							   				</p:selectBooleanCheckbox>
-							   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['int']}" itemLabel="INT">
-							   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('int')}" immediate="true" update="@form"/>
-							   				</p:selectBooleanCheckbox>
+							   				<h:panelGrid columns="2">
+								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['dev'].activate}" itemLabel="DEV" disabled="true">
+								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('dev')}" immediate="true" update="@form"/>
+								   				</p:selectBooleanCheckbox>
+								   				<p:inputText value="#{ocpInitializerBean.namespaces['dev'].name}" style="width:400px;"/>
+							   				</h:panelGrid>
+							   				<h:panelGrid columns="2">
+								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['tst'].activate}" itemLabel="TST">
+								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('tst')}" immediate="true" update="@form"/>
+								   				</p:selectBooleanCheckbox>
+								   				<p:inputText value="#{ocpInitializerBean.namespaces['tst'].name}" style="width:400px;"/>
+								   			</h:panelGrid>
+								   			<h:panelGrid columns="2">
+								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['int'].activate}" itemLabel="INT">
+								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('int')}" immediate="true" update="@form"/>
+								   				</p:selectBooleanCheckbox>
+								   				<p:inputText value="#{ocpInitializerBean.namespaces['int'].name}" style="width:400px;"/>
+								   			</h:panelGrid>
 							   			
 							   			</h:panelGrid>
 							   			
