@@ -261,6 +261,7 @@ public class GitInitializerBean {
 				}
 			    int j=0;
 			    System.out.println("Git Project created");	
+			    pollView.log("Git DEV Project created");	
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
 			    System.out.println("Wait 3s ....");
 			    try {
@@ -272,6 +273,7 @@ public class GitInitializerBean {
 			    createArgoApp();
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 			    System.out.println("Argo application created");
+			    pollView.log("Argo application created");
 			    System.out.println("Wait 3s ....");
 			    try {
 					TimeUnit.SECONDS.sleep(3);
@@ -281,7 +283,9 @@ public class GitInitializerBean {
 				}
 
 			    createGitAppsDeploy(project);
+			    pollView.log("Git OPS Project updated");
 			    System.out.println("APPS deploy created");
+			    
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
 			e.printStackTrace();

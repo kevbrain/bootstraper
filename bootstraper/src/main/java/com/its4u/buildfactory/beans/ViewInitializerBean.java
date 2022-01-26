@@ -859,7 +859,7 @@ public class ViewInitializerBean {
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
     	pollView.log("PlaceHolder project created ....");
-    	pollView.log("Please wait ....");
+    	pollView.log("Please wait 3s....");
     	System.out.println("Wait 3s ....");
     	try {
     		TimeUnit.SECONDS.sleep(3);
@@ -875,7 +875,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	pollView.log("Please wait ....");
+    	pollView.log("Please wait 10 s ....");
     	System.out.println("Wait 10s ....");
     	try {
     		TimeUnit.SECONDS.sleep(10);
@@ -897,7 +897,7 @@ public class ViewInitializerBean {
     	
     	
     	System.out.println("Wait 60s ....");
-    	pollView.log("Please wait ....");
+    	pollView.log("Please wait 60s....");
     	try {
     		TimeUnit.SECONDS.sleep(60);
 		} catch (InterruptedException e) {
@@ -911,7 +911,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}    	
-    	pollView.log("Build pipeline on ocp started ....");
+    	pollView.log("Build pipeline started on OCP....");
     	System.out.println("Project build pipeline launched");
     	pollView.log("Start to create Workspace in codeReady....");
     	System.out.println("Start create Workspace in codeReady");
@@ -920,6 +920,7 @@ public class ViewInitializerBean {
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
+    	pollView.log("Workspace in codeReady created....");
     	
     	// resume result
     	this.bootStrapResult = new BootStraperResult(
