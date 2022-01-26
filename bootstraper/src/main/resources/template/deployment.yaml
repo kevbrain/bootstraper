@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  namespace: ${ocpNamespace}
+  namespace: ocp-namespace
   name: ${serviceAccount.name}
 ---
 </#if>

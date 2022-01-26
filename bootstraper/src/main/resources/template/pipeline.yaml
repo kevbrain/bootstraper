@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: ${appName}-pipeline
-  namespace: ${ocpNamespace}
+  namespace: {{ocp-namespace}}
 spec:
   tasks:
     - name: rollout-deploy

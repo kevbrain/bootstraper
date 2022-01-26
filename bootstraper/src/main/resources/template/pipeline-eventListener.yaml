@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
   name: ${appName}
-  namespace: ${ocpNamespace}
+  namespace: {{ocp-namespace}}
 spec:
   serviceAccountName: pipeline
   triggers:

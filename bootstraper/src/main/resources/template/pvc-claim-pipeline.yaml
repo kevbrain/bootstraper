@@ -2,7 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: ${appName}-pipeline-claim
-  namespace: ${ocpNamespace}
+  namespace: {{ocp-namespace}}
 spec:
   accessModes:
     - ReadWriteOnce
