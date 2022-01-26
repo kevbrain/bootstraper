@@ -260,26 +260,15 @@ public class ViewInitializerBean {
     	System.out.println("new app : "+projet);
     	System.out.println("namespace : ["+namespace+"]");
     	appName = projet.toLowerCase();
-    	if (namespace!=null && !namespace.isBlank()) {
-    		ocpInitializerBean.setNamespace(namespace);
-    	} else {
-    		ocpInitializerBean.setNamespace(projet);
-    		this.namespace=projet;
-    	}
+    	//ocpInitializerBean.setNamespace(projet);
+    	ocpInitializerBean.setupNameWithAppName(projet);    	
     	gitInitializerBean.setGitUrl(projet);
         gitInitializerBean.setGitSubDirectory(projet);
        	mavenInitializerBean.setArtifact(projet);       	
        	refreshAllconf();
     }
     
-    public void newNamespace(String namespace) throws IOException, TemplateException {
-    
-    	System.out.println("namespace : ["+namespace+"]");
-    	this.namespace=namespace;
-    	ocpInitializerBean.setNamespace(namespace);    	 	
-       	refreshAllconf();
-    }
-    
+     
     public void refreshAllconf() throws IOException, TemplateException {
     	mavenInitializerBean.handleNewMavenProject();       	
        	publishJkube();
@@ -647,7 +636,7 @@ public class ViewInitializerBean {
     	model.setAppName(appName);
     	model.setConfigMaps(configMaps);
     	model.setTemplateGenerator(this.generator);
-    	model.setOcpNamespace(appName+"-"+env);
+    	model.setOcpNamespace(ocpInitializerBean.getNamespaces().get(env).getName());
     	model.setOcpRegistry(ocpInitializerBean.getRegistry());
     	model.setJoinfaces(mavenInitializerBean.isJoinfaces());
       	

@@ -65,6 +65,11 @@ public class OcpInitializerBean {
  
 	}
 	
+	public void setupNameWithAppName(String appName) {
+		this.namespaces.get("dev").setName(appName+"-dev");
+		this.namespaces.get("tst").setName(appName+"-tst");
+		this.namespaces.get("int").setName(appName+"-int");
+	}
 	
 	
 	public void testConnection() {

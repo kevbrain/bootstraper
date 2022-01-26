@@ -82,12 +82,7 @@
 							   			<h:outputText value="Application Name"/>
 							   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:400px;" >
 							   				<p:ajax event="change" listener="#{viewInitializerBean.newApp(viewInitializerBean.appName)}" update="@form" />
-							   			</p:inputText>	
-							   			
-							   			<h:outputText value="Namespace"/>
-							   			<p:inputText value="#{viewInitializerBean.namespace}"   style="width:400px;" >
-							   				<p:ajax event="change" listener="#{viewInitializerBean.newNamespace(viewInitializerBean.namespace)}" update="@form" />
-							   			</p:inputText>	
+							   			</p:inputText>								   						
 							   			
 							   			<h:outputText value="Environments"/>
 							   			<h:panelGrid>
