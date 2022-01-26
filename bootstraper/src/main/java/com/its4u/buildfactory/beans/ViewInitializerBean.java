@@ -256,7 +256,8 @@ public class ViewInitializerBean {
     
     
     public void newApp(String projet) throws IOException, TemplateException {
-    	
+    	System.out.println("new app : "+projet);
+    	System.out.println("namespace : ["+namespace+"]");
     	appName = projet.toLowerCase();
     	if (namespace!=null && !namespace.isBlank()) {
     		ocpInitializerBean.setNamespace(namespace);
@@ -266,6 +267,13 @@ public class ViewInitializerBean {
     	gitInitializerBean.setGitUrl(projet);
         gitInitializerBean.setGitSubDirectory(projet);
        	mavenInitializerBean.setArtifact(projet);       	
+       	refreshAllconf();
+    }
+    
+    public void newNamespace(String namespace) throws IOException, TemplateException {
+    
+    	System.out.println("namespace : ["+namespace+"]");
+    	ocpInitializerBean.setNamespace(namespace);    	 	
        	refreshAllconf();
     }
     
