@@ -946,13 +946,12 @@ public class ViewInitializerBean {
     	System.out.println("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
     	pollView.log("Now it's up to you to work.... ");
     	
+    	pollView.log("#####################################################################################################");
     	pollView.log("GIT : "+bootStrapResult.getUrlGitDev());
     	pollView.log("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
     	pollView.log("CODEREADY: "+bootStrapResult.getUrlCodeReady());
     	pollView.log("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
     	
-    	PrimeFaces current = PrimeFaces.current();
-    	current.executeScript("PF('dlgReportExecution').show();"); 
     }
     
       
