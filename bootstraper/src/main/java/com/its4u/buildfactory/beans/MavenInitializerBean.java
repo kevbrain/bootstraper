@@ -91,6 +91,10 @@ public class MavenInitializerBean {
 	
 	private TreeNode argo;
 	
+	private TreeNode argoApplications;
+	
+	private TreeNode argoNamespaces;
+	
 	private TreeNode selectedNode;
 	
 	
@@ -131,8 +135,11 @@ public class MavenInitializerBean {
     	main.setExpanded(true);
     	jkube = new DefaultTreeNode(new ProjectArborescenceItem("jkube","Folder",null),main);
     	argo = new DefaultTreeNode(new ProjectArborescenceItem("argo","Folder",null),main);
+    	argoApplications = new  DefaultTreeNode(new ProjectArborescenceItem("applications","Folder",null),argo);
+    	argoNamespaces =new DefaultTreeNode(new ProjectArborescenceItem("namespaces","Folder",null),argo);
     	jkube.setExpanded(true);
     	argo.setExpanded(true);
+    	
     	TreeNode java = new DefaultTreeNode(new ProjectArborescenceItem("java","Folder",null),main);
     	TreeNode resources = new DefaultTreeNode(new ProjectArborescenceItem("resources","Folder",null),main);
     	new DefaultTreeNode("Text",new ProjectArborescenceItem("application.properties","Text",application_properties_generated),resources);

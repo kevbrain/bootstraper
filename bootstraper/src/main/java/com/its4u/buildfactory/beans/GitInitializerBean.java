@@ -80,6 +80,8 @@ public class GitInitializerBean {
 	
 	private TreeNode nodeArgoApp;
 	
+	private TreeNode nodeArgoNamespaces;
+	
 	public void setGitUrl(String appName) {
 		this.gitUrl= gitUrlPrefix+appName+".git";
 	}
@@ -162,7 +164,8 @@ public class GitInitializerBean {
 				}	
 				
 				pollView.log("Git Cluster app cloned");
-				readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
+				readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster//applications");
+				readNodeMavenProjectAndCreateArtifact(nodeArgoNamespaces,path+"//cluster//namespaces");
 				git.add().addFilepattern(".").call();
 		
 				pollView.log("App created : "+path);

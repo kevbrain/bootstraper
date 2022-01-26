@@ -811,33 +811,34 @@ public class ViewInitializerBean {
 	    	jkube.setExpanded(true);
 	    	HashMap<String,TreeNode> mapTreeNodeEnv = new HashMap<String, TreeNode>();
 	    	
-	    	for (String keyEnv:ocpInitializerBean.getNamespaces().keySet()) {
-	    		//if (ocpInitializerBean.getNamespaces().get(keyEnv))
+	    	for (String keyEnv:ocpInitializerBean.getNamespaces().keySet()) {	    		
 	    			mapTreeNodeEnv.put(keyEnv, new DefaultTreeNode(new ProjectArborescenceItem(model.getAppName()+"-"+keyEnv,"Folder",null),jkube));
 	    	}
 	    	
-	    	TreeNode argo=  mavenInitializerBean.getArgo();
+	    	TreeNode argoApp=  mavenInitializerBean.getArgoApplications();
+	    	TreeNode argoNamespaces = mavenInitializerBean.getArgoNamespaces();
+	    	
 	    	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
 	    	
 	    	
 	    	for (String keyenv:ocpInitializerBean.getNamespaces().keySet()) {
-	 
-	    		// generate resources only for DEV environment
-	    		//if (ocpInitializerBean.getNamespaces().get(keyenv)) {
+	 	    	
 	    			generateDeployment(keyenv);
 			    	for (TemplateResource res: generatedTemplatesResources) { 
 			    		// Argo only on DEV
-			    		if ( (res.getName().equalsIgnoreCase(argoNameApp) || res.getName().startsWith("NS-"))			    				
-			    				&& keyenv.equalsIgnoreCase("dev")) {
-			    			TreeNode nodeArgoApp = new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argo);
-			    			gitInitializerBean.setNodeArgoApp(nodeArgoApp);
-			    		} else {
+			    		if ( (res.getName().equalsIgnoreCase(argoNameApp) && keyenv.equalsIgnoreCase("dev"))) {
+			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoApp);
+			    			gitInitializerBean.setNodeArgoApp(argoApp);
+			    		} else if (res.getName().startsWith("NS-")){
+			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoNamespaces);
+			    			gitInitializerBean.setNodeArgoNamespaces(argoNamespaces);
+			    		} else {			    		
 			    			TreeNode parent= mapTreeNodeEnv.get(keyenv);
 			    			parent.setExpanded(true);
 			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
 			    		}
 			    	}
-	    		//}
+	    		
 	    	}
     	}
     }
