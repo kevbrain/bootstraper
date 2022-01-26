@@ -167,33 +167,33 @@ public class TemplateGenerator {
     	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
     	
     	// for all env
-    	TemplateResource namespace = new TemplateResource("00-namespace-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
+    	TemplateResource namespace = new TemplateResource("NS-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
     	generatedResources.add(namespace); 
     	
     	// only for dev
     	if (model.getEnv().equalsIgnoreCase("dev")) {
 		    	if (model.getServiceAccount()!=null) {
-		    		TemplateResource serviceAccount = new TemplateResource("00-ServiceAccount-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
+		    		TemplateResource serviceAccount = new TemplateResource("00-SA-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
 		    		generatedResources.add(serviceAccount);
-		    		TemplateResource scc = new TemplateResource("00-SecurityContextConstraint-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
+		    		TemplateResource scc = new TemplateResource("00-SCC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
 		    		generatedResources.add(scc);
 		    	}
 		    	
-		    	TemplateResource configMaps = new TemplateResource("ConfigMaps-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_configMaps),20,20,50);
-		    	TemplateResource secrets = new TemplateResource("Secrets-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_secrets),25,25,25);
-		    	TemplateResource deployment = new TemplateResource("Deployment-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_deployment),50,50,10);
-		    	TemplateResource service = new TemplateResource("Service-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_service),55,55,20);
+		    	TemplateResource configMaps = new TemplateResource("CM-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_configMaps),20,20,50);
+		    	TemplateResource secrets = new TemplateResource("S-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_secrets),25,25,25);
+		    	TemplateResource deployment = new TemplateResource("D-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_deployment),50,50,10);
+		    	TemplateResource service = new TemplateResource("SVC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_service),55,55,20);
 		    	
-		    	TemplateResource pipeline = new TemplateResource("00-pipeline.yml",generateResourceWithTemplate(model,template_pipeline),0,0,0);
-		    	TemplateResource pipelineTrigger = new TemplateResource("00-pipeline-trigger.yml",generateResourceWithTemplate(model,template_pipelineTrigger),0,0,0);
-		    	TemplateResource pipelineTriggerTemplate = new TemplateResource("00-pipeline-triggerTemplate.yml",generateResourceWithTemplate(model,template_pipelineTriggerTemplate),0,0,0);
-		    	TemplateResource pipelineTriggerBinding = new TemplateResource("00-pipeline-triggerBinding.yml",generateResourceWithTemplate(model,template_pipelineTriggerBinding),0,0,0);
-		    	TemplateResource pipelineEventListener = new TemplateResource("00-pipeline-eventListener.yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
-		    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-pipeline-eventListenerRoute.yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
+		    	TemplateResource pipeline = new TemplateResource("00-PL-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipeline),0,0,0);
+		    	TemplateResource pipelineTrigger = new TemplateResource("00-T-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipelineTrigger),0,0,0);
+		    	TemplateResource pipelineTriggerTemplate = new TemplateResource("00-TT-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipelineTriggerTemplate),0,0,0);
+		    	TemplateResource pipelineTriggerBinding = new TemplateResource("00-TB-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipelineTriggerBinding),0,0,0);
+		    	TemplateResource pipelineEventListener = new TemplateResource("00-EL-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
+		    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-ELR"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
 		    	    	
 		    	
-		    	TemplateResource mavensetting= new TemplateResource("00-mavensetting-cm-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
-		    	TemplateResource pvcPipeline= new TemplateResource("00-pvc-claim-pipeline"+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
+		    	TemplateResource mavensetting= new TemplateResource("NS-MAVENSETTING-CM-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
+		    	TemplateResource pvcPipeline= new TemplateResource("00-PVCPL-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
 		    	appArgo = new TemplateResource(argoNameApp,generateResourceWithTemplate(model,template_argo_application),0,0,0);
 		
 		    	generatedResources.add(appArgo);		    	    	   	   	       
@@ -215,12 +215,12 @@ public class TemplateGenerator {
 		    	//}
 		    	
 		    	if (!model.getRoutes().isEmpty()) {
-		    		TemplateResource route = new TemplateResource("Routes-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_route),60,60,10);
+		    		TemplateResource route = new TemplateResource("RT-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_route),60,60,10);
 		    		generatedResources.add(route);
 		    	}
 		    	
 		    	if (!model.getPersitentVolumes().isEmpty()) {
-		    		TemplateResource pvc = new TemplateResource("00-PVClaims-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
+		    		TemplateResource pvc = new TemplateResource("00-PVC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
 		    		generatedResources.add(pvc);
 		    	}
     	}
