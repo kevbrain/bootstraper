@@ -111,7 +111,20 @@ public class MavenInitializerBean {
 	  	logger.info("Generate NEW Maven TEMPLATE for : ");
     	this.generator = new TemplateGenerator(pathTemplate);
     	
-    	model = new MavenModel(group, artifact, description, packageName, java,ocpInitializerBean.getNamespace(),ocpInitializerBean.getRegistry(), newMavenProject, lombok, actuator, freemarker, sonar, web, joinfaces);
+    	model = new MavenModel(group, 
+    			artifact, 
+    			description,
+    			packageName, 
+    			java,
+    			ocpInitializerBean.getNamespaces().get("dev").getName(),
+    			ocpInitializerBean.getRegistry(),
+    			newMavenProject, 
+    			lombok, 
+    			actuator,
+    			freemarker,
+    			sonar,
+    			web,
+    			joinfaces);
     	
     	this.pom_generated = new TemplateResource("pom.xml", generator.generateResourceWithTemplate(model,generator.getTemplate_maven_pom()), 0, 0, 0);
     	this.maven_classpath_generated = new TemplateResource(".classpath", generator.generateResourceWithTemplate(model, generator.getTemplate_maven_classpath()), 0,0,0);
