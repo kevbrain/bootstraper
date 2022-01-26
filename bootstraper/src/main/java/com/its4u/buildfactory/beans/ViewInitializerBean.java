@@ -253,18 +253,15 @@ public class ViewInitializerBean {
         refreshAllconf();
     }
     
-        
+    
+    
     public void newApp(String projet) throws IOException, TemplateException {
     	
-    	appName = appName.toLowerCase();
-    	if (namespace==null || namespace.isBlank() || namespace.isEmpty()) {
-    		ocpInitializerBean.setNamespace(appName);
-    	} else {
-    		ocpInitializerBean.setNamespace(namespace);
-    	}
-    	gitInitializerBean.setGitUrl(appName);
-        gitInitializerBean.setGitSubDirectory(appName);
-       	mavenInitializerBean.setArtifact(appName);       	
+    	appName = projet.toLowerCase();
+    	ocpInitializerBean.setNamespace(projet);
+    	gitInitializerBean.setGitUrl(projet);
+        gitInitializerBean.setGitSubDirectory(projet);
+       	mavenInitializerBean.setArtifact(projet);       	
        	refreshAllconf();
     }
     
