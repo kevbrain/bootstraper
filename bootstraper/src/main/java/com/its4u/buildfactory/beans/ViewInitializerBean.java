@@ -815,7 +815,7 @@ public class ViewInitializerBean {
 	    	for (String keyenv:ocpInitializerBean.getNamespaces().keySet()) {
 	 
 	    		// generate resources only for DEV environment
-	    		if (ocpInitializerBean.getNamespaces().get(keyenv) && keyenv.equalsIgnoreCase("dev")) {
+	    		if (ocpInitializerBean.getNamespaces().get(keyenv)) {
 	    			generateDeployment(keyenv);
 			    	for (TemplateResource res: generatedTemplatesResources) { 
 			    		// Argo only on DEV
