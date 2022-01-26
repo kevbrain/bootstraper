@@ -48,6 +48,13 @@ public class PlaceHolderManagerService {
 				if (cmKey.equalsIgnoreCase("ocp-namespace")) {valueKey=env.getEnvironment();}
 				if (cmKey.equalsIgnoreCase("ocp.environment")) {valueKey=keyenv;}
 				if (cmKey.equalsIgnoreCase("ocp.replicas")) {valueKey="1";}
+				if (cmKey.equalsIgnoreCase("app-request.memory")) {valueKey="250Mi";}
+				if (cmKey.equalsIgnoreCase("app-request.cpu")) {valueKey="200m";}
+				if (cmKey.equalsIgnoreCase("app-limit.memory")) {valueKey="750Mi";}
+				if (cmKey.equalsIgnoreCase("app-limit.cpu")) {valueKey="500m";}
+				if (cmKey.equalsIgnoreCase("app-actuator.port")) {valueKey="8080";}
+				if (cmKey.equalsIgnoreCase("app-container.port")) {valueKey="8080";}
+				
 				placeHolders.add(new PlaceHolders(new PlaceHolderId(env.getEnvironment(),cmKey),env,valueKey,""));
 			}
 		}
