@@ -827,7 +827,8 @@ public class ViewInitializerBean {
 	    			generateDeployment(keyenv);
 			    	for (TemplateResource res: generatedTemplatesResources) { 
 			    		// Argo only on DEV
-			    		if (res.getName().equalsIgnoreCase(argoNameApp) && keyenv.equalsIgnoreCase("dev")) {
+			    		if ( (res.getName().equalsIgnoreCase(argoNameApp) || res.getName().startsWith("NS-"))			    				
+			    				&& keyenv.equalsIgnoreCase("dev")) {
 			    			TreeNode nodeArgoApp = new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argo);
 			    			gitInitializerBean.setNodeArgoApp(nodeArgoApp);
 			    		} else {

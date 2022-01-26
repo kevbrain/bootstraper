@@ -188,7 +188,7 @@ public class GitInitializerBean {
 	
 	public void createRepo(String project) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
 		try {	
-				pollView.log("Workspace creation");
+				
 				UUID uuid = UUID.randomUUID();
 				
 				this.gitSubDirectory=project;
@@ -202,7 +202,7 @@ public class GitInitializerBean {
 				this.gitUrl= gitUrlPrefix+project+".git";
 				
 				
-				pollView.log("Git initialization");
+				pollView.log("Git DEV initialization");
 				// clone Git Project"
 				Git git = null;
 				File workingDirectory = null;
@@ -219,7 +219,7 @@ public class GitInitializerBean {
 					git = Git.init().setDirectory(workingDirectory).call();
 				}	
 				
-				pollView.log("Git Project Setup");
+				pollView.log("Git DEV Setup");
 				// Create project in Git Project
 				File newFile = new File(workingDirectory, project);
 				newFile.mkdir();
@@ -259,10 +259,11 @@ public class GitInitializerBean {
 				} finally {
 					pushCommand.call();
 				}
-			    int j=0;
+
 			    System.out.println("Git Project created");	
 			    pollView.log("Git DEV Project created");	
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
+			    pollView.log("Wait 3s ....");	
 			    System.out.println("Wait 3s ....");
 			    try {
 					TimeUnit.SECONDS.sleep(3);
