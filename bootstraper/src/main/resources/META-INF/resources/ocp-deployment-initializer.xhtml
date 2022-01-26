@@ -191,16 +191,16 @@
 							   			<p:inputText value="#{ocpInitializerBean.token}"   style="width:600px;" >
 							   				<p:ajax event="change" listener="#{viewInitializerBean.refreshAllconf}" update="@form" />
 							   			</p:inputText>							
-							   			<h:outputText value="NameSpace DEV :" rendered="#{ocpInitializerBean.namespaces['dev']}"/>
-							   			<h:outputText  value="#{viewInitializerBean.namespaceString('dev')}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['dev']}"/>
+							   			<h:outputText value="NameSpace DEV :" rendered="#{ocpInitializerBean.namespaces['dev'].activate}"/>
+							   			<h:outputText  value="#{ocpInitializerBean.namespaces['dev'].name}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['dev'].activate}"/>
 							   					
 							   			
-							   			<h:outputText value="NameSpace TST :" rendered="#{ocpInitializerBean.namespaces['tst']}"/>
-							   			<h:outputText value="#{viewInitializerBean.namespaceString('tst')}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['tst']}"/>
+							   			<h:outputText value="NameSpace TST :" rendered="#{ocpInitializerBean.namespaces['tst'].activate}"/>
+							   			<h:outputText value="#{ocpInitializerBean.namespaces['tst'].name}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['tst'].activate}"/>
 							   				
 							   			
-							   			<h:outputText value="NameSpace INT :" rendered="#{ocpInitializerBean.namespaces['int']}"/>
-							   			<h:outputText value="#{viewInitializerBean.namespaceString('int')}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['int']}" />
+							   			<h:outputText value="NameSpace INT :" rendered="#{ocpInitializerBean.namespaces['int'].activate}"/>
+							   			<h:outputText value="#{ocpInitializerBean.namespaces['int'].name}"   style="width:400px;" rendered="#{ocpInitializerBean.namespaces['int'].activate}" />
 							   				
 							   			
 							   			<h:outputText value="Registry :"/>
