@@ -164,8 +164,8 @@ public class GitInitializerBean {
 				}	
 				
 				pollView.log("Git Cluster app cloned");
-				readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster//applications");
-				readNodeMavenProjectAndCreateArtifact(nodeArgoNamespaces,path+"//cluster//namespaces");
+				readNodeMavenProjectAndCreateArtifact(nodeArgoApp,path+"//cluster");
+				readNodeMavenProjectAndCreateArtifact(nodeArgoNamespaces,path+"//cluster");
 				git.add().addFilepattern(".").call();
 		
 				pollView.log("App created : "+path);
