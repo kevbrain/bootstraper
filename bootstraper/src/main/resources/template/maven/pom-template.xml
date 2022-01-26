@@ -129,7 +129,7 @@
                         <image>${ocpRegistry}/openshift/java:11</image>
                     </from>
                     <to>
-                        <image>${ocpRegistry}/${ocpNamespace}-dev/${artifact}</image>
+                        <image>${ocpRegistry}/${ocpNamespace}/${artifact}</image>
                         <tags>
                             <tag>latest</tag>                            
                             <tag>${r"${project.version}"}</tag>                           

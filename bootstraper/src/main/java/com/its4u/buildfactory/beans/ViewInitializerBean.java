@@ -704,8 +704,6 @@ public class ViewInitializerBean {
                 .contentType("application/zip")
                 .stream(() -> targetStreamSplit)
                 .build();
-        
-        //publishJkube();
     }
     
     public void analyseFile(FilesToAnalyse f) throws IOException {
@@ -811,8 +809,10 @@ public class ViewInitializerBean {
 	    	jkube.setExpanded(true);
 	    	HashMap<String,TreeNode> mapTreeNodeEnv = new HashMap<String, TreeNode>();
 	    	
-	    	for (String keyEnv:ocpInitializerBean.getNamespaces().keySet()) {	    		
+	    	for (String keyEnv:ocpInitializerBean.getNamespaces().keySet()) {	  
+	    		if (ocpInitializerBean.getNamespaces().get(keyEnv).isActivate()) {
 	    			mapTreeNodeEnv.put(keyEnv, new DefaultTreeNode(new ProjectArborescenceItem(model.getAppName()+"-"+keyEnv,"Folder",null),jkube));
+	    		}
 	    	}
 	    	
 	    	TreeNode argoApp=  mavenInitializerBean.getArgoApplications();
@@ -822,23 +822,23 @@ public class ViewInitializerBean {
 	    	
 	    	
 	    	for (String keyenv:ocpInitializerBean.getNamespaces().keySet()) {
-	 	    	
-	    			generateDeployment(keyenv);
-			    	for (TemplateResource res: generatedTemplatesResources) { 
-			    		// Argo only on DEV
-			    		if ( (res.getName().equalsIgnoreCase(argoNameApp) && keyenv.equalsIgnoreCase("dev"))) {
-			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoApp);
-			    			gitInitializerBean.setNodeArgoApp(argoApp);
-			    		} else if (res.getName().startsWith("NS-")){
-			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoNamespaces);
-			    			gitInitializerBean.setNodeArgoNamespaces(argoNamespaces);
-			    		} else {			    		
-			    			TreeNode parent= mapTreeNodeEnv.get(keyenv);
-			    			parent.setExpanded(true);
-			    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
-			    		}
-			    	}
-	    		
+	 	    	if (ocpInitializerBean.getNamespaces().get(keyenv).isActivate()) {
+		    			generateDeployment(keyenv);
+				    	for (TemplateResource res: generatedTemplatesResources) { 
+				    		// Argo only on DEV
+				    		if ( (res.getName().equalsIgnoreCase(argoNameApp) && keyenv.equalsIgnoreCase("dev"))) {
+				    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoApp);
+				    			gitInitializerBean.setNodeArgoApp(argoApp);
+				    		} else if (res.getName().startsWith("NS-")){
+				    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoNamespaces);
+				    			gitInitializerBean.setNodeArgoNamespaces(argoNamespaces);
+				    		} else {			    		
+				    			TreeNode parent= mapTreeNodeEnv.get(keyenv);
+				    			parent.setExpanded(true);
+				    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),parent);
+				    		}
+				    	}
+	 	    	}
 	    	}
     	}
     }

@@ -167,8 +167,8 @@ public class TemplateGenerator {
     	String argoNameApp = "argoApp-"+model.getAppName()+".yaml";
     	
     	// for all env
-    	TemplateResource namespace = new TemplateResource("NS-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
-    	generatedResources.add(namespace); 
+	    TemplateResource namespace = new TemplateResource("NS-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
+	    generatedResources.add(namespace); 
     	
     	// only for dev
     	if (model.getEnv().equalsIgnoreCase("dev")) {
