@@ -619,7 +619,10 @@ public class ViewInitializerBean {
     public void generateDeployment(String env) throws IOException, TemplateException {
     	
     	logger.info("Generate NEW deployment TEMPLATE for : "+appName);
-    	this.generator = new TemplateGenerator(pathTemplate);
+    	
+       	this.generator = new TemplateGenerator(pathTemplate);
+       	
+       	// Model creation
     	model = new DeploymentModel();
     	model.setEnv(env);
     	model.setAppName(appName);
@@ -663,6 +666,8 @@ public class ViewInitializerBean {
     	model.setConfigMapsAsvol(configMapsAsvol);
     	model.setSecrets(secrets);
     	model.setRoutes(routesDepl);
+    	
+    	// Generation Template
         this.templateAllinOne = generator.generateAllInOne(model);
         this.implementation_allInOne = generator.generateImplemenatationAllInOne(model);
         this.generatedTemplatesResources = generator.generateAllDeployments(model);
