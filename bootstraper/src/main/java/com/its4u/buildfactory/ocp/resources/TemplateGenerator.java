@@ -192,7 +192,7 @@ public class TemplateGenerator {
 		    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-ELR+"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
 		    	    	
 		    	
-		    	TemplateResource mavensetting= new TemplateResource("NS-MAVENSETTING-CM-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
+		    	TemplateResource mavensetting= new TemplateResource("00-MAVENSETTING-CM-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
 		    	TemplateResource pvcPipeline= new TemplateResource("00-PVCPL-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
 		    	appArgo = new TemplateResource(argoNameApp,generateResourceWithTemplate(model,template_argo_application),0,0,0);
 		
