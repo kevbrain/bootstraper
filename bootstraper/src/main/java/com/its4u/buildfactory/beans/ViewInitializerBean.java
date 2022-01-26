@@ -258,7 +258,11 @@ public class ViewInitializerBean {
     public void newApp(String projet) throws IOException, TemplateException {
     	
     	appName = projet.toLowerCase();
-    	ocpInitializerBean.setNamespace(projet);
+    	if (namespace!=null && !namespace.isBlank()) {
+    		ocpInitializerBean.setNamespace(namespace);
+    	} else {
+    		ocpInitializerBean.setNamespace(projet);
+    	}
     	gitInitializerBean.setGitUrl(projet);
         gitInitializerBean.setGitSubDirectory(projet);
        	mavenInitializerBean.setArtifact(projet);       	
@@ -268,7 +272,9 @@ public class ViewInitializerBean {
     public void refreshAllconf() throws IOException, TemplateException {
     	mavenInitializerBean.handleNewMavenProject();       	
        	publishJkube();
-       	//generateDeployment("dev");
+       	// for GUI Display
+       	generateDeployment("dev");
+       	
        	if (!(appName.isEmpty()||gitInitializerBean.getGitPassword().isBlank()||gitInitializerBean.getGitPassword().isEmpty())) {
        		disablePublish=false;
        	}
