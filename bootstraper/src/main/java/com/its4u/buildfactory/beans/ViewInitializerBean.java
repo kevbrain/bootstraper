@@ -878,7 +878,7 @@ public class ViewInitializerBean {
 			e.printStackTrace();
 		}
     	System.out.println("Start to update conf cluster ...."); 
-    	pollView.log("Start to update conf cluster ....");
+    	pollView.log("Start to apply conf cluster ....");
     	try {
 			placeHolderManagerBean.sync("cluster-configs");
 		} catch (IOException e) {
@@ -894,9 +894,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	pollView.log("conf cluster updated....");
-    	System.out.println("Start apply Default application application ...."); 
-    	pollView.log("Start apply Default application application ....");
+    	pollView.log("Start to apply conf application ....");
     	try {
 			placeHolderManagerBean.applyConf(appName);
 		} catch (IOException e) {

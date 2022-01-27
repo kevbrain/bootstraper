@@ -4,3 +4,9 @@ ocp-namespace
 ocp.environment
 cluster-suffix
 app-version
+app-request.memoryµ
+app-request.cpu
+app-limit.memory
+app-limit.cpu
+app-actuator.port
+app-container.port

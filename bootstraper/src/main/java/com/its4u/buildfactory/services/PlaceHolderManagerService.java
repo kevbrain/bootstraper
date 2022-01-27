@@ -19,15 +19,15 @@ import com.its4u.buildfactory.ocp.resources.Secrets;
 @Service
 public class PlaceHolderManagerService {
 
-	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,HashMap<String,NamespaceResource> environments) {
+	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,HashMap<String,NamespaceResource> env_namespaces) {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		List<Environments> envsProject =  new ArrayList<>();
-		for (String keyenv:environments.keySet()) {
+		for (String keyenv:env_namespaces.keySet()) {
 			//if (environments.get(keyenv)) {
 				System.out.println("Create Environment : "+keyenv);
 				Environments env = new Environments(project,projectName+"-"+keyenv);
 				if (keyenv.equalsIgnoreCase("dev")) {
-					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv));
+					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));
 				} 
 				envsProject.add(env);
 			//}
@@ -36,7 +36,7 @@ public class PlaceHolderManagerService {
 		return project;
 	}
 	
-	public List<PlaceHolders> createplaceHoldersForEnv(Environments env,List<ConfigMap> cms,List<Secrets> secrets,String keyenv) {
+	public List<PlaceHolders> createplaceHoldersForEnv(Environments env,List<ConfigMap> cms,List<Secrets> secrets,String keyenv, String namespace) {
 		List<PlaceHolders> placeHolders = new ArrayList<>();
 		for (ConfigMap cm:cms) {
 			for (String cmKey :cm.getKeyValue().keySet()) {
@@ -45,7 +45,7 @@ public class PlaceHolderManagerService {
 				if (cmKey.equalsIgnoreCase("app-version")) {valueKey="0.0.1-SNAPSHOT";}
 				if (cmKey.equalsIgnoreCase("ocp-cluster.registry")) {valueKey="image-registry.openshift-image-registry.svc.cluster.local:5000";}
 				if (cmKey.equalsIgnoreCase("cluster-suffix")) {valueKey="apps.ocp-lab.its4u.eu";}
-				if (cmKey.equalsIgnoreCase("ocp-namespace")) {valueKey=env.getEnvironment();}
+				if (cmKey.equalsIgnoreCase("ocp-namespace")) {valueKey=namespace;}
 				if (cmKey.equalsIgnoreCase("ocp.environment")) {valueKey=keyenv;}
 				if (cmKey.equalsIgnoreCase("ocp.replicas")) {valueKey="1";}
 				if (cmKey.equalsIgnoreCase("app-request.memory")) {valueKey="250Mi";}
