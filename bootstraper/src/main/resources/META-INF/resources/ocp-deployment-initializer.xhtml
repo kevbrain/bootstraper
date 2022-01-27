@@ -744,12 +744,12 @@
 	         </p:panel>
 	         </center>
 	       
-	         
+	         <p:remoteCommand name="updateDialogReportExecution" update="reportInformation" />
 	          
     	</h:form>
 	</p:panel>
 	
-		<p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade">	
+		<p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade" onShow="updateDialogReportExecution">	
 			<h:form>			
 					<h1>Congratulations ! Your project is created, configured and deployed. </h1>		
 					<h:panelGrid columns="2" id="reportInformation">
