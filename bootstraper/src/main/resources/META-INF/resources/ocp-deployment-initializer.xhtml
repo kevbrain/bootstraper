@@ -53,7 +53,7 @@
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide();PF('dlgLog').show();"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}"/>
 				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
-				    	<p:commandButton value="Report" onclick="PF('dlgReportExecution').show()"/>
+				    	<p:commandButton value="Report" onclick="PF('dlgReportExecution').show()" update="reportInformationForm"/>
 			    </div>
    			
    			<br/> 
@@ -744,15 +744,10 @@
 	         </p:panel>
 	         </center>
 	       
-	         <p:remoteCommand name="updateDialogReportExecution" update="reportInformation" />
-	          
-    	</h:form>
-	</p:panel>
-	
-		<p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade" onShow="updateDialogReportExecution">	
-			<h:form>			
+	         <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade" >	
+					
 					<h1>Congratulations ! Your project is created, configured and deployed. </h1>		
-					<h:panelGrid columns="2" id="reportInformation">
+					<h:panelGrid columns="2" id="reportInformationForm">
 					
 						<h:outputLabel value="Git Url :"/>
 						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}" style="width:600px;"/>
@@ -766,8 +761,13 @@
 						<h:outputLabel value="OpenShift project Url :"/>
 						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}" style="width:600px;"/>
 					</h:panelGrid>					
-			</h:form>													
-		</p:dialog>
+															
+			</p:dialog>
+	          
+    	</h:form>
+	</p:panel>
+	
+		
 	
 	 <p:dialog header="Logs" widgetVar="dlgLog" minHeight="500" width="1400" showEffect="fade">	
 	 		<h:form>			
