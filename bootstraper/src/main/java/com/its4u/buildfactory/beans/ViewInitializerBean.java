@@ -864,7 +864,10 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
     	System.out.println("Git reposiroties created ....");    	
+    	
+    	/*
     	System.out.println("Start create placeHolder project ....");    	
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
     	System.out.println("PlaceHolder project created....");   
@@ -949,7 +952,7 @@ public class ViewInitializerBean {
     	pollView.log("DEPLOYER : "+bootStrapResult.getUrlPlaceHolder());
     	pollView.log("CODEREADY: "+bootStrapResult.getUrlCodeReady());
     	pollView.log("OPENSHIFT: "+bootStrapResult.getUrlOpenShift());
-    	
+    	*/
     }
     
       
