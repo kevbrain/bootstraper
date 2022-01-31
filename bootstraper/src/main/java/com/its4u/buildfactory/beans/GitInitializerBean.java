@@ -241,7 +241,7 @@ public class GitInitializerBean {
 				
 				// Now, we do the commit with a message
 				
-				/*
+				
 				git.add().addFilepattern(".").call();
 				git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
 			
@@ -291,7 +291,7 @@ public class GitInitializerBean {
 			    createGitAppsDeploy(project);
 			    pollView.log("Git OPS Project updated");
 			    System.out.println("APPS deploy created");
-			    */
+			    
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
 			e.printStackTrace();
