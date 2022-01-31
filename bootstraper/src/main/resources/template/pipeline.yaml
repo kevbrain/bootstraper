@@ -1,8 +1,8 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: {{ocp-namespace}}-pipeline-build
-  namespace: {{ocp-namespace}}
+  name: ${ocpNamespace}-pipeline-build
+  namespace: ${ocpNamespace}
 spec:
   params:
     - name: git-revision

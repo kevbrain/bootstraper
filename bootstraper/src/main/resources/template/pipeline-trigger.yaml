@@ -2,7 +2,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: Trigger
 metadata:
   name: ${ocpNamespace}-trigger
-  namespace: {{ocp-namespace}}
+  namespace: ${ocpNamespace}
 spec:
   serviceAccountName: pipeline
   bindings:

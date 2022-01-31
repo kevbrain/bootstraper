@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   name: ${appName}-pipeline
-  namespace: {{ocp-namespace}}
+  namespace: ${ocpNamespace}
   generation: 1
 spec:
   pipelineRef:
