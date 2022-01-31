@@ -371,8 +371,8 @@ public class GitInitializerBean {
 		try {
 				if (node!=null && node.getData() instanceof ProjectArborescenceItem) {
 					ProjectArborescenceItem item = (ProjectArborescenceItem) node.getData();
-					System.out.println(item.getName() + " # "+item.getType());
-					/*
+					System.out.println(item.getName() + " # ["+item.getType()+"]");
+					
 					if (item.getType().equalsIgnoreCase("Folder")) {
 						File folder =  new File(path+"//"+item.getName());
 						folder.mkdir();
@@ -382,12 +382,14 @@ public class GitInitializerBean {
 					}
 					
 					if (node.getChildren()!=null && !node.getChildren().isEmpty()) {
-						path =path + "/"+item.getName();
+						if (!item.getType().equalsIgnoreCase("-")) {
+							path =path + "/"+item.getName();
+						}
 						for (TreeNode childNode: node.getChildren()) {
 							readNodeMavenProjectAndCreateArtifact(childNode,path);
 						}
 					}
-					*/
+					
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
