@@ -13,6 +13,6 @@ spec:
     targetPort: http-listener
   to:
     kind: Service
-    name: el-${ocpNamespace}-EventListener
+    name: el-${ocpNamespace}-eventListener
     weight: 100
   wildcardPolicy: None
