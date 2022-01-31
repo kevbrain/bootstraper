@@ -224,8 +224,8 @@ public class GitInitializerBean {
 				
 				pollView.log("Git DEV Setup");
 				// Create project in Git Project
-				File newFile = new File(workingDirectory, project);
-				newFile.mkdir();
+				//File newFile = new File(workingDirectory, project);
+				//newFile.mkdir();
 				
 				pollView.log("Init Maven project");	
 				// Read Maven Project and Create structure
