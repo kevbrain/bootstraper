@@ -6,6 +6,6 @@ metadata:
 spec:
   serviceAccountName: pipeline
   bindings:
-    - ref: ${ocpNamespace}-triggerBinging
+    - ref: ${ocpNamespace}-triggerbinding
   template:
-    ref: ${ocpNamespace}-triggerTemplate
+    ref: ${ocpNamespace}-triggertemplate

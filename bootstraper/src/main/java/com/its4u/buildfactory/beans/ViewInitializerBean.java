@@ -829,7 +829,7 @@ public class ViewInitializerBean {
 				    		if ( (res.getName().equalsIgnoreCase(argoNameApp) && keyenv.equalsIgnoreCase("dev"))) {
 				    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoApp);
 				    			gitInitializerBean.setNodeArgoApp(argoApp);
-				    		} else if (res.getName().startsWith("NS-")){
+				    		} else if (res.getName().startsWith("NS-") || res.getName().startsWith("00-") ){
 				    			new DefaultTreeNode("Text",new ProjectArborescenceItem(res.getName(),"Text",res),argoNamespaces);
 				    			gitInitializerBean.setNodeArgoNamespaces(argoNamespaces);
 				    		} else {			    		
