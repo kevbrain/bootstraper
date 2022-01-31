@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/part-of: Triggers
     eventlistener: ${appName}
   name: el-${ocpNamespace}-route
-  namespace: {{ocp-namespace}}
+  namespace: ${ocpNamespace}
 spec:
   host: el-${ocpNamespace}.apps.ocp-lab.its4u.eu
   port:
