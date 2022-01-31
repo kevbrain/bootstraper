@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
-  name: ${appName}
+  name: ${ocpNamespace}-triggerBinging
   namespace: {{ocp-namespace}}
 spec:
   params:

@@ -1,9 +1,16 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: ${appName}-pipeline
+  name: {{ocp-namespace}}-pipeline-build
   namespace: {{ocp-namespace}}
 spec:
+  params:
+    - name: git-repo-name
+      type: string
+    - name: git-revision
+      type: string
+    - name: git-repo-url
+      type: string
   tasks:
     - name: rollout-deploy
       params:
@@ -19,17 +26,15 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: 'https://github.com/kevbrain/${appName}.git'
+          value: $(params.git-repo-url)
         - name: revision
-          value: master
+          value: $(params.git-revision)
         - name: submodules
           value: 'true'
         - name: depth
           value: '1'
         - name: sslVerify
           value: 'true'
-        - name: subdirectory
-          value: /${appName}
         - name: deleteExisting
           value: 'true'
         - name: verbose
@@ -53,8 +58,6 @@ spec:
             - compile
         - name: PROXY_PROTOCOL
           value: http
-        - name: CONTEXT_DIR
-          value: ${appName}/${appName}
       runAfter:
         - git-clone
       taskRef:
@@ -75,8 +78,6 @@ spec:
             - 'jib:build'
         - name: PROXY_PROTOCOL
           value: http
-        - name: CONTEXT_DIR
-          value: ${appName}/${appName}
       runAfter:
         - code-analysis
       taskRef:
@@ -102,8 +103,6 @@ spec:
             - '-Darguments=-DskipITs'
         - name: PROXY_PROTOCOL
           value: http
-        - name: CONTEXT_DIR
-          value: ${appName}/${appName}
       runAfter:
         - compile
       taskRef:
