@@ -371,6 +371,8 @@ public class GitInitializerBean {
 		try {
 				if (node!=null && node.getData() instanceof ProjectArborescenceItem) {
 					ProjectArborescenceItem item = (ProjectArborescenceItem) node.getData();
+					System.out.println(item.getName() + " # "+item.getType());
+					/*
 					if (item.getType().equalsIgnoreCase("Folder")) {
 						File folder =  new File(path+"//"+item.getName());
 						folder.mkdir();
@@ -385,6 +387,7 @@ public class GitInitializerBean {
 							readNodeMavenProjectAndCreateArtifact(childNode,path);
 						}
 					}
+					*/
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
