@@ -31,5 +31,5 @@ spec:
           persistentVolumeClaim:
             claimName: ${ocpNamespace}-pipeline-claim
         - configMap:
-            name: maven-settings-cm
+            name: ${ocpNamespace}-maven-settings-cm
           name: maven-settings
