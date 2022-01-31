@@ -1,4 +1,5 @@
 {
+    "ref": "refs/heads/feature-test",
     "repository": {
     "name": "dummy",
     "full_name": "dummy",
@@ -7,3 +8,5 @@
     "url": "https://api.github.com/repos/kevbrain/dummy"
   }
 }
+
+

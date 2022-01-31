@@ -53,7 +53,7 @@
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide();PF('dlgLog').show();"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}"/>
 				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
-				    	<p:commandButton value="Report" onclick="PF('dlgReportExecution').show()" update="reportInformationForm"/>
+				    	<p:commandButton value="Report" oncomplete="PF('dlgReportExecution').show()" update="fgiturl,fplaceholderurl,fcodereadyurl,focpurl"/>
 			    </div>
    			
    			<br/> 
@@ -744,22 +744,22 @@
 	         </p:panel>
 	         </center>
 	       
-	         <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade" >	
+	         <p:dialog header="Report" widgetVar="dlgReportExecution" minHeight="500" width="1400" showEffect="fade" modal="true">	
 					
 					<h1>Congratulations ! Your project is created, configured and deployed. </h1>		
-					<h:panelGrid columns="2" id="reportInformationForm">
+					<h:panelGrid columns="2" >
 					
 						<h:outputLabel value="Git Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}" style="width:600px;"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlGitDev}" style="width:600px;" id="fgiturl"/>
 						
 						<h:outputLabel value="Deployer Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlPlaceHolder}" style="width:600px;"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlPlaceHolder}" style="width:600px;" id="fplaceholderurl"/>
 						
 						<h:outputLabel value="CodeReady Workspace Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlCodeReady}" style="width:600px;"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlCodeReady}" style="width:600px;" id="fcodereadyurl"/>
 						
 						<h:outputLabel value="OpenShift project Url :"/>
-						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}" style="width:600px;"/>
+						<h:inputText value="#{viewInitializerBean.bootStrapResult.urlOpenShift}" style="width:600px;" id="focpurl"/>
 					</h:panelGrid>					
 															
 			</p:dialog>
@@ -788,7 +788,7 @@
  	<p:dialog  widgetVar="dlg0"  showEffect="fade">
 		<h:form>
 			<p:graphicImage name="loader_seq.gif"  style="background: transparent;"/>
-			<center>.. Loading ..</center>
+			<center>.. In progress ..</center>
 		</h:form>	
 	</p:dialog>
 

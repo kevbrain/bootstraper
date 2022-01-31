@@ -859,7 +859,7 @@ public class ViewInitializerBean {
 		}
     	System.out.println("Start create repos ....");
     	try {
-			gitInitializerBean.createRepo(appName);
+			gitInitializerBean.createRepo(appName,ocpInitializerBean.getNamespaces().get("dev").getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -915,7 +915,7 @@ public class ViewInitializerBean {
 		}
     	System.out.println("Start Pipeline ....");
     	try {
-			tektonManagerBean.startPipelineExecution(appName);
+			tektonManagerBean.startPipelineExecution(appName,ocpInitializerBean.getNamespaces().get("dev").getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -189,7 +189,7 @@ public class GitInitializerBean {
 		}
 	}
 	
-	public void createRepo(String project) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
+	public void createRepo(String project,String namespace) throws AbortedByHookException, ConcurrentRefUpdateException, NoHeadException, NoMessageException, ServiceUnavailableException, UnmergedPathsException, WrongRepositoryStateException, GitAPIException, IOException, URISyntaxException, InterruptedException {
 		try {	
 				
 				UUID uuid = UUID.randomUUID();
@@ -238,8 +238,10 @@ public class GitInitializerBean {
 					//copyResourcesFromClassPath(pathResource,project,path);
 				}
 						
+				
 				// Now, we do the commit with a message
 				
+				/*
 				git.add().addFilepattern(".").call();
 				git.commit().setAuthor("ksc", "ksc@example.com").setMessage("Creation App By OCP - GitOps Application BootStrapper").call();
 			
@@ -258,7 +260,7 @@ public class GitInitializerBean {
 				    pushCommand.call();
 			    } catch (Exception e) {
 					System.out.println(e.getCause().getMessage());
-					createNewRemoteRepository(project);
+					createNewRemoteRepository(project,namespace);
 				} finally {
 					pushCommand.call();
 				}
@@ -289,7 +291,7 @@ public class GitInitializerBean {
 			    createGitAppsDeploy(project);
 			    pollView.log("Git OPS Project updated");
 			    System.out.println("APPS deploy created");
-			    
+			    */
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -330,7 +332,7 @@ public class GitInitializerBean {
 	}
 
 	
-	public void createNewRemoteRepository(String project) throws IOException, InterruptedException {
+	public void createNewRemoteRepository(String project,String namespace) throws IOException, InterruptedException {
 		
 		try {
 				System.out.println("*** create new repo ***");								
@@ -345,7 +347,7 @@ public class GitInitializerBean {
 				//System.out.println("*** Repo created ***");
 				pollView.log("Repo created ");
 				
-				String urlWebHook="http://el-"+project+"-"+project+"-dev.apps.ocp-lab.its4u.eu/";
+				String urlWebHook="http://el-"+namespace+".apps.ocp-lab.its4u.eu/";
 				System.out.println("wait 4s ...");
 				System.out.println("Try to create Webhook");
 				Thread.sleep(4000);
