@@ -888,11 +888,11 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	pollView.log("Please wait 10 s ....");
+    	pollView.log("Please wait 30 s ....");
     	pollView.log("conf cluster updated....");
-    	System.out.println("Wait 10s ....");
+    	System.out.println("Wait 30s ....");
     	try {
-    		TimeUnit.SECONDS.sleep(10);
+    		TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -908,10 +908,10 @@ public class ViewInitializerBean {
     	System.out.println("Project bootstraped with success ...."); 
     	
     	pollView.log("Start Deployment resources on OCP ....");
-    	System.out.println("Wait 90s ....");
-    	pollView.log("Please wait 90s....");
+    	System.out.println("Wait 60s ....");
+    	pollView.log("Please wait 60s....");
     	try {
-    		TimeUnit.SECONDS.sleep(90);
+    		TimeUnit.SECONDS.sleep(60);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
