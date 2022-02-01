@@ -37,7 +37,7 @@ public class TektonManagerBean {
 		this.body_generated = new TemplateResource("body.json", generator.generateResourceWithTemplate(tektonModel,generator.getTemplate_tektonStartPipeline()), 0, 0, 0);
 		
 		Unirest.setTimeouts(0, 0);
-		String url = "http://el-"+projectName+"-"+namespace+".apps.ocp-lab.its4u.eu/";
+		String url = "http://el-"+namespace+".apps.ocp-lab.its4u.eu/";
 		System.out.println("Trigger url = "+url);
 		try {
 			HttpResponse<String> response = Unirest.post(url)
