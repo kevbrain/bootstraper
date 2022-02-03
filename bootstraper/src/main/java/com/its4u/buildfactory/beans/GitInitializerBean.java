@@ -300,7 +300,7 @@ public class GitInitializerBean {
 	
 	public void copyResourcesFromClassPath(String pathResource,String project,String pathDest)  {
 	    	
-			pathDest = pathDest+"//"+project+"//src//main//resources//META-INF//resources";
+			pathDest = pathDest+"//src//main//resources//META-INF//resources";
 	    	System.out.println("COPY RESSOURCE FROM CLASSPATH TO "+pathDest);
 	    	
 			Path pathDestination = Paths.get(pathDest);
