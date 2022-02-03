@@ -10,6 +10,7 @@ import com.its4u.buildfactory.model.placeholders.Environments;
 import com.its4u.buildfactory.model.placeholders.PlaceHolderId;
 import com.its4u.buildfactory.model.placeholders.PlaceHolders;
 import com.its4u.buildfactory.model.placeholders.Project;
+import com.its4u.buildfactory.model.placeholders.Versions;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
 import com.its4u.buildfactory.ocp.resources.NamespaceResource;
 import com.its4u.buildfactory.ocp.resources.Secrets;
@@ -21,13 +22,18 @@ public class PlaceHolderManagerService {
 
 	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,HashMap<String,NamespaceResource> env_namespaces) {
 		Project project = new Project(projectName, gitURl, "Kevyn");
+		
+		List<Versions> versions = new ArrayList<Versions>();
+		versions.add(new Versions("0.0.1-SNAPSHOT",project));
+		project.setVersions(versions);
+		
 		List<Environments> envsProject =  new ArrayList<>();
 		for (String keyenv:env_namespaces.keySet()) {
 			//if (environments.get(keyenv)) {
 				System.out.println("Create Environment : "+keyenv);
 				Environments env = new Environments(project,projectName+"-"+keyenv);
 				if (keyenv.equalsIgnoreCase("dev")) {
-					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));
+					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));					
 				} 
 				envsProject.add(env);
 			//}

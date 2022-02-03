@@ -3,6 +3,7 @@ package com.its4u.buildfactory.model.placeholders;
 import java.io.Serializable;
 import java.util.List;
 
+
 import lombok.Data;
 
 @Data
@@ -19,6 +20,8 @@ public class Project implements Serializable{
 	private String owner;
 
 	private List<Environments> environments;
+	
+	private List<Versions> versions;
 
 	public Project() {
 		super();

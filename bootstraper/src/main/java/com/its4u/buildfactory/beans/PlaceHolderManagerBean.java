@@ -52,6 +52,7 @@ public class PlaceHolderManagerBean {
 				cms,
 				secrets,
 				ocpInitializerBean.getNamespaces());
+		
 		System.out.println(myProject.getProject_Id()+ " created with success !");
 		ObjectMapper mapper = new ObjectMapper();
 		try {

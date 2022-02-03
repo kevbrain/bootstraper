@@ -24,7 +24,6 @@ public class Environments implements Serializable {
 	private String projectId;
 	
 	@JsonIgnore
-
     private Project project;
 	
 	public List<PlaceHolders> placeholders;
