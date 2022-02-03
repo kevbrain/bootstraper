@@ -24,7 +24,7 @@ public class PlaceHolderManagerService {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		
 		List<Versions> versions = new ArrayList<Versions>();
-		versions.add(new Versions("0.0.1-SNAPSHOT",project));
+		versions.add(new Versions("0.0.1-SNAPSHOT",project.getProject_Id(),project));
 		project.setVersions(versions);
 		
 		List<Environments> envsProject =  new ArrayList<>();

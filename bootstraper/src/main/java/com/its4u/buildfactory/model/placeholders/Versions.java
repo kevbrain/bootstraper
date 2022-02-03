@@ -48,5 +48,14 @@ public class Versions implements Serializable {
 			this.version = version;
 		}
 
+
+
+		public Versions(String version, String projectId, Project project) {
+			super();
+			this.version = version;
+			this.projectId = projectId;
+			this.project = project;
+		}
+
 		
 }
