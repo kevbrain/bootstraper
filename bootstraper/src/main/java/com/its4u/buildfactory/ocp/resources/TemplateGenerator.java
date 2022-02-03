@@ -66,6 +66,8 @@ public class TemplateGenerator {
     
     private final Template template_pipeline_create_branch;
     
+    private final Template template_pipeline_tag;
+    
     private final Template template_pvc_pipeline;
     
     private final Template template_pipelineTrigger;
@@ -147,6 +149,7 @@ public class TemplateGenerator {
         template_tektonStartPipeline = cfg.getTemplate("startPipeline.json");
         template_pvc_pipeline=cfg.getTemplate("pvc-claim-pipeline.yaml");
         template_pipeline_create_branch= cfg.getTemplate("pipeline-createBranch.yaml");
+        template_pipeline_tag = cfg.getTemplate("pipeline-tag.yaml");
         
         // codeReady
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//codeready"));
@@ -198,6 +201,7 @@ public class TemplateGenerator {
 		    	TemplateResource pipelineEventListener = new TemplateResource("00-EL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
 		    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-ELR-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
 		    	TemplateResource pipelineCreateBranch =  new TemplateResource("00-PLCB-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipeline_create_branch),0,0,0);
+		    	TemplateResource pipelineTag = new TemplateResource("00-PLCT-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipeline_tag),0,0,0);
 		    	
 		    	TemplateResource mavensetting= new TemplateResource("00-MAVENSETTING-CM-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
 		    	TemplateResource pvcPipeline= new TemplateResource("00-PVCPL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
@@ -211,6 +215,7 @@ public class TemplateGenerator {
 		    			    	
 	    		generatedResources.add(pipeline);
 	    		generatedResources.add(pipelineCreateBranch);
+	    		generatedResources.add(pipelineTag);
 	    		generatedResources.add(pvcPipeline);
 	    		generatedResources.add(pipelineTrigger);
 	    		generatedResources.add(pipelineTriggerTemplate);
