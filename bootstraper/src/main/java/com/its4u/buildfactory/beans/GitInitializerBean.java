@@ -235,7 +235,7 @@ public class GitInitializerBean {
 				
 				// if joinfaces project we copy resources to meta-inf
 				if (mavenInitializerBean.isJoinfaces()) {
-					//copyResourcesFromClassPath(pathResource,project,path);
+					copyResourcesFromClassPath(pathResource,project,path);
 				}
 						
 				
