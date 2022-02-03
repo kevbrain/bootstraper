@@ -40,9 +40,6 @@ public class TemplateGenerator {
     
     private final Template template_implementation_splited;
     
-    private final Template template_pipeline;
-    
-    
     private final Template template_maven_application;
     
     private final Template template_maven_classpath;
@@ -64,6 +61,10 @@ public class TemplateGenerator {
     private final Template template_rolebinding;
     
     private final Template template_cm_maven;
+    
+    private final Template template_pipeline;
+    
+    private final Template template_pipeline_create_branch;
     
     private final Template template_pvc_pipeline;
     
@@ -91,9 +92,16 @@ public class TemplateGenerator {
 
     public TemplateGenerator(String pathTemplate ) throws IOException {    	
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
+        this.generatedResources = new ArrayList<>();
+        
+        // infra
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate));
+        template_rolebinding= cfg.getTemplate("rolebinding.yaml");
+        template_implementation_allInOne = cfg.getTemplate("implementation-dar.yaml");
+        template_implementation_splited = cfg.getTemplate("implementation-split-dar.yaml");
         
         // ocp resources templates
-        cfg.setDirectoryForTemplateLoading(new File(pathTemplate));
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//openshift"));
         template_all_in_one = cfg.getTemplate("deployment.yaml");
         template_configMaps = cfg.getTemplate("deployment-configMaps.yaml");
         template_secrets = cfg.getTemplate("deployment-secrets.yaml");
@@ -102,26 +110,16 @@ public class TemplateGenerator {
         template_route = cfg.getTemplate("deployment-route.yaml");
         template_serviceAccount = cfg.getTemplate("deployment-serviceAccount.yaml");
         template_scc = cfg.getTemplate("deployment-scc.yaml");
-        template_pvc = cfg.getTemplate("deployment-pvc.yaml");
-        template_implementation_allInOne = cfg.getTemplate("implementation-dar.yaml");
-        template_implementation_splited = cfg.getTemplate("implementation-split-dar.yaml");
+        template_pvc = cfg.getTemplate("deployment-pvc.yaml");        
         template_namespace= cfg.getTemplate("namespace.yaml");
-        template_rolebinding= cfg.getTemplate("rolebinding.yaml");
-        template_cm_maven=cfg.getTemplate("maven-cm.yaml");
-        template_pvc_pipeline=cfg.getTemplate("pvc-claim-pipeline.yaml");
-                
-        // pipeline
-        template_pipeline = cfg.getTemplate("pipeline.yaml");
-        template_pipelineTrigger = cfg.getTemplate("pipeline-trigger.yaml");
-        template_pipelineTriggerBinding = cfg.getTemplate("pipeline-triggerBinding.yaml");
-        template_pipelineTriggerTemplate = cfg.getTemplate("pipeline-triggerTemplate.yaml");
-        template_pipelineEventListener = cfg.getTemplate("pipeline-eventListener.yaml");
-        template_pipelineEventListenerRoute  = cfg.getTemplate("pipeline-eventListenerRoute.yaml");
         
+                                              
         // gitops argo
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//argo"));
         template_argo_application = cfg.getTemplate("argo-application.yaml");
         template_argo_kustomization = cfg.getTemplate("argo-kustomization.yaml");
         
+             
         // maven resources templates
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//maven"));
         template_maven_application = cfg.getTemplate("application");
@@ -130,7 +128,8 @@ public class TemplateGenerator {
         template_maven_pom = cfg.getTemplate("pom-template.xml");
         template_maven_application_properties = cfg.getTemplate("application-properties");
         template_maven_readMe = cfg.getTemplate("README-md");
-        this.generatedResources = new ArrayList<>();
+        template_cm_maven=cfg.getTemplate("maven-cm.yaml");
+        
         
         // joinfaces
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//joinfaces"));
@@ -139,7 +138,15 @@ public class TemplateGenerator {
         
         // tekton
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//tekton"));
+        template_pipeline = cfg.getTemplate("pipeline.yaml");
+        template_pipelineTrigger = cfg.getTemplate("pipeline-trigger.yaml");
+        template_pipelineTriggerBinding = cfg.getTemplate("pipeline-triggerBinding.yaml");
+        template_pipelineTriggerTemplate = cfg.getTemplate("pipeline-triggerTemplate.yaml");
+        template_pipelineEventListener = cfg.getTemplate("pipeline-eventListener.yaml");
+        template_pipelineEventListenerRoute  = cfg.getTemplate("pipeline-eventListenerRoute.yaml");
         template_tektonStartPipeline = cfg.getTemplate("startPipeline.json");
+        template_pvc_pipeline=cfg.getTemplate("pvc-claim-pipeline.yaml");
+        template_pipeline_create_branch= cfg.getTemplate("pipeline-createBranch.yaml");
         
         // codeReady
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//codeready"));
@@ -190,7 +197,7 @@ public class TemplateGenerator {
 		    	TemplateResource pipelineTriggerBinding = new TemplateResource("00-TB-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineTriggerBinding),0,0,0);
 		    	TemplateResource pipelineEventListener = new TemplateResource("00-EL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineEventListener),0,0,0);
 		    	TemplateResource pipelineEventListenerRoute = new TemplateResource("00-ELR-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineEventListenerRoute),0,0,0);
-		    	    	
+		    	TemplateResource pipelineCreateBranch =  new TemplateResource("00-PLCB-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipeline_create_branch),0,0,0);
 		    	
 		    	TemplateResource mavensetting= new TemplateResource("00-MAVENSETTING-CM-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_cm_maven),0,0,0);
 		    	TemplateResource pvcPipeline= new TemplateResource("00-PVCPL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pvc_pipeline),0,0,0);
@@ -201,10 +208,9 @@ public class TemplateGenerator {
 		    	generatedResources.add(secrets);
 		    	generatedResources.add(deployment);
 		    	generatedResources.add(service);
-		    	
-		    	// pipeline build , only on dev
-		    	//if (model.getEnv().equalsIgnoreCase("dev")) {
+		    			    	
 	    		generatedResources.add(pipeline);
+	    		generatedResources.add(pipelineCreateBranch);
 	    		generatedResources.add(pvcPipeline);
 	    		generatedResources.add(pipelineTrigger);
 	    		generatedResources.add(pipelineTriggerTemplate);
@@ -212,7 +218,7 @@ public class TemplateGenerator {
 	    		generatedResources.add(pipelineEventListener); 
 	    		generatedResources.add(pipelineEventListenerRoute);
 	    		generatedResources.add(mavensetting);
-		    	//}
+		    	
 		    	
 		    	if (!model.getRoutes().isEmpty()) {
 		    		TemplateResource route = new TemplateResource("RT-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_route),60,60,10);
