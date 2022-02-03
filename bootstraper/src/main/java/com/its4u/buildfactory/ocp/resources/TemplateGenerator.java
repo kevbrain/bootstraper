@@ -115,7 +115,7 @@ public class TemplateGenerator {
         
                                               
         // gitops argo
-        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//argo"));
+        cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//argocd"));
         template_argo_application = cfg.getTemplate("argo-application.yaml");
         template_argo_kustomization = cfg.getTemplate("argo-kustomization.yaml");
         
