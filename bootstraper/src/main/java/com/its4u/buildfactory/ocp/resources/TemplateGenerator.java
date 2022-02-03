@@ -138,7 +138,7 @@ public class TemplateGenerator {
         
         // tekton
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//tekton"));
-        template_pipeline = cfg.getTemplate("pipeline.yaml");
+        template_pipeline = cfg.getTemplate("pipeline-build.yaml");
         template_pipelineTrigger = cfg.getTemplate("pipeline-trigger.yaml");
         template_pipelineTriggerBinding = cfg.getTemplate("pipeline-triggerBinding.yaml");
         template_pipelineTriggerTemplate = cfg.getTemplate("pipeline-triggerTemplate.yaml");
