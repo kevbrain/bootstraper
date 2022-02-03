@@ -1,12 +1,13 @@
 {
-    "ref": "refs/heads/feature-test",
+    "ref": "master",
     "repository": {
-    "name": "dummy",
-    "full_name": "dummy",
-    "private": false,
-    "html_url": "https://github.com/kevbrain/dummy",
-    "url": "https://api.github.com/repos/kevbrain/dummy"
-  }
+        "name": "${appName}",
+        "full_name": "${appName}",
+        "private": false,
+        "html_url": "https://github.com/kevbrain/${appName}",
+        "url": "https://github.com/kevbrain/${appName}"
+    },
+    "head_commit": {
+        "id": "master"
+    }
 }
-
-
