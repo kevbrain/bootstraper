@@ -3,9 +3,13 @@ kind: TriggerBinding
 metadata:
   name: ${ocpNamespace}-triggerbinding
   namespace: ${ocpNamespace}
+  labels:
+    app.kubernetes.io/instance: cluster-configs
 spec:
   params:
     - name: git-repo-url
       value: $(body.repository.url)
     - name: git-revision
       value: $(body.head_commit.id)
+    - name: git-application-name
+      value: $(body.repository.name)

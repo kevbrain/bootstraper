@@ -33,6 +33,8 @@ spec:
         - name: gitInitImage
           value: >-
             registry.redhat.io/openshift-pipelines/pipelines-git-init-rhel8@sha256:afc5d3f9efe26c7042635d43b8ffd09d67936e3d0b6b901dc08a33e20313d361
+        - name: subdirectory
+          value: $(params.project-name)-$(params.feature-branch-name)
       taskRef:
         kind: ClusterTask
         name: git-clone
@@ -46,6 +48,8 @@ spec:
             docker.io/alpine/git:v2.26.2@sha256:23618034b0be9205d9cc0846eb711b12ba4c9b468efdd8a59aac1d7b1a23363f
         - name: GIT_SCRIPT
           value: >
+            cd $(params.project-name)-$(params.feature-branch-name)/;
+
             git config remote.origin.url
             https://$(params.git-user):$(params.git-token)@github.com/kevbrain/$(params.project-name).git
             ;git checkout -b $(params.feature-branch-name);
@@ -60,23 +64,23 @@ spec:
         - name: input
           workspace: source
     - name: maven-set-version
-      runAfter:
-        - git-create-branch
-      taskRef:
-        kind: ClusterTask
-        name: maven
       params:
         - name: MAVEN_IMAGE
           value: >-
             gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
         - name: GOALS
           value:
-            - versions:set
+            - 'versions:set'
             - '-DnewVersion=$(params.feature-branch-name)-0.0.1-SNAPSHOT'
         - name: PROXY_PROTOCOL
           value: http
         - name: CONTEXT_DIR
-          value: .
+          value: $(params.project-name)-$(params.feature-branch-name)
+      runAfter:
+        - git-create-branch
+      taskRef:
+        kind: ClusterTask
+        name: maven
       workspaces:
         - name: source
           workspace: source
@@ -89,10 +93,11 @@ spec:
             docker.io/alpine/git:v2.26.2@sha256:23618034b0be9205d9cc0846eb711b12ba4c9b468efdd8a59aac1d7b1a23363f
         - name: GIT_SCRIPT
           value: >
-            git config --global user.name 'ksc';
-            git config --global user.email 'ksc@example.com';
-            git commit -am "change version";
-            git config remote.origin.url
+            cd $(params.project-name)-$(params.feature-branch-name)/;
+
+            git config --global user.name 'ksc'; git config --global user.email
+            'ksc@example.com'; git commit -am "change version"; git config
+            remote.origin.url
             https://$(params.git-user):$(params.git-token)@github.com/kevbrain/$(params.project-name).git;
             git push origin $(params.feature-branch-name)
       runAfter:
@@ -109,7 +114,7 @@ spec:
       params:
         - name: url
           value: >-
-            https://placeholdermanager-route-placeholdermanager-dev.apps.ocp-lab.its4u.eu/Projects/$(params.project-name)/create-version/$(params.feature-branch-name)-0.0.1-SNAPSHOT
+            https://placeholdermanager-route-placeholdermanager-dev.apps.ocp-lab.its4u.eu/projects/$(params.project-name)/create-version/$(params.feature-branch-name)-0.0.1-SNAPSHOT
         - name: options
           value: []
         - name: curl-image
@@ -122,8 +127,4 @@ spec:
         name: curl
   workspaces:
     - name: source
-      optional: false
     - name: maven-settings
-      optional: false
-  resources: []
-  finally: []

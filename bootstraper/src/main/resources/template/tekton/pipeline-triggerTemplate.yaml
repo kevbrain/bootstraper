@@ -3,33 +3,39 @@ kind: TriggerTemplate
 metadata:
   name: ${ocpNamespace}-triggertemplate
   namespace: ${ocpNamespace}
+  labels:
+    app.kubernetes.io/instance: cluster-configs
 spec:
   params:
-  - name: git-repo-url
-    description: The git repository url
-  - name: git-revision
-    description: The git revision
+    - description: The git repository url
+      name: git-repo-url
+    - description: The git revision
+      name: git-revision
+    - description: The git application
+      name: git-application-name
   resourcetemplates:
-  - apiVersion: tekton.dev/v1beta1
-    kind: PipelineRun
-    metadata:
-      generateName: build-deploy-$(tt.params.git-revision)
-      namespace: ${ocpNamespace}
-      generation: 1
-    spec:
-      params:
-        - name: git-revision
-          value: $(tt.params.git-revision)
-        - name: git-repo-url
-          value: $(tt.params.git-repo-url)
-      pipelineRef:
-        name: ${ocpNamespace}-pipeline-build
-      serviceAccountName: pipeline
-      timeout: 1h0m0s
-      workspaces:
-        - name: source
-          persistentVolumeClaim:
-            claimName: ${ocpNamespace}-pipeline-claim
-        - configMap:
-            name: ${ocpNamespace}-maven-settings-cm
-          name: maven-settings
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: build-deploy-$(tt.params.git-revision)
+        generation: 1
+        namespace: ${ocpNamespace}
+      spec:
+        params:
+          - name: git-revision
+            value: $(tt.params.git-revision)
+          - name: git-repo-url
+            value: $(tt.params.git-repo-url)
+          - name: git-application-name
+            value: $(tt.params.git-application-name)
+        pipelineRef:
+          name: ${ocpNamespace}-pipeline-build
+        serviceAccountName: pipeline
+        timeout: 1h0m0s
+        workspaces:
+          - name: source
+            persistentVolumeClaim:
+              claimName: ${ocpNamespace}-pipeline-claim
+          - configMap:
+              name: ${ocpNamespace}-maven-settings-cm
+            name: maven-settings
