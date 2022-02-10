@@ -20,7 +20,9 @@ import com.its4u.buildfactory.ocp.resources.Secrets;
 @Service
 public class PlaceHolderManagerService {
 
-	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,HashMap<String,NamespaceResource> env_namespaces) {
+	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,
+									HashMap<String,NamespaceResource> env_namespaces,
+									String gitOpsRepo, String gitOpsAppsRepo, String argoProj) {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		
 		List<Versions> versions = new ArrayList<Versions>();
@@ -32,6 +34,10 @@ public class PlaceHolderManagerService {
 			//if (environments.get(keyenv)) {
 				System.out.println("Create Environment : "+keyenv);
 				Environments env = new Environments(project,projectName+"-"+keyenv);
+				env.setGitOpsRepo(gitOpsRepo);
+				env.setGitOpsAppsRepo(gitOpsAppsRepo);
+				env.setArgoProj(argoProj);
+				env.setGitOpsAppsRepo(gitURl);
 				if (keyenv.equalsIgnoreCase("dev")) {
 					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));					
 				} 

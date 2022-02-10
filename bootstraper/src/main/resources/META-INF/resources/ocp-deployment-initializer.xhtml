@@ -231,7 +231,12 @@
 							   			<h:outputText value="Password :"/>
 							   			<p:password value="#{argoInitializerBean.argoPassword}" toggleMask="true" redisplay="true" style="width:400px;">   	
 				   							<p:ajax event="change" update="@form" />
-				   						</p:password>							
+				   						</p:password>
+				   						<p:spacer height="10" width="10"></p:spacer>
+							   			<h:outputText value="Argo project :"/>
+							   			<p:inputText value="#{argoInitializerBean.argoProj}"   style="width:600px;" >
+							   				<p:ajax event="change"  update="@form" />
+							   			</p:inputText>
 			    			</h:panelGrid>
 			    	</p:tab>
 			    	<p:tab title="CODEREADY">

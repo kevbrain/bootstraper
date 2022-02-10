@@ -88,6 +88,9 @@ public class ViewInitializerBean {
 	private TektonManagerBean tektonManagerBean;
 	
 	@Autowired
+	private ArgoInitializerBean argoInitializerbean;
+	
+	@Autowired
 	private CodeReadyWorspaceManagerBean codeReadyWorspaceManagerBean;
 	
 	private static Logger logger = LoggerFactory.getLogger(ViewInitializerBean.class);
@@ -869,7 +872,10 @@ public class ViewInitializerBean {
     	
     	
     	System.out.println("Start create placeHolder project ....");    	
-    	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets);
+    	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets,
+    			argoInitializerbean.getGitOpsRepo(),
+    			argoInitializerbean.getGitOpsAppsRepo(),
+    			argoInitializerbean.getArgoProj());
     	System.out.println("PlaceHolder project created....");   
     	pollView.log("PlaceHolder project created ....");
     	pollView.log("Please wait 3s....");
