@@ -24,10 +24,13 @@ public class ArgoInitializerBean {
 	@Value("${argo.password}")
 	private String argoPassword;
 	
+	@Value("${argo.repo.gitops}")
 	private String gitOpsRepo;
 	
+	@Value("${argo.repo.gitapps}")
 	private String gitOpsAppsRepo;
 	
+	@Value("${argo.projet}")
 	private String argoProj;
 	
 	public void createInfra(List<TemplateResource> resources) {
