@@ -3,13 +3,11 @@ package com.its4u.buildfactory.model.placeholders;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Data
 
@@ -27,6 +25,12 @@ public class Environments implements Serializable {
     private Project project;
 	
 	public List<PlaceHolders> placeholders;
+	
+	private String argoProj;
+	
+	private String gitOpsRepo;
+	
+	private String gitOpsAppsRepo;
 	
 	@JsonIgnore
 	@Getter

@@ -24,6 +24,12 @@ public class ArgoInitializerBean {
 	@Value("${argo.password}")
 	private String argoPassword;
 	
+	private String gitOpsRepo;
+	
+	private String gitOpsAppsRepo;
+	
+	private String argoProj;
+	
 	public void createInfra(List<TemplateResource> resources) {
 		
 		for (TemplateResource template:resources) {

@@ -207,9 +207,14 @@
 							<p:commandButton value="Test Connection" actionListener="#{ocpInitializerBean.testConnection()}" />
 			    	</p:tab>
 			    	<p:tab title="ARGO">
-			    			<h:panelGrid columns="2">	 
+			    			<h:panelGrid columns="5">	 
 			    						<h:outputText value="Server :"/>
 							   			<p:inputText value="#{argoInitializerBean.argoServer}"   style="width:600px;" >
+							   				<p:ajax event="change"  update="@form" />
+							   			</p:inputText>	
+							   			<p:spacer height="10" width="10"></p:spacer>
+							   			<h:outputText value="Repo GitOps url :"/>
+							   			<p:inputText value="#{argoInitializerBean.gitOpsRepo}"   style="width:600px;" >
 							   				<p:ajax event="change"  update="@form" />
 							   			</p:inputText>	
 							   			
@@ -217,6 +222,11 @@
 							   			<p:inputText value="#{argoInitializerBean.argoUser}"   style="width:600px;" >
 							   				<p:ajax event="change"  update="@form" />
 							   			</p:inputText>	
+							   			<p:spacer height="10" width="10"></p:spacer>
+							   			<h:outputText value="Repo GitApps url :"/>
+							   			<p:inputText value="#{argoInitializerBean.gitOpsAppsRepo}"   style="width:600px;" >
+							   				<p:ajax event="change"  update="@form" />
+							   			</p:inputText>
 							   			
 							   			<h:outputText value="Password :"/>
 							   			<p:password value="#{argoInitializerBean.argoPassword}" toggleMask="true" redisplay="true" style="width:400px;">   	
