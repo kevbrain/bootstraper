@@ -875,7 +875,8 @@ public class ViewInitializerBean {
     	placeHolderManagerBean.createPlaceHolderProject(appName, configMaps, secrets,
     			argoInitializerbean.getGitOpsRepo(),
     			argoInitializerbean.getGitOpsAppsRepo(),
-    			argoInitializerbean.getArgoProj());
+    			argoInitializerbean.getArgoProj(),
+    			argoInitializerbean.getArgoServer());
     	System.out.println("PlaceHolder project created....");   
     	pollView.log("PlaceHolder project created ....");
     	pollView.log("Please wait 3s....");

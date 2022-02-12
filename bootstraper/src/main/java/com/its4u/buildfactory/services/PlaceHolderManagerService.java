@@ -22,7 +22,8 @@ public class PlaceHolderManagerService {
 
 	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,
 									HashMap<String,NamespaceResource> env_namespaces,
-									String gitOpsRepo, String gitOpsAppsRepo, String argoProj) {
+									String gitOpsRepo, String gitOpsAppsRepo, String argoProj,
+									String argoServer) {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		
 		List<Versions> versions = new ArrayList<Versions>();
