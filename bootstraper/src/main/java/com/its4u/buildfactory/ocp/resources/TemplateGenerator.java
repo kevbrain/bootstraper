@@ -183,16 +183,16 @@ public class TemplateGenerator {
     	// only for dev
     	if (model.getEnv().equalsIgnoreCase("dev")) {
 		    	if (model.getServiceAccount()!=null) {
-		    		TemplateResource serviceAccount = new TemplateResource("00-SA-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
+		    		TemplateResource serviceAccount = new TemplateResource("00-SA-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_serviceAccount),10,10,55);
 		    		generatedResources.add(serviceAccount);
-		    		TemplateResource scc = new TemplateResource("00-SCC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
+		    		TemplateResource scc = new TemplateResource("00-SCC-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_scc),0,0,0);
 		    		generatedResources.add(scc);
 		    	}
 		    	
-		    	TemplateResource configMaps = new TemplateResource("CM-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_configMaps),20,20,50);
-		    	TemplateResource secrets = new TemplateResource("S-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_secrets),25,25,25);
-		    	TemplateResource deployment = new TemplateResource("D-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_deployment),50,50,10);
-		    	TemplateResource service = new TemplateResource("SVC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_service),55,55,20);
+		    	TemplateResource configMaps = new TemplateResource("CM-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_configMaps),20,20,50);
+		    	TemplateResource secrets = new TemplateResource("S-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_secrets),25,25,25);
+		    	TemplateResource deployment = new TemplateResource("D-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_deployment),50,50,10);
+		    	TemplateResource service = new TemplateResource("SVC-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_service),55,55,20);
 		    	
 		    	TemplateResource pipeline = new TemplateResource("00-PL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipeline),0,0,0);
 		    	TemplateResource pipelineTrigger = new TemplateResource("00-T-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_pipelineTrigger),0,0,0);
@@ -226,12 +226,12 @@ public class TemplateGenerator {
 		    	
 		    	
 		    	if (!model.getRoutes().isEmpty()) {
-		    		TemplateResource route = new TemplateResource("RT-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_route),60,60,10);
+		    		TemplateResource route = new TemplateResource("RT-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_route),60,60,10);
 		    		generatedResources.add(route);
 		    	}
 		    	
 		    	if (!model.getPersitentVolumes().isEmpty()) {
-		    		TemplateResource pvc = new TemplateResource("00-PVC-"+model.getAppName()+"-"+model.getEnv()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
+		    		TemplateResource pvc = new TemplateResource("00-PVC-"+model.getAppName()+".yml",generateResourceWithTemplate(model,template_pvc),30,30,60);
 		    		generatedResources.add(pvc);
 		    	}
     	}

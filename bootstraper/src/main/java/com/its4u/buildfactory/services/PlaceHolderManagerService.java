@@ -23,7 +23,7 @@ public class PlaceHolderManagerService {
 	public Project createProject(String projectName,String gitURl,List<ConfigMap> cms,List<Secrets> secrets,
 									HashMap<String,NamespaceResource> env_namespaces,
 									String gitOpsRepo, String gitOpsAppsRepo, String argoProj,
-									String argoServer) {
+									String argoServer, String argoUser , String argoPassword) {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		
 		List<Versions> versions = new ArrayList<Versions>();
@@ -39,6 +39,9 @@ public class PlaceHolderManagerService {
 				env.setGitOpsAppsRepo(gitOpsAppsRepo);
 				env.setArgoProj(argoProj);
 				env.setGitOpsAppsRepo(gitURl);
+				env.setArgoServer(argoServer);
+				env.setArgoUser(argoUser);
+				env.setArgoPassword(argoPassword);
 				if (keyenv.equalsIgnoreCase("dev")) {
 					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));					
 				} 

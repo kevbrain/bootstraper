@@ -28,6 +28,10 @@ public class Environments implements Serializable {
 	
 	private String argoServer;
 	
+	private String argoUser;
+	
+	private String argoPassword;
+	
 	private String argoProj;
 	
 	private String gitOpsRepo;

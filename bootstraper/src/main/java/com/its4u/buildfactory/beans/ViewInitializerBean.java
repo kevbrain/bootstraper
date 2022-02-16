@@ -876,7 +876,9 @@ public class ViewInitializerBean {
     			argoInitializerbean.getGitOpsRepo(),
     			argoInitializerbean.getGitOpsAppsRepo(),
     			argoInitializerbean.getArgoProj(),
-    			argoInitializerbean.getArgoServer());
+    			argoInitializerbean.getArgoServer(),
+    			argoInitializerbean.getArgoUser(),
+    			argoInitializerbean.getArgoPassword());
     	System.out.println("PlaceHolder project created....");   
     	pollView.log("PlaceHolder project created ....");
     	pollView.log("Please wait 3s....");
