@@ -26,6 +26,8 @@ public class Environments implements Serializable {
 	
 	public List<PlaceHolders> placeholders;
 	
+	private String argoEnvId;
+	
 	private String argoServer;
 	
 	private String argoUser;

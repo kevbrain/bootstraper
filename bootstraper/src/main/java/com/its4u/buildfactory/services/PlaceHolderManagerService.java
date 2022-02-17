@@ -37,11 +37,7 @@ public class PlaceHolderManagerService {
 				Environments env = new Environments(project,projectName+"-"+keyenv);
 				env.setGitOpsRepo(gitOpsRepo);
 				env.setGitOpsAppsRepo(gitOpsAppsRepo);
-				env.setArgoProj(argoProj);
-				env.setGitOpsAppsRepo(gitURl);
-				env.setArgoServer(argoServer);
-				env.setArgoUser(argoUser);
-				env.setArgoPassword(argoPassword);
+				env.setArgoEnvId("lab.its4u.eu-dev");
 				if (keyenv.equalsIgnoreCase("dev")) {
 					env.setPlaceholders(createplaceHoldersForEnv(env,cms,secrets,keyenv,env_namespaces.get(keyenv).getName()));					
 				} 

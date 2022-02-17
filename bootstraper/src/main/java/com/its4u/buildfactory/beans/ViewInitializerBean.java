@@ -892,7 +892,7 @@ public class ViewInitializerBean {
     	System.out.println("Start to update conf cluster ...."); 
     	pollView.log("Start to apply conf cluster ....");
     	try {
-			placeHolderManagerBean.sync("cluster-configs");
+			placeHolderManagerBean.sync("cluster-configs-dev");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
