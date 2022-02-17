@@ -891,12 +891,7 @@ public class ViewInitializerBean {
 		}
     	System.out.println("Start to update conf cluster ...."); 
     	pollView.log("Start to apply conf cluster ....");
-    	try {
-			placeHolderManagerBean.sync("cluster-configs-dev");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	placeHolderManagerBean.syncClusterConfig("dev","lab.its4u.eu-dev");
     	pollView.log("Please wait 30 s ....");
     	pollView.log("conf cluster updated....");
     	System.out.println("Wait 30s ....");

@@ -95,7 +95,7 @@ public class PlaceHolderManagerBean {
 		System.out.println("Apply Conf and sync "+projectName);
 		
 		Unirest.setTimeouts(0, 0);
-		String url = placeholdermanagerUrl+"/apply-conf/"+projectName;
+		String url = placeholdermanagerUrl+"/apply-conf/"+projectName+"/dev";
 		try {
 			HttpResponse<String> response = Unirest.get(url).asString();	
 			System.out.println(response.getBody());
@@ -103,6 +103,20 @@ public class PlaceHolderManagerBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
+	}
+	
+	public void syncClusterConfig(String envSuffix,String ArgoEnvID) {
+		System.out.println("Sync env cluster "+envSuffix);
+		
+		Unirest.setTimeouts(0, 0);
+		String url = placeholdermanagerUrl+"/sync-cluster-config/"+envSuffix+"/"+ArgoEnvID;
+		try {
+			HttpResponse<String> response = Unirest.get(url).asString();	
+			System.out.println(response.getBody());
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	public void sync(String projectName) throws IOException {
