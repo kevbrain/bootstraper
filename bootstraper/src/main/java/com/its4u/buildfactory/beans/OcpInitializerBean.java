@@ -60,15 +60,15 @@ public class OcpInitializerBean {
 	public void init() {
     	this.namespaces = new HashMap<String, NamespaceResource>();
     	this.namespaces.put("dev", new NamespaceResource("-dev",this.dev_env));
-    	//this.namespaces.put("tst", new NamespaceResource("-tst",this.tst_env));
-    	//this.namespaces.put("int", new NamespaceResource("-int",this.int_env));
+    	this.namespaces.put("tst", new NamespaceResource("-tst",this.tst_env));
+    	this.namespaces.put("int", new NamespaceResource("-int",this.int_env));
  
 	}
 	
 	public void setupNameWithAppName(String appName) {
 		this.namespaces.get("dev").setName(appName+"-dev");
-		//this.namespaces.get("tst").setName(appName+"-tst");
-		//this.namespaces.get("int").setName(appName+"-int");
+		this.namespaces.get("tst").setName(appName+"-tst");
+		this.namespaces.get("int").setName(appName+"-int");
 	}
 	
 	
