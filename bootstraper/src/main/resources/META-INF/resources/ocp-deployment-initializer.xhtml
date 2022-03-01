@@ -37,13 +37,13 @@
 	   		<h:panelGrid columns="3" >
 	   			<p:commandButton   icon="fa fa-fw fa-chevron-left" actionListener="#{viewInitializerBean.previousStep}"  update="@form"  style="margin:10px;background:#003b50;color:white" immediate="true" />
 	   			<p:steps activeIndex="#{viewInitializerBean.activeIndex}"  >
-	   				<p:menuitem value="Parametrization"/>	   				
-	   				<p:menuitem value="Distribute placeHolders"/>
-	   				<p:menuitem value="Mount Secrets/CM as ENV"/>
-	   				<p:menuitem value="Create - Mount Volumes"/>
-	   				<p:menuitem value="Exposition - RunAsUser"/>
-	   				<p:menuitem value="Generate Deployment"/>
-	   				<p:menuitem value="Maven Project" />
+	   				<p:menuitem value="Setup"/>	   				
+	   				<p:menuitem value="PlaceHolders"/>
+	   				<p:menuitem value="Secrets/CM"/>
+	   				<p:menuitem value="Volumes"/>
+	   				<p:menuitem value="Exposition"/>
+	   				<p:menuitem value="Resources"/>
+	   				<p:menuitem value="mvn Project" />
 	   			</p:steps>
 	   			<p:commandButton   icon="fa fa-fw fa-chevron-right" actionListener="#{viewInitializerBean.nextStep}"  update="@form" style="margin:10px;background:#003b50;color:white" />
 	   		</h:panelGrid>
