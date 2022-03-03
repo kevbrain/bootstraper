@@ -77,7 +77,7 @@
    				
 			    <p:tabView>
 			    	<p:tab title="Project Metadata">
-			    		<h:panelGrid columns="5">	 
+			    		<h:panelGrid columns="7">	 
 			    	
 						    		<h:panelGrid columns="2">	   			
 							   			<h:outputText value="Application Name"/>
@@ -126,6 +126,18 @@
 								            <f:selectItem itemLabel="11" itemValue="11"/>
 								            <f:selectItem itemLabel="8" itemValue="8"/>
 								        </p:selectOneButton>								        								     
+					    			</h:panelGrid>
+					    			<p:spacer height="10" width="100"></p:spacer>
+					    			<h:panelGrid columns="2">
+					    				<h:outputText value="Team Name"/>
+							   			<p:inputText value=""   style="width:200px;" >
+							   				
+							   			</p:inputText>	
+							   			<h:outputText value="ValueChain Name"/>
+							   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:200px;" >
+							   				
+							   			</p:inputText>	
+							   			
 					    			</h:panelGrid>
 					    			<p:spacer height="10" width="100"></p:spacer>
 					    			<p:panel header="Add Maven dependencies :" >
