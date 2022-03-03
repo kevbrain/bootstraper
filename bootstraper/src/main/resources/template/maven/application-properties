@@ -1,1 +1,3 @@
 # ${artifact} Application properties
+joinfaces.primefaces.theme=diamond-indigo-light
+joinfaces.primefaces.FONT_AWESOME=true
