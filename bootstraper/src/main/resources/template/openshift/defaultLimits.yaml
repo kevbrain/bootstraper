@@ -1,0 +1,14 @@
+kind: LimitRange
+apiVersion: v1
+metadata:
+  name: mem-limit-range
+  namespace: ${ocpNamespace}
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 512Mi
+      defaultRequest:
+        cpu: 200m
+        memory: 256Mi

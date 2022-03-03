@@ -1,0 +1,12 @@
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: quotas-project
+  namespace: ${ocpNamespace}
+spec:
+  hard:
+    limits.cpu: '2'
+    limits.memory: 2Gi
+    requests.cpu: '1'
+    requests.memory: 1Gi
+status:

@@ -88,6 +88,10 @@ public class TemplateGenerator {
     
     private final Template template_codeReady_devfile;
     
+    private final Template template_quotas_namespace;
+    
+    private final Template template_defaultLimits_namespace;
+    
     private TemplateResource appArgo;
     
     public List<TemplateResource> generatedResources = new ArrayList<>();
@@ -114,7 +118,8 @@ public class TemplateGenerator {
         template_scc = cfg.getTemplate("deployment-scc.yaml");
         template_pvc = cfg.getTemplate("deployment-pvc.yaml");        
         template_namespace= cfg.getTemplate("namespace.yaml");
-        
+        template_quotas_namespace = cfg.getTemplate("quotas.yaml");
+        template_defaultLimits_namespace = cfg.getTemplate("defaultLimits.yaml");
                                               
         // gitops argo
         cfg.setDirectoryForTemplateLoading(new File(pathTemplate+"//argocd"));
@@ -178,7 +183,11 @@ public class TemplateGenerator {
     	
     	// for all env
 	    TemplateResource namespace = new TemplateResource("NS-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_namespace),0,0,0);
+	    TemplateResource quotas = new TemplateResource("NS-Q-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_quotas_namespace),0,0,0);
+	    TemplateResource defaultLimits = new TemplateResource("NS-DL-"+model.getOcpNamespace()+".yml",generateResourceWithTemplate(model,template_defaultLimits_namespace),0,0,0);
 	    generatedResources.add(namespace); 
+	    generatedResources.add(quotas);
+	    generatedResources.add(defaultLimits);
     	
     	// only for dev
     	if (model.getEnv().equalsIgnoreCase("dev")) {
