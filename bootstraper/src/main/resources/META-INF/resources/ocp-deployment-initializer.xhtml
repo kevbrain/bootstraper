@@ -178,13 +178,15 @@
 							     <div class="p-col">
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Default Limits" >
-							    			<h:panelGrid columns="1">
-           									
-											     CPU <p:slider for="txt6,txt7" style="width: 400px" range="true" minValue="0" maxValue="3000"
-											                     />
+							    			<h:panelGrid columns="4">
+           										<h:outputLabel value="Cpu (m )"/>
+											    <p:slider for="txt6,txt7" style="width: 400px" range="true" minValue="0" maxValue="3000"/>
 										        
-										        <h:inputHidden id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
-										        <h:inputHidden id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
+										        <h:outputLabel value="Default Request"/>
+										        <h:inputText id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+										        
+										        <h:outputLabel value="Request"/>
+										        <h:inputText id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
 									        </h:panelGrid>
 									        
 							    		</p:panel>
