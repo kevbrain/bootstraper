@@ -13,24 +13,6 @@ import lombok.Setter;
 public class DeploymentModel extends TemplateModel{
 	
 	
-	public DeploymentModel() {
-		super();
-		configMaps = new ArrayList<>();
-		configMapsAsvol = new ArrayList<>();
-		emptyDirVolumes =new ArrayList<>();
-		persitentVolumes= new ArrayList<>();
-		secrets = new ArrayList<>();
-		routes = new ArrayList<>();
-		cmVolumes = new ArrayList<>();
-		claims = new ArrayList<>();
-		config = new HashMap<>();
-	    secret = new HashMap<>();
-	    nas =new ArrayList<>();
-	    serviceAccount = null;
-	    env="dev";
-	    
-	}
-
 	//private TemplateGenerator templateGenerator;
 	
 	private HashMap<String,String> config;
@@ -72,5 +54,27 @@ public class DeploymentModel extends TemplateModel{
 	private String env;
 	
 	private boolean joinfaces;
+	
+	private String teamName;
+	
+	private String valueChainName;
+	
+	public DeploymentModel() {
+		super();
+		configMaps = new ArrayList<>();
+		configMapsAsvol = new ArrayList<>();
+		emptyDirVolumes =new ArrayList<>();
+		persitentVolumes= new ArrayList<>();
+		secrets = new ArrayList<>();
+		routes = new ArrayList<>();
+		cmVolumes = new ArrayList<>();
+		claims = new ArrayList<>();
+		config = new HashMap<>();
+	    secret = new HashMap<>();
+	    nas =new ArrayList<>();
+	    serviceAccount = null;
+	    env="dev";
+	    
+	}
 
 }

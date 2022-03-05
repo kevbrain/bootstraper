@@ -198,6 +198,10 @@ public class ViewInitializerBean {
 	
 	private BootStraperResult bootStrapResult;
 	
+	private String teamName;
+	
+	private String valueChainName;
+	
 	
     @PostConstruct
     public void init()  {
