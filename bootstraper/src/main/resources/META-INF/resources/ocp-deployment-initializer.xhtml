@@ -139,7 +139,7 @@
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Owner - Sponsor" >
 								    		<h:panelGrid columns="2">	   
-							    				<h:outputText value="Team Name"/>
+							    				<h:outputText value="Team"/>
 							    				<p:selectOneMenu value="#{viewInitializerBean.teamName}" >
 							    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
 							    					<f:selectItem itemLabel="devops" itemValue="devops"/>
@@ -147,7 +147,7 @@
 							    					<f:selectItem itemLabel="erp" itemValue="erp"/>
 							    				</p:selectOneMenu>
 									   		
-									   			<h:outputText value="ValueChain Name"/>
+									   			<h:outputText value="Department"/>
 									   			<p:selectOneMenu value="#{viewInitializerBean.valueChainName}" >
 							    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
 							    					<f:selectItem itemLabel="idtm" itemValue="idtm"/>
@@ -179,9 +179,12 @@
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Default Limits" >
 							    			<h:panelGrid columns="1">
-	           									 <h:outputText id="displayRange" value="CPU milliCores"/>
+           									
 											     <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true" minValue="0" maxValue="3000"
-											                      />
+											                      displayTemplate="Between {min} and {max}"/>
+										        
+										        <h:inputHidden id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+										        <h:inputHidden id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
 									        </h:panelGrid>
 									        
 							    		</p:panel>
