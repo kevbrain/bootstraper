@@ -180,28 +180,36 @@
 							    		<p:panel header="Default Limits" >
 							    			<h:panelGrid columns="2">
            										<h:outputLabel value="CPU" style="font-weight: bold;"/>
-											    <p:slider for="dfreqcpu,reqcpu" style="width: 400px" range="true" step="100"  minValue="0" maxValue="3000"/>
+											    <p:slider for="dfreqcpu,reqcpu" style="width: 200px" range="true" step="100"  minValue="0" maxValue="3000"/>
 										        
 										        <h:outputLabel value="Min"/>
-										        <p:inputText id="dfreqcpu" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+										        <p:inputText id="dfreqcpu" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>mCpu
 										        
 										        <h:outputLabel value="Max"/>
-										        <p:inputText id="reqcpu" value="#{viewInitializerBean.limitRequestCpu}"/>
+										        <p:inputText id="reqcpu" value="#{viewInitializerBean.limitRequestCpu}"/>mCpu
 										        
 										        <h:outputLabel value="MEMORY" style="font-weight: bold;"/>
-										        <p:slider for="dfreqmem,reqmem" style="width: 400px" range="true" step="128"  minValue="0" maxValue="3000"/>
+										        <p:slider for="dfreqmem,reqmem" style="width: 200px" range="true" step="128"  minValue="0" maxValue="5120"/>
 										        
 										        <h:outputLabel value="Min"/>
-										        <p:inputText id="dfreqmem" value="#{viewInitializerBean.limitdefaultRequestMemory}"/>
+										        <p:inputText id="dfreqmem" value="#{viewInitializerBean.limitdefaultRequestMemory}"/>Mb
 										        
 										        <h:outputLabel value="Max"/>
-										        <p:inputText id="reqmem" value="#{viewInitializerBean.limitRequestMemory}"/>
+										        <p:inputText id="reqmem" value="#{viewInitializerBean.limitRequestMemory}"/>Mb
 										        
 									        </h:panelGrid>
 									        
 							    		</p:panel>
+							    	</div>							    								    							    	
+							    </div>
+							    
+							    <div class="p-col">
+							    	<div class="p-shadow-24">
+							    		<p:panel header="Quotas" >
+							    		</p:panel>
 							    	</div>
 							    </div>
+							    
 							</div>		
 										    						    	
 			    	</p:tab>
