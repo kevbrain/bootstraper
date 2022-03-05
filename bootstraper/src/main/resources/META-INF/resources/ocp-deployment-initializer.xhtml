@@ -88,8 +88,8 @@
 								   				<p:ajax event="change" listener="#{viewInitializerBean.newApp(viewInitializerBean.appName)}" update="@form" />
 								   			</p:inputText>								   						
 								   			
-								   			<h:outputText value="Environments"/>
-								   			<h:panelGrid>
+								   			<h:outputText value="Environments" rendered="false"/>
+								   			<h:panelGrid rendered="false">
 								   				<h:panelGrid columns="2">
 									   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['dev'].activate}" itemLabel="DEV" disabled="true">
 									   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('dev')}" immediate="true" update="@form"/>
@@ -133,54 +133,47 @@
 							    	</div>
 							    
 							    </div>
-							    <div class="p-col">2</div>
-							    <div class="p-col">3</div>
-							</div>		
-							
-			    		<h:panelGrid columns="7">	 
-									 			   
-						    		
-					    			<p:spacer height="10" width="100"></p:spacer>
-					    			<h:panelGrid columns="2">
-					    				<h:outputText value="Team Name"/>
-					    				<p:selectOneMenu value="#{viewInitializerBean.teamName}" >
-					    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
-					    					<f:selectItem itemLabel="devops" itemValue="devops"/>
-					    					<f:selectItem itemLabel="dms" itemValue="dms"/>
-					    					<f:selectItem itemLabel="erp" itemValue="erp"/>
-					    				</p:selectOneMenu>
-							   			
-							   			<h:outputText value="ValueChain Name"/>
-							   			<p:selectOneMenu value="#{viewInitializerBean.valueChainName}" >
-					    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
-					    					<f:selectItem itemLabel="idtm" itemValue="idtm"/>
-					    					<f:selectItem itemLabel="it" itemValue="it"/>					    				
-					    				</p:selectOneMenu>
-							   			<p:inputText value="#{viewInitializerBean.valueChainName}"   style="width:200px;" >
-							   				
-							   			</p:inputText>	
-							   			
-					    			</h:panelGrid>
-					    			<p:spacer height="10" width="100"></p:spacer>
-					    			<p:panel header="Add Maven dependencies :" >
+							    <div class="p-col">
+							    	<div class="p-shadow-24">
+							    		<div class="p-field">
+						    				<h:outputText value="Team Name"/>
+						    				<p:selectOneMenu value="#{viewInitializerBean.teamName}" >
+						    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
+						    					<f:selectItem itemLabel="devops" itemValue="devops"/>
+						    					<f:selectItem itemLabel="dms" itemValue="dms"/>
+						    					<f:selectItem itemLabel="erp" itemValue="erp"/>
+						    				</p:selectOneMenu>
+								   		</div>
+								   		<div class="p-field">
+								   			<h:outputText value="ValueChain Name"/>
+								   			<p:selectOneMenu value="#{viewInitializerBean.valueChainName}" >
+						    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
+						    					<f:selectItem itemLabel="idtm" itemValue="idtm"/>
+						    					<f:selectItem itemLabel="it" itemValue="it"/>					    				
+						    				</p:selectOneMenu>								   			
+							   			</div>					    			
+							    	</div>
+							    </div>
+							    <div class="p-col">
+							    	<div class="p-shadow-24">
+							    		<p:panel header="Add Maven dependencies :" >
 					    				
-						    			<h:panelGrid columns="1">
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.lombok}" itemLabel="Lombok"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.actuator}" itemLabel="Actuator"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.freemarker}" itemLabel="FreeMarker"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.sonar}" itemLabel="Sonar"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.web}" itemLabel="Web-starter"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.apiRest}" itemLabel="Api Rest"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.springIntegration}" itemLabel="Spring-Integration"/>
-							    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.joinfaces}" itemLabel="JoinFaces"/>
-				    			
-				    					</h:panelGrid>
-				    				</p:panel>
-				    				<p:spacer height="10" width="100"></p:spacer>
-				    				
-			    					
-					    </h:panelGrid>
-					    	
+							    			<h:panelGrid columns="1">
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.lombok}" itemLabel="Lombok"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.actuator}" itemLabel="Actuator"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.freemarker}" itemLabel="FreeMarker"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.sonar}" itemLabel="Sonar"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.web}" itemLabel="Web-starter"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.apiRest}" itemLabel="Api Rest"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.springIntegration}" itemLabel="Spring-Integration"/>
+								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.joinfaces}" itemLabel="JoinFaces"/>
+					    			
+					    					</h:panelGrid>
+					    				</p:panel>
+							    	</div>
+							    </div>
+							</div>		
+										    						    	
 			    	</p:tab>
 			    	
 			    	<p:tab title="GIT">
