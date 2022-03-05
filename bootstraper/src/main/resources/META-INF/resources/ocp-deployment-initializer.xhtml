@@ -178,13 +178,13 @@
 							     <div class="p-col">
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Default Limits / Quotas" >
-							    			<h:panelGrid columns="1" style="margin-bottom: 10px">
-           										 <h:outputText id="displayRange" value="CPU Limits DefaultRequest #{viewInitializerBean.limitdefaultRequestCpu} Request #{viewInitializerBean.limitRequestCpu}"/>
-										            <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true"
+							    			
+           									 <h:outputText id="displayRange" value="CPU #{viewInitializerBean.limitdefaultRequestCpu} Request #{viewInitializerBean.limitRequestCpu}"/>
+										     <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true" minValue="200" maxValue="3000"
 										                      displayTemplate="Between {min} and {max}"/>
-									        </h:panelGrid>
-									        <h:inputHidden id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
-									        <h:inputHidden id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
+									        
+									        <h:outputText id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+									        <h:outputText id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
 							    		</p:panel>
 							    	</div>
 							    </div>
