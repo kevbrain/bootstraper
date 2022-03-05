@@ -206,6 +206,26 @@
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Quotas" >
+								    		<h:panelGrid columns="2">
+	           										<h:outputLabel value="CPU (Cpu)" style="font-weight: bold;"/>
+												    <p:slider for="quotdfreqcpu,quotreqcpu" style="width: 200px" range="true" step="100"  minValue="0" maxValue="3000"/>
+											        
+											        <h:outputLabel value="Min"/>
+											        <p:inputText id="quotdfreqcpu" value="#{viewInitializerBean.quotadefaultRequestCpu}" width="30px;"/> 
+											        
+											        <h:outputLabel value="Max"/>
+											        <p:inputText id="quotreqcpu" value="#{viewInitializerBean.quotaRequestCpu}" width="30px;"/>
+											        
+											        <h:outputLabel value="MEMORY (Gb)" style="font-weight: bold;"/>
+											        <p:slider for="quotdfreqmem,quotreqmem" style="width: 200px" range="true" step="128"  minValue="0" maxValue="5120"/>
+											        
+											        <h:outputLabel value="Min"/>
+											        <p:inputText id="quotdfreqmem" value="#{viewInitializerBean.quotadefaultRequestMemory}" width="30px;"/>
+											        
+											        <h:outputLabel value="Max"/>
+											        <p:inputText id="quotreqmem" value="#{viewInitializerBean.quotaRequestMemory}" width="30px;"/>
+											        
+										        </h:panelGrid>
 							    		</p:panel>
 							    	</div>
 							    </div>

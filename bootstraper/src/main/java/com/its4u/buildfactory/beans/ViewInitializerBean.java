@@ -208,8 +208,15 @@ public class ViewInitializerBean {
 	
 	private int limitdefaultRequestMemory =256;
 	
-	private int limitRequestMemory = 512;
+	private int limitRequestMemory = 1024;
 	
+	private int quotadefaultRequestCpu =1;
+	
+	private int quotaRequestCpu = 2;
+	
+	private int quotadefaultRequestMemory =1;
+	
+	private int quotaRequestMemory = 2;
 	
     @PostConstruct
     public void init()  {
