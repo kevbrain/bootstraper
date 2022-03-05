@@ -77,15 +77,15 @@
    			<p:fieldset id="msconfig" legend="Setup" rendered="#{viewInitializerBean.activeIndex==0}">
    				
 			    <p:tabView>
-			    	<p:tab title="Metadatas">
+			    	<p:tab title="Project">
 			    	
 			    			<div class="p-grid">
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Project Metadata" >
+							    		<p:panel header="Properties" >
 										    	<h:panelGrid columns="2">	   			
-										   			<h:outputText value="Application Name"/>
-										   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:400px;" >
+										   			<h:outputText value="Name"/>
+										   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:500px;" >
 										   				<p:ajax event="change" listener="#{viewInitializerBean.newApp(viewInitializerBean.appName)}" update="@form" />
 										   			</p:inputText>								   						
 										   			
@@ -177,14 +177,13 @@
 							    </div>
 							     <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Default Limits / Quotas" >
-							    			
-           									 <h:outputText id="displayRange" value="CPU #{viewInitializerBean.limitdefaultRequestCpu} Request #{viewInitializerBean.limitRequestCpu}"/>
-										     <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true" minValue="200" maxValue="3000"
-										                      displayTemplate="Between {min} and {max}"/>
+							    		<p:panel header="Default Limits" >
+							    			<h:panelGrid columns="1">
+	           									 <h:outputText id="displayRange" value="CPU milliCores"/>
+											     <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true" minValue="0" maxValue="3000"
+											                      />
+									        </h:panelGrid>
 									        
-									        <h:outputText id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
-									        <h:outputText id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
 							    		</p:panel>
 							    	</div>
 							    </div>
