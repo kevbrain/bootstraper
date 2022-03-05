@@ -74,15 +74,15 @@
 				    				
    			</p:panel>
    			
-   			<p:fieldset id="msconfig" legend="Application Metadata" rendered="#{viewInitializerBean.activeIndex==0}">
+   			<p:fieldset id="msconfig" legend="Setup" rendered="#{viewInitializerBean.activeIndex==0}">
    				
 			    <p:tabView>
-			    	<p:tab title="Project Metadata">
+			    	<p:tab title="Metadatas">
 			    	
 			    			<div class="p-grid">
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Project Metadata :" >
+							    		<p:panel header="Project Metadata" >
 										    	<h:panelGrid columns="2">	   			
 										   			<h:outputText value="Application Name"/>
 										   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:400px;" >
@@ -137,8 +137,8 @@
 							    </div>
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Project owner :" >
-								    		<div class="p-field">
+							    		<p:panel header="Owner - Sponsor" >
+								    		<h:panelGrid columns="2">	   
 							    				<h:outputText value="Team Name"/>
 							    				<p:selectOneMenu value="#{viewInitializerBean.teamName}" >
 							    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
@@ -146,21 +146,20 @@
 							    					<f:selectItem itemLabel="dms" itemValue="dms"/>
 							    					<f:selectItem itemLabel="erp" itemValue="erp"/>
 							    				</p:selectOneMenu>
-									   		</div>
-									   		<div class="p-field">
+									   		
 									   			<h:outputText value="ValueChain Name"/>
 									   			<p:selectOneMenu value="#{viewInitializerBean.valueChainName}" >
 							    					<f:selectItem itemLabel="Select one" itemValue=""/>					    					
 							    					<f:selectItem itemLabel="idtm" itemValue="idtm"/>
 							    					<f:selectItem itemLabel="it" itemValue="it"/>					    				
 							    				</p:selectOneMenu>								   			
-								   			</div>	
+								   			</h:panelGrid>
 								   		</p:panel>				    			
 							    	</div>
 							    </div>
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Add Maven dependencies :" >
+							    		<p:panel header="Maven dependencies " >
 					    				
 							    			<h:panelGrid columns="1">
 								    			<p:selectBooleanCheckbox value="#{mavenInitializerBean.lombok}" itemLabel="Lombok"/>
@@ -174,6 +173,19 @@
 					    			
 					    					</h:panelGrid>
 					    				</p:panel>
+							    	</div>
+							    </div>
+							     <div class="p-col">
+							    	<div class="p-shadow-24">
+							    		<p:panel header="Default Limits / Quotas" >
+							    			<h:panelGrid columns="1" style="margin-bottom: 10px">
+           										 <h:outputText id="displayRange" value="CPU Limits DefaultRequest #{viewInitializerBean.limitdefaultRequestCpu} Request #{viewInitializerBean.limitRequestCpu}"/>
+										            <p:slider for="txt6,txt7" display="displayRange" style="width: 400px" range="true"
+										                      displayTemplate="Between {min} and {max}"/>
+									        </h:panelGrid>
+									        <h:inputHidden id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+									        <h:inputHidden id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
+							    		</p:panel>
 							    	</div>
 							    </div>
 							</div>		

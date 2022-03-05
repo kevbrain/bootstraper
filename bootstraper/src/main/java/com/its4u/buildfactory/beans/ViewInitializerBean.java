@@ -202,6 +202,10 @@ public class ViewInitializerBean {
 	
 	private String valueChainName;
 	
+	private int limitdefaultRequestCpu =200;
+	
+	private int limitRequestCpu = 500;
+	
 	
     @PostConstruct
     public void init()  {
