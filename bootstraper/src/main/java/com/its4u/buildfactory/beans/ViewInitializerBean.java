@@ -206,6 +206,10 @@ public class ViewInitializerBean {
 	
 	private int limitRequestCpu = 500;
 	
+	private int limitdefaultRequestMemory =256;
+	
+	private int limitRequestMemory = 512;
+	
 	
     @PostConstruct
     public void init()  {

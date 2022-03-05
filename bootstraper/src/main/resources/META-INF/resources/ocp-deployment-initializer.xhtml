@@ -179,14 +179,24 @@
 							    	<div class="p-shadow-24">
 							    		<p:panel header="Default Limits" >
 							    			<h:panelGrid columns="2">
-           										<h:outputLabel value="Cpu (m )"/>
-											    <p:slider for="txt6,txt7" style="width: 400px" range="true" step="100"  minValue="0" maxValue="3000"/>
+           										<h:outputLabel value="CPU" style="font-weight: bold;"/>
+											    <p:slider for="dfreqcpu,reqcpu" style="width: 400px" range="true" step="100"  minValue="0" maxValue="3000"/>
 										        
-										        <h:outputLabel value="Default Request"/>
-										        <p:inputText id="txt6" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
+										        <h:outputLabel value="Min"/>
+										        <p:inputText id="dfreqcpu" value="#{viewInitializerBean.limitdefaultRequestCpu}"/>
 										        
-										        <h:outputLabel value="Request"/>
-										        <p:inputText id="txt7" value="#{viewInitializerBean.limitRequestCpu}"/>
+										        <h:outputLabel value="Max"/>
+										        <p:inputText id="reqcpu" value="#{viewInitializerBean.limitRequestCpu}"/>
+										        
+										        <h:outputLabel value="MEMORY" style="font-weight: bold;"/>
+										        <p:slider for="dfreqmem,reqmem" style="width: 400px" range="true" step="128"  minValue="0" maxValue="3000"/>
+										        
+										        <h:outputLabel value="Min"/>
+										        <p:inputText id="dfreqmem" value="#{viewInitializerBean.limitdefaultRequestMemory}"/>
+										        
+										        <h:outputLabel value="Max"/>
+										        <p:inputText id="reqmem" value="#{viewInitializerBean.limitRequestMemory}"/>
+										        
 									        </h:panelGrid>
 									        
 							    		</p:panel>
