@@ -80,61 +80,66 @@
 			    	<p:tab title="Project Metadata">
 			    	
 			    			<div class="p-grid">
-							    <div class="p-col">1</div>
+							    <div class="p-col">
+							    	<div class="p-shadow-24">
+								    	<h:panelGrid columns="2">	   			
+								   			<h:outputText value="Application Name"/>
+								   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:400px;" >
+								   				<p:ajax event="change" listener="#{viewInitializerBean.newApp(viewInitializerBean.appName)}" update="@form" />
+								   			</p:inputText>								   						
+								   			
+								   			<h:outputText value="Environments"/>
+								   			<h:panelGrid>
+								   				<h:panelGrid columns="2">
+									   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['dev'].activate}" itemLabel="DEV" disabled="true">
+									   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('dev')}" immediate="true" update="@form"/>
+									   				</p:selectBooleanCheckbox>
+									   				<p:inputText value="#{ocpInitializerBean.namespaces['dev'].name}" style="width:400px;"/>
+								   				</h:panelGrid>
+								   				<h:panelGrid columns="2">
+									   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['tst'].activate}" itemLabel="TST">
+									   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('tst')}" immediate="true" update="@form"/>
+									   				</p:selectBooleanCheckbox>
+									   				<p:inputText value="#{ocpInitializerBean.namespaces['tst'].name}" style="width:400px;"/>
+									   			</h:panelGrid>
+									   			<h:panelGrid columns="2">
+									   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['int'].activate}" itemLabel="INT">
+									   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('int')}" immediate="true" update="@form"/>
+									   				</p:selectBooleanCheckbox>
+									   				<p:inputText value="#{ocpInitializerBean.namespaces['int'].name}" style="width:400px;"/>
+									   			</h:panelGrid>
+								   			
+								   			</h:panelGrid>
+								   			
+								   			
+								   			<h:outputText value="Group" />
+								   			<p:inputText value="#{mavenInitializerBean.group}"  style="width:500px;" >
+								   				<p:ajax event="change" update="@form" />
+								   			</p:inputText>	
+								   			
+								   			<h:outputText value="Artifact" />
+								   			<p:inputText value="#{mavenInitializerBean.artifact}"  style="width:500px;"/>
+								   			
+								   			<h:outputText value="Description"/>
+								   			<p:inputText value="#{mavenInitializerBean.description}"  style="width:500px;"/>
+								   				   			
+								   			<h:outputText value="Java"/>
+								   			<p:selectOneButton value="#{mavenInitializerBean.java}">
+									            <f:selectItem itemLabel="16" itemValue="16"/>
+									            <f:selectItem itemLabel="11" itemValue="11"/>
+									            <f:selectItem itemLabel="8" itemValue="8"/>
+									        </p:selectOneButton>								        								     
+						    			</h:panelGrid>
+							    	</div>
+							    
+							    </div>
 							    <div class="p-col">2</div>
 							    <div class="p-col">3</div>
 							</div>		
 							
 			    		<h:panelGrid columns="7">	 
 									 			   
-						    		<h:panelGrid columns="2">	   			
-							   			<h:outputText value="Application Name"/>
-							   			<p:inputText value="#{viewInitializerBean.appName}"   style="width:400px;" >
-							   				<p:ajax event="change" listener="#{viewInitializerBean.newApp(viewInitializerBean.appName)}" update="@form" />
-							   			</p:inputText>								   						
-							   			
-							   			<h:outputText value="Environments"/>
-							   			<h:panelGrid>
-							   				<h:panelGrid columns="2">
-								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['dev'].activate}" itemLabel="DEV" disabled="true">
-								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('dev')}" immediate="true" update="@form"/>
-								   				</p:selectBooleanCheckbox>
-								   				<p:inputText value="#{ocpInitializerBean.namespaces['dev'].name}" style="width:400px;"/>
-							   				</h:panelGrid>
-							   				<h:panelGrid columns="2">
-								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['tst'].activate}" itemLabel="TST">
-								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('tst')}" immediate="true" update="@form"/>
-								   				</p:selectBooleanCheckbox>
-								   				<p:inputText value="#{ocpInitializerBean.namespaces['tst'].name}" style="width:400px;"/>
-								   			</h:panelGrid>
-								   			<h:panelGrid columns="2">
-								   				<p:selectBooleanCheckbox value="#{ocpInitializerBean.namespaces['int'].activate}" itemLabel="INT">
-								   					<p:ajax event="change" listener="#{viewInitializerBean.handleEnv('int')}" immediate="true" update="@form"/>
-								   				</p:selectBooleanCheckbox>
-								   				<p:inputText value="#{ocpInitializerBean.namespaces['int'].name}" style="width:400px;"/>
-								   			</h:panelGrid>
-							   			
-							   			</h:panelGrid>
-							   			
-							   			
-							   			<h:outputText value="Group" />
-							   			<p:inputText value="#{mavenInitializerBean.group}"  style="width:500px;" >
-							   				<p:ajax event="change" update="@form" />
-							   			</p:inputText>	
-							   			
-							   			<h:outputText value="Artifact" />
-							   			<p:inputText value="#{mavenInitializerBean.artifact}"  style="width:500px;"/>
-							   			
-							   			<h:outputText value="Description"/>
-							   			<p:inputText value="#{mavenInitializerBean.description}"  style="width:500px;"/>
-							   				   			
-							   			<h:outputText value="Java"/>
-							   			<p:selectOneButton value="#{mavenInitializerBean.java}">
-								            <f:selectItem itemLabel="16" itemValue="16"/>
-								            <f:selectItem itemLabel="11" itemValue="11"/>
-								            <f:selectItem itemLabel="8" itemValue="8"/>
-								        </p:selectOneButton>								        								     
-					    			</h:panelGrid>
+						    		
 					    			<p:spacer height="10" width="100"></p:spacer>
 					    			<h:panelGrid columns="2">
 					    				<h:outputText value="Team Name"/>
