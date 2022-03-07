@@ -54,7 +54,7 @@
 				    	<p:commandButton value="Apply and create Project"  actionListener="#{viewInitializerBean.createPlaceHolderProject}" 
 				    		onclick="PF('dlg0').show()" oncomplete="PF('dlg0').hide();PF('dlgLog').show();"
 				    		update="growl" style="margin:10px;background:#003b50;color:white" disabled="#{viewInitializerBean.disablePublish}"/>
-				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()"/>
+				    	<p:commandButton value="Logs" onclick="PF('dlg1').show()" style="margin:10px;" />
 				    	<p:commandButton value="Report" oncomplete="PF('dlgReportExecution').show()" update="fgiturl,fplaceholderurl,fcodereadyurl,focpurl"/>
 			    </div>
    			
@@ -177,7 +177,7 @@
 							    </div>
 							     <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Default Limits" >
+							    		<p:panel header="Pod Default Limits" >
 							    			<h:panelGrid columns="2">
            										<h:outputLabel value="CPU (mCpu)" style="font-weight: bold;"/>
 											    <p:slider for="dfreqcpu,reqcpu" style="width: 200px" range="true" step="100"  minValue="0" maxValue="3000"/>
@@ -205,7 +205,7 @@
 							    
 							    <div class="p-col">
 							    	<div class="p-shadow-24">
-							    		<p:panel header="Quotas" >
+							    		<p:panel header="Project Quotas" >
 								    		<h:panelGrid columns="2">
 	           										<h:outputLabel value="CPU (Cpu)" style="font-weight: bold;"/>
 												    <p:slider for="quotdfreqcpu,quotreqcpu" style="width: 200px" range="true" step="1"  minValue="0" maxValue="3"/>
