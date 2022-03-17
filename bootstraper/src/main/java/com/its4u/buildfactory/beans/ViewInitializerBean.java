@@ -661,6 +661,8 @@ public class ViewInitializerBean {
     	model.setOcpNamespace(ocpInitializerBean.getNamespaces().get(env).getName());
     	model.setOcpRegistry(ocpInitializerBean.getRegistry());
     	model.setJoinfaces(mavenInitializerBean.isJoinfaces());
+    	model.setTeamName(teamName);
+    	model.setValueChainName(valueChainName);
       	
     	if (runAsUser) {    		
 	    	model.setServiceAccount(new ServiceAccount(appName+"-sa"));    	

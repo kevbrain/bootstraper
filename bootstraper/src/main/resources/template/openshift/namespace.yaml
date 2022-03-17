@@ -2,6 +2,10 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ${ocpNamespace}
+  labels:
+    its4u.com/env: dev
+    its4u.com/team: ${teamName}
+    its4u.com/value-chain: ${valueChainName}
   annotations:
       openshift.io/requester: OCP BootStrapper
 spec:
