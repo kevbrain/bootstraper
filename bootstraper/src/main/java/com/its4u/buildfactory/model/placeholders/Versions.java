@@ -14,9 +14,7 @@ public class Versions implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		
-		private String version;
-		
-		private String projectId;
+		private VersionsId versionsid;
 		
 		@JsonIgnore
 	    private Project project;
@@ -24,38 +22,11 @@ public class Versions implements Serializable {
 		public Versions() {
 			super();
 		}
-		
-		
 
-		public Versions(String version, Project project) {
+		public Versions(com.its4u.buildfactory.model.placeholders.VersionsId versionsid, Project project) {
 			super();
-			this.version = version;
+			this.versionsid = versionsid;
 			this.project = project;
 		}
-
-
-
-		public Versions(String version, String projectId) {
-			super();
-			this.version = version;
-			this.projectId = projectId;
-		}
-
-
-
-		public Versions(String version) {
-			super();
-			this.version = version;
-		}
-
-
-
-		public Versions(String version, String projectId, Project project) {
-			super();
-			this.version = version;
-			this.projectId = projectId;
-			this.project = project;
-		}
-
-		
+				
 }

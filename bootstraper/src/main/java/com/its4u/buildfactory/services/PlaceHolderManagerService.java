@@ -11,6 +11,7 @@ import com.its4u.buildfactory.model.placeholders.PlaceHolderId;
 import com.its4u.buildfactory.model.placeholders.PlaceHolders;
 import com.its4u.buildfactory.model.placeholders.Project;
 import com.its4u.buildfactory.model.placeholders.Versions;
+import com.its4u.buildfactory.model.placeholders.VersionsId;
 import com.its4u.buildfactory.ocp.resources.ConfigMap;
 import com.its4u.buildfactory.ocp.resources.NamespaceResource;
 import com.its4u.buildfactory.ocp.resources.Secrets;
@@ -27,7 +28,7 @@ public class PlaceHolderManagerService {
 		Project project = new Project(projectName, gitURl, "Kevyn");
 		
 		List<Versions> versions = new ArrayList<Versions>();
-		versions.add(new Versions("0.0.1-SNAPSHOT",project.getProject_Id(),project));
+		versions.add(new Versions(new VersionsId(project.getProject_Id(),"0.0.1-SNAPSHOT"),project));
 		project.setVersions(versions);
 		
 		List<Environments> envsProject =  new ArrayList<>();

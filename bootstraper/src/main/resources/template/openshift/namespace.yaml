@@ -4,8 +4,12 @@ metadata:
   name: ${ocpNamespace}
   labels:
     its4u.com/env: dev
+<#if (teamName)?has_content>
     its4u.com/team: ${teamName}
+</#if>
+<#if (valueChainName)?has_content>
     its4u.com/value-chain: ${valueChainName}
+</#if>
   annotations:
       openshift.io/requester: OCP BootStrapper
 spec:
