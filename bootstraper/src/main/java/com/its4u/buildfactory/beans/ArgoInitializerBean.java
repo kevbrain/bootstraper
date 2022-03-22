@@ -15,6 +15,7 @@ import lombok.Data;
 @Component
 public class ArgoInitializerBean {
 	
+	
 	@Value("${argo.server}")
 	private String argoServer;
 

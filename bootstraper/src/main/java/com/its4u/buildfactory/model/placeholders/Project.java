@@ -6,7 +6,6 @@ import java.util.List;
 
 import lombok.Data;
 
-@Data
 
 public class Project implements Serializable{
 	
@@ -46,5 +45,63 @@ public class Project implements Serializable{
 	public String toString() {
 		return project_Id ;
 	}
+
+	public String getProject_Id() {
+		return project_Id;
+	}
+
+	public void setProject_Id(String project_Id) {
+		this.project_Id = project_Id;
+	}
+
+	public String getGitUrl() {
+		return gitUrl!=null?gitUrl:"";
+	}
+
+	public void setGitUrl(String gitUrl) {
+		this.gitUrl = gitUrl;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public String getTeam() {
+		return team!=null?team:"";
+	}
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+	public String getValueChain() {
+		return valueChain!=null?valueChain:"";
+	}
+
+	public void setValueChain(String valueChain) {
+		this.valueChain = valueChain;
+	}
+
+	public List<Environments> getEnvironments() {
+		return environments;
+	}
+
+	public void setEnvironments(List<Environments> environments) {
+		this.environments = environments;
+	}
+
+	public List<Versions> getVersions() {
+		return versions;
+	}
+
+	public void setVersions(List<Versions> versions) {
+		this.versions = versions;
+	}
+	
+	
 	
 }
