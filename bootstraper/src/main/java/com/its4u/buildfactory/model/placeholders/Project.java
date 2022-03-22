@@ -18,6 +18,10 @@ public class Project implements Serializable{
 	private String gitUrl;
 	
 	private String owner;
+	
+	private String team;
+	
+	private String valueChain;
 
 	private List<Environments> environments;
 	
@@ -27,12 +31,14 @@ public class Project implements Serializable{
 		super();
 	}
 
-	public Project(String projectId, String gitUrl, String owner) {
+	public Project(String projectId, String gitUrl, String owner, String team, String valueChain) {
 		
 		super();
 		this.project_Id = projectId;
 		this.gitUrl = gitUrl;
 		this.owner = owner;
+		this.team = team;
+		this.valueChain = valueChain;
 		System.out.println("New project placeholder : "+projectId+" "+gitUrl+" "+owner);
 	}
 

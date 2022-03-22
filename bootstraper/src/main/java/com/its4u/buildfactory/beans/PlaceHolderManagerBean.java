@@ -43,7 +43,8 @@ public class PlaceHolderManagerBean {
 	
 	public void createPlaceHolderProject(String appName,List<ConfigMap> cms,List<Secrets> secrets,
 										 String gitOpsRepo, String gitOpsAppsRepo, String argoProj,
-										 String argoServer, String argoUser, String argoPassword) {
+										 String argoServer, String argoUser, String argoPassword,
+										 String team, String valueChain) {
 		
 		pollView.log("create PlaceHolder Project : "+appName);
 		String gitUrl = gitInitializerBean.getGitUrlPrefix()+appName+".git";
@@ -58,7 +59,9 @@ public class PlaceHolderManagerBean {
 				argoProj,
 				argoServer,
 				argoUser,
-				argoPassword);
+				argoPassword,
+				team,
+				valueChain);
 		
 		System.out.println(myProject.getProject_Id()+ " created with success !");
 		ObjectMapper mapper = new ObjectMapper();
