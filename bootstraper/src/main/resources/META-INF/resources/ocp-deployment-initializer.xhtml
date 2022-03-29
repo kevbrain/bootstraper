@@ -698,7 +698,10 @@
 							<p:spacer rendered="#{vol.type=='Persistent'}" width="1"/>
 							<h:outputText value="StorageClass" rendered="#{vol.type=='Persistent'}"/>
 							<p:selectOneMenu  rendered="#{vol.type=='Persistent'}" value="#{vol.claim.storageClassName}">
-								<f:selectItem itemLabel="managed-nfs-storage" itemValue="managed-nfs-storage"/>
+								<f:selectItem itemLabel="ocs-storagecluster-cephfs" itemValue="ocs-storagecluster-cephfs"/>
+								<f:selectItem itemLabel="ocs-storagecluster-ceph-rbd" itemValue="ocs-storagecluster-ceph-rbd"/>
+								<f:selectItem itemLabel="ocs-storagecluster-ceph-rgw" itemValue="ocs-storagecluster-ceph-rgw"/>
+								<f:selectItem itemLabel="openshift-storage.noobaa.io" itemValue="openshift-storage.noobaa.io"/>
 								<p:ajax event="change" update="panelVol" ></p:ajax>									
 							</p:selectOneMenu>
 							
