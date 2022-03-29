@@ -33,7 +33,7 @@ supplementalGroups:
    - min: ${userGid}
      max: ${userGid}
 users:
-- system:serviceaccount:${appName}-{{bil.environment}}:${serviceAccount.name}
+- system:serviceaccount:${appName}-{{ocp.environment}}:${serviceAccount.name}
 volumes:
 - configMap
 - downwardAPI
