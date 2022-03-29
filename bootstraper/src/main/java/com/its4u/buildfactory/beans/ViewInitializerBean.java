@@ -437,7 +437,7 @@ public class ViewInitializerBean {
     public void handleEvent(Volumes vol) {
     	if (vol.getType().equalsIgnoreCase("Persistent")) {
     		this.newConfigMapVol=null;
-    		PersistentVolumeClaim pvc = new PersistentVolumeClaim(vol.getName()+"_claim");
+    		PersistentVolumeClaim pvc = new PersistentVolumeClaim(vol.getName()+"-claim");
     		pvc.setGbStorage(2);
     		pvc.setAccessModes("ReadWriteMany");
     		pvc.setStorageClassName("managed-nfs-storage");
