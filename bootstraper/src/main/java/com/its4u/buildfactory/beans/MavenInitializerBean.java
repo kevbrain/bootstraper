@@ -103,7 +103,7 @@ public class MavenInitializerBean {
 		try {
 			generateResources();
 		} catch (IOException | TemplateException e) {
-			e.printStackTrace();
+
 		}
 	}
 	

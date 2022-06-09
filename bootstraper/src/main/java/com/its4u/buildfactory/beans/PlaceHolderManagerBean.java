@@ -70,9 +70,9 @@ public class PlaceHolderManagerBean {
 			postProjectToPlaceHolderManager(jsonProject);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Placeholder created"));
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+
 		} catch (IOException e) {
-			e.printStackTrace();
+
 		}
 		
 	}
@@ -89,7 +89,7 @@ public class PlaceHolderManagerBean {
 			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class PlaceHolderManagerBean {
 			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}	
 	}
 	
@@ -118,7 +118,7 @@ public class PlaceHolderManagerBean {
 			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}		
 	}
 	
@@ -133,7 +133,7 @@ public class PlaceHolderManagerBean {
 			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}	
 	}
 	

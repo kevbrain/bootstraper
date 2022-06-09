@@ -62,7 +62,6 @@ public class CodeReadyWorspaceManagerBean {
 			return response.getBody().getObject().getString("access_token");
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return null;
 	}
@@ -85,7 +84,6 @@ public class CodeReadyWorspaceManagerBean {
 			System.out.println(response.getBody());
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

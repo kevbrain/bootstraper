@@ -44,12 +44,12 @@
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 	</dependency>
  </#if>
- <#if (web)>
+
 	<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
 	</dependency>
-</#if>
+
 <#if (joinfaces)> 	
     <dependency>
       		<groupId>org.joinfaces</groupId>

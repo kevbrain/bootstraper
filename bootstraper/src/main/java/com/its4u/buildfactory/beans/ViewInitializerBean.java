@@ -328,7 +328,7 @@ public class ViewInitializerBean {
 			}
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
     	    	
     	this.secrets.add(commonSecret);
@@ -886,7 +886,7 @@ public class ViewInitializerBean {
 			gitInitializerBean.createRepo(appName,ocpInitializerBean.getNamespaces().get("dev").getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
     	
     	System.out.println("Git reposiroties created ....");    	
@@ -911,7 +911,7 @@ public class ViewInitializerBean {
     		TimeUnit.SECONDS.sleep(3);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
     	System.out.println("Start to update conf cluster ...."); 
     	pollView.log("Start to apply conf cluster ....");
@@ -923,14 +923,14 @@ public class ViewInitializerBean {
     		TimeUnit.SECONDS.sleep(30);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
     	pollView.log("Start to apply conf application ....");
     	try {
 			placeHolderManagerBean.applyConf(appName);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
     	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	System.out.println("Project bootstraped with success ...."); 
@@ -942,14 +942,14 @@ public class ViewInitializerBean {
     		TimeUnit.SECONDS.sleep(60);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
     	System.out.println("Start Pipeline ....");
     	try {
 			tektonManagerBean.startPipelineExecution(appName,ocpInitializerBean.getNamespaces().get("dev").getName());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}    	
     	pollView.log("Started Build Pipeline on OCP....");
     	System.out.println("Project build pipeline launched");
@@ -958,7 +958,7 @@ public class ViewInitializerBean {
     	try {
     		codeReadyWorspaceManagerBean.createWorkspace(appName);
     	} catch (Exception e) {
-    		e.printStackTrace();
+    		
     	}
     	pollView.log("Workspace in codeReady created....");
     	

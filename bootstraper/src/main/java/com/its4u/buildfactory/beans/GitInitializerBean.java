@@ -294,7 +294,7 @@ public class GitInitializerBean {
 			    
 			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 	
@@ -309,7 +309,7 @@ public class GitInitializerBean {
 				Files.walkFileTree(pathOrigin, new CopyDir(pathOrigin, pathDestination));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
 	    		    
 	}
@@ -326,7 +326,6 @@ public class GitInitializerBean {
 				Files.copy(pathSource, targetFile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -362,7 +361,7 @@ public class GitInitializerBean {
 				pollView.log("WebHook created with urlWebHook");
 				System.out.println("*** WebHook created with "+urlWebHook);
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 	
@@ -392,7 +391,7 @@ public class GitInitializerBean {
 					
 				}
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 }
