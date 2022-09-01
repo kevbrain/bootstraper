@@ -13,6 +13,7 @@ public class OcpDeploymentInitializer {
 		SpringApplication app = new SpringApplication(OcpDeploymentInitializer.class);
 		app.setBannerMode(Banner.Mode.CONSOLE);
         app.run();	
+        
 	}
 	
 	
