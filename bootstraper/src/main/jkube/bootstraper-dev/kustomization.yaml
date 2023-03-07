@@ -1,7 +1,6 @@
 resources:
 - namespace-dev.yml
 - Deployment-dev.yml
-- ConfigMaps-dev.yml
 - Secrets-dev.yml
 - Service-dev.yml
 - mavensetting-cm-dev.yml
