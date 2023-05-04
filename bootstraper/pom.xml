@@ -145,8 +145,8 @@
                 <configuration>
                     <allowInsecureRegistries>true</allowInsecureRegistries>
                     <from>
-                        <image>image-registry.openshift-image-registry.svc.cluster.local:5000/openshift/java:11</image>
-                    </from>
+                        <image>image-registry.openshift-image-registry.svc.cluster.local:5000/openshift/java:latest</image>
+                   </from>
                     <to>
                         <image>image-registry.openshift-image-registry.svc.cluster.local:5000/bootstraper-dev/bootstraper</image>
                         <tags>
