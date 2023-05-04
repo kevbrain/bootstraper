@@ -85,17 +85,17 @@ public class MavenInitializerBean {
 	
 	private MavenModel model;
 	
-	private TreeNode root;
+	private TreeNode<ProjectArborescenceItem> root;
 	
-	private TreeNode jkube;
+	private TreeNode<ProjectArborescenceItem> jkube;
 	
-	private TreeNode argo;
+	private TreeNode<ProjectArborescenceItem> argo;
 	
-	private TreeNode argoApplications;
+	private TreeNode<ProjectArborescenceItem> argoApplications;
 	
-	private TreeNode argoNamespaces;
+	private TreeNode<ProjectArborescenceItem> argoNamespaces;
 	
-	private TreeNode selectedNode;
+	private TreeNode<?> selectedNode;
 	
 	
 	public void handleNewMavenProject() {
@@ -107,6 +107,7 @@ public class MavenInitializerBean {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void generateResources() throws IOException, TemplateException {
 	  	logger.info("Generate NEW Maven TEMPLATE for : ");
     	this.generator = new TemplateGenerator(pathTemplate);
@@ -187,7 +188,7 @@ public class MavenInitializerBean {
 	
 	public void onNodeSelect(NodeSelectEvent event) {
 		System.out.println("nodeSelected "+event.getTreeNode().getClass());
-		DefaultTreeNode node = (DefaultTreeNode) event.getTreeNode();
+		DefaultTreeNode<?> node = (DefaultTreeNode<?>) event.getTreeNode();
 		dialogBean.setHeader("No available");
 		dialogBean.setContent("No render available");
 		if (node.getData() instanceof ProjectArborescenceItem) {

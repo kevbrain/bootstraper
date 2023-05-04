@@ -42,6 +42,8 @@ import org.springframework.stereotype.Component;
 import com.its4u.buildfactory.maven.resources.ProjectArborescenceItem;
 import com.its4u.buildfactory.utils.CopyDir;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import lombok.Data;
 
 @Data
@@ -292,7 +294,7 @@ public class GitInitializerBean {
 			    pollView.log("Git OPS Project updated");
 			    System.out.println("APPS deploy created");
 			    
-//			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
 
 		}
@@ -385,9 +387,10 @@ public class GitInitializerBean {
 							path =path + "/"+item.getName();
 						}
 						/*
-						for (TreeNode childNode: node.getChildren()) {
+						for (TreeNode<?> childNode: node.getChildren()) {
 							readNodeMavenProjectAndCreateArtifact(childNode,path);
-						}*/
+						}
+						*/
 					}
 					
 				}

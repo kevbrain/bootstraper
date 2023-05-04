@@ -60,12 +60,13 @@ import com.its4u.buildfactory.ocp.resources.TemplateResource;
 import com.its4u.buildfactory.ocp.resources.Volumes;
 
 import freemarker.template.TemplateException;
+import jakarta.faces.view.ViewScoped;
 import lombok.Data;
 
 
 @Data
 @Component
-//@ViewScoped
+@ViewScoped
 
 public class ViewInitializerBean {
 	
