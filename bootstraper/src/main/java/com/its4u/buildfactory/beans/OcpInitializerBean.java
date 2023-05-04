@@ -4,7 +4,7 @@ package com.its4u.buildfactory.beans;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
@@ -56,7 +56,7 @@ public class OcpInitializerBean {
 	
 	
 	
-	@PostConstruct
+//	@PostConstruct
 	public void init() {
     	this.namespaces = new HashMap<String, NamespaceResource>();
     	this.namespaces.put("dev", new NamespaceResource("-dev",this.dev_env));

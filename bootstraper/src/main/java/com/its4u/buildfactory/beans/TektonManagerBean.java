@@ -1,8 +1,8 @@
 package com.its4u.buildfactory.beans;
 
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -50,7 +50,7 @@ public class TektonManagerBean {
 			e.printStackTrace();
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Tekton build pipeline launched"));
+		//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Tekton build pipeline launched"));
 		
 	}
 }

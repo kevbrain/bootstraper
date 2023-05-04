@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.context.FacesContext;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
@@ -267,7 +267,7 @@ public class GitInitializerBean {
 
 			    System.out.println("Git Project created");	
 			    pollView.log("Git DEV Project created");	
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
+
 			    pollView.log("Wait 3s ....");	
 			    System.out.println("Wait 3s ....");
 			    try {
@@ -277,7 +277,7 @@ public class GitInitializerBean {
 					e1.printStackTrace();
 				}
 			    createArgoApp();
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
+
 			    System.out.println("Argo application created");
 			    pollView.log("Argo application created");
 			    System.out.println("Wait 3s ....");
@@ -292,7 +292,7 @@ public class GitInitializerBean {
 			    pollView.log("Git OPS Project updated");
 			    System.out.println("APPS deploy created");
 			    
-			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
+//			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project created in GitOpsApp"));
 		} catch (Exception e) {
 
 		}
@@ -384,9 +384,10 @@ public class GitInitializerBean {
 						if (!item.getType().equalsIgnoreCase("-")) {
 							path =path + "/"+item.getName();
 						}
+						/*
 						for (TreeNode childNode: node.getChildren()) {
 							readNodeMavenProjectAndCreateArtifact(childNode,path);
-						}
+						}*/
 					}
 					
 				}

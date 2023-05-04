@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,7 @@ public class PollView implements Serializable {
 	
 	private int number;
 	
-	@PostConstruct
+//	@PostConstruct
     public void init()  {
 		listLogs = "";
     }

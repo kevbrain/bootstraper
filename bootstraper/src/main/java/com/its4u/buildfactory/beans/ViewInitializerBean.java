@@ -18,10 +18,10 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+//import javax.annotation.PostConstruct;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.context.FacesContext;
+//import javax.faces.view.ViewScoped;
 
 import org.apache.commons.io.IOUtils;
 import org.primefaces.PrimeFaces;
@@ -65,7 +65,7 @@ import lombok.Data;
 
 @Data
 @Component
-@ViewScoped
+//@ViewScoped
 
 public class ViewInitializerBean {
 	
@@ -218,7 +218,7 @@ public class ViewInitializerBean {
 	
 	private int quotaRequestMemory = 2;
 	
-    @PostConstruct
+//    @PostConstruct
     public void init()  {
     	reset();    	
 
@@ -915,7 +915,7 @@ public class ViewInitializerBean {
 		}
     	System.out.println("Start to update conf cluster ...."); 
     	pollView.log("Start to apply conf cluster ....");
-    	placeHolderManagerBean.syncClusterConfig("dev","lab.its4u.eu-dev");
+    	placeHolderManagerBean.syncClusterConfig("dev","lab2.its4u.eu-dev");
     	pollView.log("Please wait 30 s ....");
     	pollView.log("conf cluster updated....");
     	System.out.println("Wait 30s ....");
@@ -932,7 +932,7 @@ public class ViewInitializerBean {
 			// TODO Auto-generated catch block
 			
 		}
-    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
+ //   	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project bootstraped with success"));
     	System.out.println("Project bootstraped with success ...."); 
     	
     	pollView.log("Start Deployment resources on OCP ....");
