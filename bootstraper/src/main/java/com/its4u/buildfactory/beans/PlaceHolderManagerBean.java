@@ -3,8 +3,6 @@ package com.its4u.buildfactory.beans;
 import java.io.IOException;
 import java.util.List;
 
-//import javax.faces.application.FacesMessage;
-//import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +18,8 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import lombok.Data;
 
 @Data
@@ -68,7 +68,7 @@ public class PlaceHolderManagerBean {
 		try {
 			String jsonProject = mapper.writeValueAsString(myProject);
 			postProjectToPlaceHolderManager(jsonProject);
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Placeholder created"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Placeholder created"));
 		} catch (JsonProcessingException e) {
 
 		} catch (IOException e) {

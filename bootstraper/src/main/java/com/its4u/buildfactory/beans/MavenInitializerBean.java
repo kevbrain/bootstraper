@@ -107,7 +107,6 @@ public class MavenInitializerBean {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void generateResources() throws IOException, TemplateException {
 	  	logger.info("Generate NEW Maven TEMPLATE for : ");
     	this.generator = new TemplateGenerator(pathTemplate);

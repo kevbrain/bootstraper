@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-//import javax.faces.application.FacesMessage;
-//import javax.faces.context.FacesContext;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
@@ -269,7 +267,7 @@ public class GitInitializerBean {
 
 			    System.out.println("Git Project created");	
 			    pollView.log("Git DEV Project created");	
-
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Project Git created"));
 			    pollView.log("Wait 3s ....");	
 			    System.out.println("Wait 3s ....");
 			    try {
@@ -279,7 +277,7 @@ public class GitInitializerBean {
 					e1.printStackTrace();
 				}
 			    createArgoApp();
-
+			    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Application created in GitOps"));
 			    System.out.println("Argo application created");
 			    pollView.log("Argo application created");
 			    System.out.println("Wait 3s ....");
@@ -387,7 +385,7 @@ public class GitInitializerBean {
 							path =path + "/"+item.getName();
 						}
 						/*
-						for (TreeNode<?> childNode: node.getChildren()) {
+						for (TreeNode childNode: node.getChildren()) {
 							readNodeMavenProjectAndCreateArtifact(childNode,path);
 						}
 						*/

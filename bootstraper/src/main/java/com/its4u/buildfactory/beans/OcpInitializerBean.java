@@ -4,7 +4,7 @@ package com.its4u.buildfactory.beans;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-//import javax.annotation.PostConstruct;
+
 
 import org.springframework.stereotype.Component;
 
@@ -26,6 +26,7 @@ import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import jakarta.annotation.PostConstruct;
 import lombok.Data;
 
 @Data
@@ -56,7 +57,7 @@ public class OcpInitializerBean {
 	
 	
 	
-//	@PostConstruct
+	@PostConstruct
 	public void init() {
     	this.namespaces = new HashMap<String, NamespaceResource>();
     	this.namespaces.put("dev", new NamespaceResource("-dev",this.dev_env));
