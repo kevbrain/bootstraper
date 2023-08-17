@@ -674,23 +674,24 @@ public class ViewInitializerBean {
     	configMapsAsvol = new ArrayList<>();
     	List<Volumes> cmVolumes = new ArrayList<>();
     	List<Route> routesDepl= new ArrayList<>();
-    	    	
-    	for(Volumes vol:volumes) {
-
-    		if (vol.getConfigMap()!=null) {
-    			cmVolumes.add(vol);
-    			configMapsAsvol.add(vol.getConfigMap());
-    		}
-    		if (vol.isEmptyDir()) {
-    			model.getEmptyDirVolumes().add(vol);    		
-    		}
-    		if (vol.isPersistent()) {
-    			model.getPersitentVolumes().add(vol);
-    		}
-    		if (vol.isANas()) {
-    			model.getNas().add(vol);
-    		}
-    		
+    	if (volumes!=null && !volumes.isEmpty()) {
+	    	for(Volumes vol:volumes) {
+	
+	    		if (vol.getConfigMap()!=null) {
+	    			cmVolumes.add(vol);
+	    			configMapsAsvol.add(vol.getConfigMap());
+	    		}
+	    		if (vol.isEmptyDir()) {
+	    			model.getEmptyDirVolumes().add(vol);    		
+	    		}
+	    		if (vol.isPersistent()) {
+	    			model.getPersitentVolumes().add(vol);
+	    		}
+	    		if (vol.isANas()) {
+	    			model.getNas().add(vol);
+	    		}
+	    		
+	    	}
     	}
     	if (routeExposed) {
     		routesDepl.add(new Route(this.hostRouteName));
